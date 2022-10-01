@@ -1,0 +1,184 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    color: #434549;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.card {
+    padding: 10px 80px 10px 80;
+    margin: 10px 10px 60px 10px;
+    padding: 30px;
+    box-shadow: 0px 0px .3em .01em grey;
+    font-family: 'Gill Sans', 'sans-serif';
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    color: #434549;
+}
+
+.card.upcoming {
+    &:hover {
+        box-shadow: 0px 0px 20px 3px grey;
+    }
+}
+
+.card.previous {
+    background-color: #b8b8b8;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+h4 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.7em;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+.nav-link {
+    color: #434549;
+}
+
+.side {
+    height: 80vh;
+    box-sizing: border-box;
+    background-color: blue;
+    overflow-x: scroll;
+    min-width: 15em;
+    width: 80vw;
+}
+
+.inside {
+    width: 100em;
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+
+    height: 80vh;
+    //width: 100em;
+    background-color: red;
+}
+
+.room {
+    position: absolute;
+    background-color: green;
+    display: inline;
+    width: 250px;
+    height: 150px;
+}
+
+.flex-room {
+    background-color: green;
+    width: 200px;
+    height: 20vh;
+    order: 1;
+    flex: 0 1 auto;
+    align-self: auto;
+    min-width: 0;
+    min-height: auto;
+}
+
+.flex-container {
+    width: 100em;
+    /* We first create a flex layout context */
+    display: flex;
+
+    /* Then we define the flow direction 
+       and if we allow the items to wrap 
+     * Remember this is the same as:
+     * flex-direction: row;
+     * flex-wrap: wrap;
+     */
+    flex-flow: row wrap;
+
+    /* Then we define how is distributed the remaining space */
+    justify-content: space-around;
+
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.nav-item {
+    border: 1px solid;
+    list-style-type: none;
+    display: inline-block;
+    padding: 9px;
+}
+
+.flex-item {
+    background: tomato;
+    padding: 5px;
+    width: 200px;
+    height: 150px;
+    margin-top: 10px;
+    line-height: 150px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+}
+
+.top {
+    position: absolute;
+    background-color: green;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 150px;
+}
+
+.bottom {
+    position: absolute;
+    background-color: green;
+    bottom: 5%;
+    left: 5%;
+    width: 90%;
+    height: 150px;
+}
+
+.room {
+    max-width: 60vw;
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: purple;
+}
+
+.cot {
+    background-color: green;
+    padding: 10px;
+    margin: 10px;
+}
+
+.cot.reserved {
+    background-color: grey;
+}

@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext()
 
@@ -9,12 +9,10 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
     let [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken') ? JSON.parse(localStorage.getItem('accessToken')) : null)
-    console.log('before AuthProvider')
-    console.log(accessToken)
     let [user, setUser] = useState(() => localStorage.getItem('accessToken') ? jwt_decode(localStorage.getItem('accessToken')) : null)
-    let [loading, setLoading] = useState(true)
+    let [loading, setLoading] = useState(true);
 
-    const history = useHistory()
+    const navigate = useNavigate();
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -28,14 +26,11 @@ export const AuthProvider = ({ children }) => {
         let data = await response.json()
 
         if (response.status === 200) {
-            console.log(data);
             await setAccessToken(data.accessToken)
             //setUser(jwt_decode(data.accessToken))
-            console.log(data.accessToken);
             setUser(data.user);
             localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
-            console.log(accessToken);
-            history.push('/')
+            navigate('/')
         } else {
             alert('Something went wrong!')
         }
@@ -46,15 +41,12 @@ export const AuthProvider = ({ children }) => {
         setAccessToken(null)
         setUser(null)
         localStorage.removeItem('accessToken')
-        history.push('/login')
+        navigate('/login')
     }
 
 
     let updateToken = async () => {
 
-        console.log('refresh');
-        console.log(accessToken);
-        console.log(localStorage.getItem('accessToken'));
         console.log(localStorage.getItem('accessToken') ? JSON.parse(localStorage.getItem('accessToken')) : null);
         let response = await fetch(`http://127.0.0.1:2200/api/refresh?token=${accessToken?.accessToken}`);
         // let response = await fetch(`http://127.0.0.1:2200/api/refresh?token=${accessToken}`, {
@@ -73,7 +65,7 @@ export const AuthProvider = ({ children }) => {
                 setAccessToken(data.accessToken)
                 //setUser(jwt_decode(data.access))
                 //localStorage.setItem('authTokens', JSON.stringify(data))
-                setUser(data);
+                setUser(data.user);
                 localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
             } else {
                 logoutUser()

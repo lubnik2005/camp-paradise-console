@@ -3,7 +3,7 @@ import AuthContext from '../context/AuthContext'
 
 const HomePage = () => {
     let [notes, setNotes] = useState([])
-    let { authTokens, logoutUser } = useContext(AuthContext)
+    let { user, accessToken, logoutUser } = useContext(AuthContext)
 
     useEffect(() => {
         getNotes()
