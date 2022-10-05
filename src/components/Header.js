@@ -8,12 +8,16 @@ const Header = () => {
         <div>
             <Link to="/" >Camp Paradise</Link>
             {user ? (
-                <p onClick={logoutUser}>Logout</p>
+                <div>
+                    <Link to="/account">Account</Link>
+                    <div onClick={logoutUser}>Logout</div>
+                </div>
             ) : (
-                <Link to="/login" >Login</Link>
+                <div>
+                    <Link to="/register" >Register</Link>
+                    <Link to="/login" >Login</Link>
+                </div>
             )}
-
-            {user && <p>Hello {user.email}</p>}
 
         </div>
     )

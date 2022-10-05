@@ -5,7 +5,7 @@ import AuthContext from '../context/AuthContext'
 import { Outlet, Navigate } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'
 
-const Cabins = () => {
+const VipHouse = () => {
 
     const [rooms, setRooms] = useState(localStorage.getItem('rooms') ? JSON.parse(localStorage.getItem('rooms')) : []);
     let { user, accessToken, logoutUser } = useContext(AuthContext);
@@ -34,21 +34,23 @@ const Cabins = () => {
     }, []);
 
     if (!camp) return <Navigate to={'/camps'} />
+
     return (
         <div className="container" style={{ border: '1px solid' }}>
             <h4 align="center">{camp.name}</h4>
-            <h3 align="center">Cabins</h3>
-            {rooms.filter(room => room.type == 'cabin').map((room) => <Link key={`cabin-${room.id})}`} to="/room" state={{ camp, room }}>
-                <div
-                    align="center"
-                    className="card upcoming"
-                >
-                    {room.name}</div>
-            </Link>
-            )}
+            <h3 align="center">VIP House</h3>
+            <div className="side">
+                <ul className="flex-container">
+                    {rooms.filter(room => room.type === 'vip').map((room) => {
+                        return <Link to="/room" state={{ camp, room }}>
+                            <li className="flex-item">{room.name}</li>
+                        </Link>
+                    })}
+                </ul>
+            </div>
         </ div>
     );
 }
 
-export default Cabins;
+export default VipHouse;
 

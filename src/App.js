@@ -7,10 +7,11 @@ import HomePage from './pages/HomePage'
 import Camps from './pages/Camps'
 import LoginPage from './pages/LoginPage'
 import Buildings from './pages/Buildings'
-import CentralHouse from './pages/CentralHouse'
+import VipHouse from './pages/VipHouse'
 import Cabins from './pages/Cabins'
 import Header from './components/Header'
 import Room from './pages/Room'
+import Cot from './pages/Cot'
 import { Outlet, Navigate } from "react-router-dom";
 
 
@@ -26,9 +27,10 @@ function App() {
                             <Route element={<Navigate to="/camps" />} path="/" exact />
                             <Route element={<Camps />} path="/camps" exact />
                             <Route element={<Buildings />} path="/buildings" exact />
-                            <Route element={<CentralHouse />} path="/buildings/central-house" exact />
+                            <Route element={<VipHouse />} path="/buildings/vip-house" exact />
                             <Route element={<Cabins />} path="/buildings/cabins" exact />
                             <Route element={<Room />} path="/room" exact />
+                            <Route element={<Cot />} path="/cot" exact />
                         </Route>
                         <Route element={<LoginPage />} path="/login" />
                     </Routes>

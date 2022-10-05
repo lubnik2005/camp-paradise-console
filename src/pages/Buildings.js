@@ -8,44 +8,43 @@ import { Link } from "react-router-dom";
 const Buildings = () => {
 
     const location = useLocation();
-    let { user, accessToken, logoutUser } = useContext(AuthContext)
-    const { camp } = location.state;
+    let { user } = useContext(AuthContext)
+    const camp = location.state?.camp;
 
     const CampInfo = () => {
 
+        if (!camp) return <Navigate to={'/camps'} />
         return (
-            !!user ? (
-                <div className="container">
+            <div className="container">
 
-                    <Link to={"cabins"} state={{ camp }} >
-                        <div align="center" className="card upcoming">
-                            <div >
-                                <h4>Cabins</h4>
-                            </div>
-                        </div>
-                    </Link>
-                    <Link to={"central-house"} state={{ camp }} >
-                        <div align="center" className="card upcoming">
-                            <div >
-                                <h4>Central House</h4>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link to={"dorm"} state={{ camp }}>
-                        <div align="center" className="card upcoming">
-                            <div >
-                                <h4>{user.sex === "m" ? "Men" : "Women"}'s Dorm</h4>
-                            </div>
-                        </div>
-                    </Link>
+                <Link to={"cabins"} state={{ camp }} >
                     <div align="center" className="card upcoming">
                         <div >
-                            <h4>Camp Image Zoomable</h4>
+                            <h4>Cabins</h4>
                         </div>
                     </div>
+                </Link>
+                <Link to={"vip-house"} state={{ camp }} >
+                    <div align="center" className="card upcoming">
+                        <div >
+                            <h4>VIP House</h4>
+                        </div>
+                    </div>
+                </Link>
+
+                <Link to={"dorm"} state={{ camp }}>
+                    <div align="center" className="card upcoming">
+                        <div >
+                            <h4>{user.sex === "m" ? "Men" : "Women"}'s Dorm</h4>
+                        </div>
+                    </div>
+                </Link>
+                <div align="center" className="card upcoming">
+                    <div >
+                        <h4>Camp Image Zoomable</h4>
+                    </div>
                 </div>
-            ) : null
+            </div>
         )
     }
 

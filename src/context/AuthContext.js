@@ -6,10 +6,19 @@ const AuthContext = createContext()
 
 export default AuthContext;
 
+function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 
 export const AuthProvider = ({ children }) => {
-    let [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken') ? JSON.parse(localStorage.getItem('accessToken')) : null)
-    let [user, setUser] = useState(() => localStorage.getItem('accessToken') ? jwt_decode(localStorage.getItem('accessToken')) : null)
+    let [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken') && isJson(localStorage.getItem('accessToken')) ? JSON.parse(localStorage.getItem('accessToken')) : null)
+    let [user, setUser] = useState(() => localStorage.getItem('accessToken') && isJson(localStorage.getItem('accessToken')) ? jwt_decode(localStorage.getItem('accessToken')) : null)
     let [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
@@ -47,7 +56,7 @@ export const AuthProvider = ({ children }) => {
 
     let updateToken = async () => {
 
-        console.log(localStorage.getItem('accessToken') ? JSON.parse(localStorage.getItem('accessToken')) : null);
+        console.log(localStorage.getItem('accessToken') && isJson(localStorage.getItem('accessToken')) ? JSON.parse(localStorage.getItem('accessToken')) : null);
         let response = await fetch(`http://127.0.0.1:2200/api/refresh?token=${accessToken?.accessToken}`);
         // let response = await fetch(`http://127.0.0.1:2200/api/refresh?token=${accessToken}`, {
         //     method: 'POST',
