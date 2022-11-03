@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import AuthContext from '../context/AuthContext'
-const API_URL = "http://localhost:2200/api/"
 
 const Camps = () => {
 
@@ -15,7 +14,7 @@ const Camps = () => {
         // Should be in a separate file, but I'm too dumb to figure out 
         // how to make that clean.
         try {
-            const response = await fetch(API_URL + `${time ? `${time}_` : ""}events` + `?token=${accessToken}`);
+            const response = await fetch(process.env.REACT_APP_API_URL + `${time ? `${time}_` : ""}events` + `?token=${accessToken}`);
             const data = await response.json();
             if (response.status === 200) {
                 console.log("second");

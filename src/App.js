@@ -12,6 +12,7 @@ import Cabins from './pages/Cabins'
 import Header from './components/Header'
 import Room from './pages/Room'
 import Cot from './pages/Cot'
+import Account from './pages/Account'
 import { Outlet, Navigate } from "react-router-dom";
 
 
@@ -31,6 +32,7 @@ function App() {
                             <Route element={<Cabins />} path="/buildings/cabins" exact />
                             <Route element={<Room />} path="/room" exact />
                             <Route element={<Cot />} path="/cot" exact />
+                            <Route element={<Account />} path="/account" exact />
                         </Route>
                         <Route element={<LoginPage />} path="/login" />
                     </Routes>

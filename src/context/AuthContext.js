@@ -24,24 +24,34 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
 
     let loginUser = async (e) => {
-        e.preventDefault()
-        let response = await fetch('http://127.0.0.1:2200/api/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 'email': e.target.email.value, 'password': e.target.password.value })
-        })
+        e.preventDefault();
+        let response = false;
+        // FIX: Use proper fetch error handling.
+        try {
+            response = await fetch(process.env.REACT_APP_API_URL + 'login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 'email': e.target.email.value, 'password': e.target.password.value })
+            })
+        } catch (error) {
+            console.log(error);
+            alert("Cannot connect to api.");
+        }
+        if (!response) return;
+
         let data = await response.json()
 
         if (response.status === 200) {
             await setAccessToken(data.accessToken)
             //setUser(jwt_decode(data.accessToken))
             setUser(data.user);
+            console.log(data);
             localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
             navigate('/')
         } else {
-            alert('Something went wrong!')
+            alert('Credentials not found.')
         }
     }
 
@@ -57,18 +67,9 @@ export const AuthProvider = ({ children }) => {
     let updateToken = async () => {
 
         console.log(localStorage.getItem('accessToken') && isJson(localStorage.getItem('accessToken')) ? JSON.parse(localStorage.getItem('accessToken')) : null);
-        let response = await fetch(`http://127.0.0.1:2200/api/refresh?token=${accessToken?.accessToken}`);
-        // let response = await fetch(`http://127.0.0.1:2200/api/refresh?token=${accessToken}`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     //body: JSON.stringify({ accessToken: authTokens?.refresh })
-        //     body: JSON.stringify({ accessToken: accessToken?.accessToken ?? "" })
-        // })
-
 
         try {
+            let response = await fetch(process.env.REACT_APP_API_URL + `refresh?token=${accessToken?.accessToken}`);
             let data = await response.json()
             if (response.status === 200) {
                 setAccessToken(data.accessToken)
