@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         let response = false;
         // FIX: Use proper fetch error handling.
         try {
-            response = await fetch(process.env.REACT_APP_API_URL + 'login/', {
+            response = await fetch(import.meta.env.VITE_APP_API_URL + 'login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
         console.log(localStorage.getItem('accessToken') && isJson(localStorage.getItem('accessToken')) ? JSON.parse(localStorage.getItem('accessToken')) : null);
 
         try {
-            let response = await fetch(process.env.REACT_APP_API_URL + `refresh?token=${accessToken?.accessToken}`);
+            let response = await fetch(import.meta.env.VITE_APP_API_URL + `refresh?token=${accessToken?.accessToken}`);
             let data = await response.json()
             if (response.status === 200) {
                 setAccessToken(data.accessToken)

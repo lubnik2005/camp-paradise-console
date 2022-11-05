@@ -15,7 +15,7 @@ const Room = () => {
         // Should be in a separate file, but I'm too dumb to figure out 
         // how to make that clean.
         try {
-            const response = await fetch(process.env.REACT_APP_API_URL + `cots` + `?room_id=${room.id}&event_id=${camp.id}&token=${accessToken}`);
+            const response = await fetch(import.meta.env.VITE_APP_API_URL + `cots` + `?room_id=${room.id}&event_id=${camp.id}&token=${accessToken}`);
             const data = await response.json();
             if (response.status === 200) {
                 return data

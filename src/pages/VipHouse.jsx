@@ -15,7 +15,7 @@ const VipHouse = () => {
 
     const getRooms = async (eventId) => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}rooms?token=${accessToken.accessToken}&event_id=${eventId}`);
+            const response = await fetch(`${import.meta.env.VITE_APP_API_URL}rooms?token=${accessToken.accessToken}&event_id=${eventId}`);
             const data = await response.json();
             if (response.status === 200) {
                 localStorage.setItem(`rooms`, JSON.stringify(data));

@@ -48,7 +48,7 @@ const Checkout = ({ camp, room, cot }) => {
     const [clientSecret, setClientSecret] = useState("");
     useEffect(() => {
         if (accessToken?.accessToken) {
-            fetch(process.env.REACT_APP_API_URL + `config?token=${accessToken?.accessToken}`)
+            fetch(import.meta.env.VITE_APP_API_URL + `config?token=${accessToken?.accessToken}`)
                 .then(async (response) => {
                     const { publishableKey } = await response.json();
                     setStripePromise(loadStripe(publishableKey));
@@ -59,7 +59,7 @@ const Checkout = ({ camp, room, cot }) => {
 
     useEffect(() => {
         if (accessToken?.accessToken) {
-            fetch(process.env.REACT_APP_API_URL + `create-payment-intent?token=${accessToken?.accessToken}`, {
+            fetch(import.meta.env.VITE_APP_API_URL + `create-payment-intent?token=${accessToken?.accessToken}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
