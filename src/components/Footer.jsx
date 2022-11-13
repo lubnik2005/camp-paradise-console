@@ -15,27 +15,26 @@ const Footer = () => {
     const { user, logoutUser } = useContext(AuthContext)
     const location = useLocation();
     const [path, setPath] = useState(location.pathname);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleStandaloneChange = (e, path2) => {
         setPath(path2);
         console.log("ATH");
         console.log(path2);
     }
-    console.log(path);
     let dark = false;
-    return user ?
+    return !!user ?
         (<ToggleButtonGroup
-            value={path}
+            value='/camps'
             className='fitness-app-nav-bar'>
             <ToggleButton
-                value="/camps"
+                value={"/camps"}
                 onChange={(e) => handleStandaloneChange(e, '/camps')}
                 selected={path === '/camps'}
                 dark={dark}
                 onClick={() => navigate('/camps')}
             >
-                <Icon path={mdiTent} size={0.9} />
+                Camps
             </ToggleButton >
             <ToggleButton
                 value="/"
@@ -43,7 +42,7 @@ const Footer = () => {
                 selected={path === '/guidelines'}
                 dark={dark}
                 onClick={() => navigate('/guidelines')}>
-                <Icon path={mdiTextBoxOutline} size={0.8} />
+                GuideLines
             </ToggleButton>
             <ToggleButton
                 value="/account"
@@ -51,7 +50,7 @@ const Footer = () => {
                 selected={path === '/account'}
                 dark={dark}
                 onClick={() => navigate('/account')}>
-                <Icon path={mdiAccount} size={0.9} />
+                Account
             </ToggleButton>
             <ToggleButton
                 value="/logout"
@@ -59,7 +58,7 @@ const Footer = () => {
                 selected={path === '/'}
                 dark={dark}
                 onClick={logoutUser}>
-                <Icon path={mdiLogout} size={0.8} />
+                Logout
             </ToggleButton>
         </ToggleButtonGroup >) : <></>
 }
