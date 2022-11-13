@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import AuthContext from '../context/AuthContext'
-import logo from '../../public/logo.png'; // Tell webpack this JS file uses this image
+import logo from '../logo.png'; // Tell webpack this JS file uses this image
 
 import { Card, TextField, Button, Alert } from 'ui-neumorphism'
 
