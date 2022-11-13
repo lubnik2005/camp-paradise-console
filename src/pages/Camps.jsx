@@ -68,7 +68,7 @@ const Camps = () => {
                         dark={dark}
                         style={{ padding: '4px', width: '46px', height: '46px' }}
                     >
-                        <Icon path={mdiTent} size={1.5} color='var(--primary)' />
+                        <Icon path={typeof mdiTent === 'object' ? '' : mdiTent} size={1.5} color='var(--primary)' />
                     </Card>
                     <Card
 
@@ -99,7 +99,7 @@ const Camps = () => {
                                     rounded
                                 >
                                     <Icon
-                                        path={mdiChevronRight}
+                                        path={typeof mdiChevronRight === 'object' ? '' : mdiChevronRight}
                                         size={0.7}
                                         color='var(--primary)'
                                     />
@@ -126,7 +126,7 @@ const Camps = () => {
                     dark={dark}
                     style={{ padding: '4px', width: '46px', height: '46px' }}
                 >
-                    <Icon path={mdiEarth} size={1.5} color='var(--primary)' />
+                    <Icon path={typeof mdiEarth === 'object' ? '' : mdiEarth} size={1.5} color='var(--primary)' />
                 </Card>
                 <Card
 
