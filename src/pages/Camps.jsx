@@ -2,6 +2,17 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import AuthContext from '../context/AuthContext'
+import { ToggleButton } from 'ui-neumorphism'
+import Icon from '@mdi/react';
+import {
+    mdiHome,
+    mdiBell,
+    mdiAccount,
+    mdiChartLine,
+} from '@mdi/js'
+
+import 'ui-neumorphism/dist/index.css'
+
 
 const Camps = () => {
 
@@ -59,8 +70,9 @@ const Camps = () => {
         </div>
     )) : null
 
+    let dark = false;
     return (
-        <div className="container" >
+        <div className='fitness-app-wrapper overflow-hidden' >
             <span >
                 <h3 align="center">Upcoming Camps</h3>
                 <p align="center">
@@ -72,6 +84,20 @@ const Camps = () => {
                 <h3 align="center">Previous Camps</h3>
                 <PreviousCamps />
             </span>
+            <div className='fitness-app-nav-bar'>
+                <ToggleButton dark={dark}>
+                    <Icon path={mdiHome} size={0.9} />
+                </ToggleButton>
+                <ToggleButton selected dark={dark} color='var(--primary)'>
+                    <Icon path={mdiChartLine} size={0.8} />
+                </ToggleButton>
+                <ToggleButton dark={dark}>
+                    <Icon path={mdiBell} size={0.8} />
+                </ToggleButton>
+                <ToggleButton dark={dark}>
+                    <Icon path={mdiAccount} size={0.9} />
+                </ToggleButton>
+            </div>
         </div>
     );
 }

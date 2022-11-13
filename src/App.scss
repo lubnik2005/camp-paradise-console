@@ -73,3 +73,31 @@ body {
 .text--center {
     text-align: center;
 }
+
+.fitness-app-wrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.overflow-hidden {
+    overflow: hidden !important;
+}
+
+.fitness-app-nav-bar {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    left: 0px;
+    bottom: -8px;
+    margin: 8px 0px;
+    padding: 16px 24px;
+    position: absolute;
+    box-shadow: var(--box-shadow);
+    background: var(--bg-color);
+    justify-content: space-between;
+}
