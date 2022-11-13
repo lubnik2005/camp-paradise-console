@@ -24,6 +24,8 @@ const Footer = () => {
         console.log(path2);
     }
     let dark = false;
+    console.log(mdiTextBoxOutline);
+    console.log(mdiMap);
     return user ?
         (<ToggleButtonGroup
             value='/camps'
