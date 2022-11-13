@@ -23,8 +23,7 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
 
-    let loginUser = async (e) => {
-        e.preventDefault();
+    let loginUser = async (email, password) => {
         let response = false;
         // FIX: Use proper fetch error handling.
         try {
@@ -33,13 +32,13 @@ export const AuthProvider = ({ children }) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ 'email': e.target.email.value, 'password': e.target.password.value })
+                body: JSON.stringify({ email, password })
             })
         } catch (error) {
             console.log(error);
-            alert("Cannot connect to api.");
+            return { error: 'Cannot connect to api.' }
         }
-        if (!response) return;
+        if (!response) return { error: 'Cannot connect to api.' };
 
         let data = await response.json()
 
@@ -51,7 +50,8 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
             navigate('/')
         } else {
-            alert('Credentials not found.')
+            console.log("NOT FOUND");
+            return { error: 'Credentials not found.' };
         }
     }
 

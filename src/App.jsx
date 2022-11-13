@@ -14,11 +14,15 @@ import Room from './pages/Room'
 import Cot from './pages/Cot'
 import Account from './pages/Account'
 import { Outlet, Navigate } from "react-router-dom";
+import { Card, TextField, Button } from 'ui-neumorphism';
+import 'ui-neumorphism/dist/index.css';
+import classes from './App.scss';
+
 
 
 function App() {
     return (
-        <div className="App">
+        <Card className="App" >
             <Router>
                 <AuthProvider>
                     <Header />
@@ -38,7 +42,7 @@ function App() {
                     </Routes>
                 </AuthProvider>
             </Router>
-        </div>
+        </Card>
     );
 }
 
