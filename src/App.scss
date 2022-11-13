@@ -20,6 +20,7 @@ body {
     height: 50em;
     display: flex;
     flex-direction: column;
+    padding: 1.5em;
 }
 
 .logo {
@@ -27,7 +28,6 @@ body {
     font-size: 20px;
     text-align: center;
     margin: 0;
-    margin-top: 100px;
     margin-bottom: -100px;
     max-width: 200px;
 }

@@ -2,9 +2,13 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import AuthContext from '../context/AuthContext'
-import { ToggleButton } from 'ui-neumorphism'
+import { ToggleButton, Card, Subtitle2, Caption, IconButton, H4 } from 'ui-neumorphism'
 import Icon from '@mdi/react';
 import {
+    mdiTicket,
+    mdiChevronRight,
+    mdiTent,
+    mdiEarth,
     mdiHome,
     mdiBell,
     mdiAccount,
@@ -40,7 +44,7 @@ const Camps = () => {
         }
     }
 
-
+    const dark = false;
     React.useEffect(() => {
         const fetchDataU = async () => setUpcomingCamps((await getCamps(accessToken?.accessToken, 'upcoming')) ?? []);
         const fetchDataP = async () => setPreviousCamps((await getCamps(accessToken?.accessToken, 'previous')) ?? []);
@@ -50,37 +54,114 @@ const Camps = () => {
 
     const UpcomingCamps = () => {
         console.log(upcomingCamps);
-        return upcomingCamps ? upcomingCamps.map(camp => <Link to={"/buildings"} key={`camp-${camp.id}`} state={{ camp }}>
-            <div align="center" className="card upcoming">
-                <div >
-                    <h4>{camp.name}</h4>
-                    <p>{camp.start_on.slice(0, 10)} - {camp.end_on.slice(0, 10)}</p>
+        return upcomingCamps ? upcomingCamps.map(camp =>
+            <Card key={`upcoming-camp-${camp.id}`} rounded={false} elevation={2} style={{ padding: '16px', marginBottom: '1.5em', marginTop: '.5em' }
+            }>
+                <div
+                    style={{
+                        display: 'flex',
+                        position: 'relative'
+                    }}
+                >
+                    <Card
+                        outlined
+                        dark={dark}
+                        style={{ padding: '4px', width: '46px', height: '46px' }}
+                    >
+                        <Icon path={mdiTent} size={1.5} color='var(--primary)' />
+                    </Card>
+                    <Card
+
+                        flat
+                        dark={dark}
+                        style={{ marginLeft: '12px', overflow: 'unset' }}
+                    >
+                        <Subtitle2 style={{ margin: '0px 0px' }}>
+                            {camp.name}
+                        </Subtitle2>
+                        <Card
+                            flat
+                            style={{
+                                display: 'flex',
+                                overflow: 'unset',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Caption secondary component='span'>
+                                {camp.start_on.slice(0, 10)} - {camp.end_on.slice(0, 10)}
+                            </Caption>
+                            <Link to={"/buildings"} key={`camp-${camp.id}`} state={{ camp }}>
+                                <IconButton
+                                    style={{ position: 'absolute', right: '10px', top: '5px' }}
+                                    text={false}
+                                    dark={dark}
+                                    size='large'
+                                    rounded
+                                >
+                                    <Icon
+                                        path={mdiChevronRight}
+                                        size={0.7}
+                                        color='var(--primary)'
+                                    />
+                                </IconButton>
+                            </Link>
+                        </Card>
+                    </Card>
                 </div>
-            </div>
-        </Link>
+            </Card >
         ) : null
     }
 
     const PreviousCamps = () => previousCamps ? previousCamps.map(camp => (
-        <div align="center" className="card previous" key={`camp-${camp.id}`} >
-            <div >
-                <h4>{camp.name}</h4>
-                <p>{camp.start_on.slice(0, 10)} - {camp.end_on.slice(0, 10)}</p>
+        <Card
+            key={`camp-${camp.id}`}
+            rounded={false} elevation={2} style={{ padding: '16px', marginBottom: '1.5em', marginTop: '.5em' }}>
+            <div
+                style={{
+                    display: 'flex'
+                }}
+            >
+                <Card
+                    outlined
+                    dark={dark}
+                    style={{ padding: '4px', width: '46px', height: '46px' }}
+                >
+                    <Icon path={mdiEarth} size={1.5} color='var(--primary)' />
+                </Card>
+                <Card
+
+                    flat
+                    dark={dark}
+                    style={{ marginLeft: '12px', overflow: 'unset' }}
+                >
+                    <Subtitle2 style={{ margin: '0px 0px' }}>
+                        {camp.name}
+                    </Subtitle2>
+                    <Card flat style={{
+                        display: 'flex', overflow: 'unset',
+                        alignItems: 'center'
+                    }}
+                    >
+                        <Caption secondary component='span'>
+                            {camp.start_on.slice(0, 10)} - {camp.end_on.slice(0, 10)}
+                        </Caption>
+                    </Card>
+                </Card>
             </div>
-        </div>
+        </Card>
+
     )) : null
 
     return (
-        <div className='' >
+        <div >
             <span >
-                <h3 align="center">Upcoming Camps</h3>
-                <p align="center">
-                    <Link to={"/guidelines"} className="nav-link">
-                        Guidelines
-                    </Link>
-                </p>
+                <H4 dark={dark} style={{ fontWeight: '500' }}>
+                    Upcoming Camps
+                </H4>
                 <UpcomingCamps />
-                <h3 align="center">Previous Camps</h3>
+                <H4 dark={dark} style={{ fontWeight: '500' }}>
+                    Previous Camps
+                </H4>
                 <PreviousCamps />
             </span>
         </div>

@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import PrivateRoutes from './utils/PrivateRoutes'
 import { AuthProvider } from './context/AuthContext'
-import './App.css';
+//import './App.css';
 
 import HomePage from './pages/HomePage'
 import Camps from './pages/Camps'

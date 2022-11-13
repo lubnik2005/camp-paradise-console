@@ -8,6 +8,7 @@ import {
     mdiTextBoxOutline,
     mdiAccount,
     mdiLogout,
+    mdiMap,
     mdiTent
 } from '@mdi/js'
 
@@ -23,7 +24,7 @@ const Footer = () => {
         console.log(path2);
     }
     let dark = false;
-    return !!user ?
+    return user ?
         (<ToggleButtonGroup
             value='/camps'
             className='fitness-app-nav-bar'>
@@ -34,7 +35,7 @@ const Footer = () => {
                 dark={dark}
                 onClick={() => navigate('/camps')}
             >
-                Camps
+                <Icon path={mdiTent} size={0.9} />
             </ToggleButton >
             <ToggleButton
                 value="/"
@@ -42,7 +43,12 @@ const Footer = () => {
                 selected={path === '/guidelines'}
                 dark={dark}
                 onClick={() => navigate('/guidelines')}>
-                GuideLines
+                <Icon path={mdiTextBoxOutline} size={0.9} />
+            </ToggleButton>
+            <ToggleButton
+                value="/map"
+                dark={dark}>
+                <Icon path={mdiMap} size={0.9} />
             </ToggleButton>
             <ToggleButton
                 value="/account"
@@ -50,7 +56,7 @@ const Footer = () => {
                 selected={path === '/account'}
                 dark={dark}
                 onClick={() => navigate('/account')}>
-                Account
+                <Icon path={mdiAccount} size={0.9} />
             </ToggleButton>
             <ToggleButton
                 value="/logout"
@@ -58,7 +64,7 @@ const Footer = () => {
                 selected={path === '/'}
                 dark={dark}
                 onClick={logoutUser}>
-                Logout
+                <Icon path={mdiLogout} size={0.9} />
             </ToggleButton>
         </ToggleButtonGroup >) : <></>
 }
