@@ -20,7 +20,6 @@ body {
     height: 50em;
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 
 .logo {
@@ -76,7 +75,6 @@ body {
 }
 
 .fitness-app-wrapper {
-    position: relative;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
