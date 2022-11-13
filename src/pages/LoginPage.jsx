@@ -15,7 +15,7 @@ const LoginPage = () => {
 
     const login = async () => {
         let response = await loginUser(email, password);
-        if (response.hasOwnProperty('error')) {
+        if (response?.hasOwnProperty('error')) {
             setAlertMessage(response.error);
             setAlertVisible(true);
         }

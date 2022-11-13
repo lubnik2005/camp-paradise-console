@@ -10,6 +10,7 @@ import Buildings from './pages/Buildings'
 import VipHouse from './pages/VipHouse'
 import Cabins from './pages/Cabins'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Room from './pages/Room'
 import Cot from './pages/Cot'
 import Account from './pages/Account'
@@ -22,10 +23,9 @@ import classes from './App.scss';
 
 function App() {
     return (
-        <Card className="App" >
+        <Card className="App overflow-hidden" >
             <Router>
                 <AuthProvider>
-                    <Header />
                     <Routes>
                         <Route element={<PrivateRoutes />}>
                             {/*<Route element={<HomePage />} path="/" exact />*/}
@@ -40,6 +40,7 @@ function App() {
                         </Route>
                         <Route element={<LoginPage />} path="/login" />
                     </Routes>
+                    <Footer />
                 </AuthProvider>
             </Router>
         </Card>

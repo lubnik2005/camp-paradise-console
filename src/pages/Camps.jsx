@@ -70,9 +70,8 @@ const Camps = () => {
         </div>
     )) : null
 
-    let dark = false;
     return (
-        <div className='fitness-app-wrapper overflow-hidden' >
+        <div className='' >
             <span >
                 <h3 align="center">Upcoming Camps</h3>
                 <p align="center">
@@ -84,20 +83,6 @@ const Camps = () => {
                 <h3 align="center">Previous Camps</h3>
                 <PreviousCamps />
             </span>
-            <div className='fitness-app-nav-bar'>
-                <ToggleButton dark={dark}>
-                    <Icon path={mdiHome} size={0.9} />
-                </ToggleButton>
-                <ToggleButton selected dark={dark} color='var(--primary)'>
-                    <Icon path={mdiChartLine} size={0.8} />
-                </ToggleButton>
-                <ToggleButton dark={dark}>
-                    <Icon path={mdiBell} size={0.8} />
-                </ToggleButton>
-                <ToggleButton dark={dark}>
-                    <Icon path={mdiAccount} size={0.9} />
-                </ToggleButton>
-            </div>
         </div>
     );
 }
