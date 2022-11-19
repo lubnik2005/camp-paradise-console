@@ -33,7 +33,7 @@ const Cabins = () => {
 
     if (!camp) return <Navigate to={'/camps'} />
     return (
-        <div className="container" style={{ border: '1px solid' }}>
+        <div className="content" >
             <h4 align="center">{camp.name}</h4>
             <h3 align="center">Cabins</h3>
             {rooms.filter(room => room.type == 'cabin').map((room) => <Link key={`cabin-${room.id})}`} to="/room" state={{ camp, room }}>

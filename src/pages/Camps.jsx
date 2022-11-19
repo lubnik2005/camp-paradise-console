@@ -68,7 +68,7 @@ const Camps = () => {
                         dark={dark}
                         style={{ padding: '4px', width: '46px', height: '46px' }}
                     >
-                        <Icon path={typeof mdiTent === 'object' ? '' : mdiTent} size={1.5} color='var(--primary)' />
+                        {/*<Icon path={typeof mdiTent === 'object' ? '' : mdiTent} size={1.5} color='var(--primary)' />*/}
                     </Card>
                     <Card
 
@@ -88,7 +88,7 @@ const Camps = () => {
                             }}
                         >
                             <Caption secondary component='span'>
-                                {camp.start_on.slice(0, 10)} - {camp.end_on.slice(0, 10)}
+                                {camp.start_on.slice(0, 10).replace(/-/g, '/')} — {camp.end_on.slice(0, 10).replace(/-/g, '/')}
                             </Caption>
                             <Link to={"/buildings"} key={`camp-${camp.id}`} state={{ camp }}>
                                 <IconButton
@@ -98,11 +98,11 @@ const Camps = () => {
                                     size='large'
                                     rounded
                                 >
-                                    <Icon
+                                    {/*<Icon
                                         path={typeof mdiChevronRight === 'object' ? '' : mdiChevronRight}
                                         size={0.7}
                                         color='var(--primary)'
-                                    />
+                        />*/}
                                 </IconButton>
                             </Link>
                         </Card>
@@ -115,7 +115,7 @@ const Camps = () => {
     const PreviousCamps = () => previousCamps ? previousCamps.map(camp => (
         <Card
             key={`camp-${camp.id}`}
-            rounded={false} elevation={2} style={{ padding: '16px', marginBottom: '1.5em', marginTop: '.5em' }}>
+            rounded={false} elevation={1} style={{ padding: '16px', marginBottom: '1.5em', marginTop: '.5em' }}>
             <div
                 style={{
                     display: 'flex'
@@ -126,7 +126,7 @@ const Camps = () => {
                     dark={dark}
                     style={{ padding: '4px', width: '46px', height: '46px' }}
                 >
-                    <Icon path={typeof mdiEarth === 'object' ? '' : mdiEarth} size={1.5} color='var(--primary)' />
+                    {/*<Icon path={typeof mdiEarth === 'object' ? '' : mdiEarth} size={1.5} color='var(--primary)' />*/}
                 </Card>
                 <Card
 
@@ -143,7 +143,7 @@ const Camps = () => {
                     }}
                     >
                         <Caption secondary component='span'>
-                            {camp.start_on.slice(0, 10)} - {camp.end_on.slice(0, 10)}
+                            {camp.start_on.slice(0, 10).replace(/-/g, '/')} — {camp.end_on.slice(0, 10).replace(/-/g, '/')}
                         </Caption>
                     </Card>
                 </Card>
@@ -153,7 +153,7 @@ const Camps = () => {
     )) : null
 
     return (
-        <div >
+        <div className="content">
             <span >
                 <H4 dark={dark} style={{ fontWeight: '500' }}>
                     Upcoming Camps

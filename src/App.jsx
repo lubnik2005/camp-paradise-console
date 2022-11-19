@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import Room from './pages/Room'
 import Cot from './pages/Cot'
 import Account from './pages/Account'
+import Guidelines from './pages/Guidelines'
 import { Outlet, Navigate } from "react-router-dom";
 import { Card, TextField, Button } from 'ui-neumorphism';
 import 'ui-neumorphism/dist/index.css';
@@ -22,7 +23,7 @@ import classes from './App.scss';
 
 function App() {
     return (
-        <Card className="App overflow-hidden" >
+        <Card className="App" >
             <Router>
                 <AuthProvider>
                     <Routes>
@@ -36,6 +37,7 @@ function App() {
                             <Route element={<Room />} path="/room" exact />
                             <Route element={<Cot />} path="/cot" exact />
                             <Route element={<Account />} path="/account" exact />
+                            <Route element={<Guidelines />} path="/guidelines" exact />
                         </Route>
                         <Route element={<LoginPage />} path="/login" />
                     </Routes>

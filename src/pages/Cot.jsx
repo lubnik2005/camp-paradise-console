@@ -100,7 +100,7 @@ const Cot = () => {
     console.log(camp, room, cot);
 
     return (
-        <div className="container" style={{ border: '1px solid' }}>
+        <div className="content" >
             <h4 align="center">{camp.name}</h4>
             <h3 align="center">{room.name}</h3>
             <h3 align="center">{cot.description}</h3>

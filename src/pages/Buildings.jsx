@@ -35,7 +35,7 @@ const Buildings = () => {
 
         if (!camp) return <Navigate to={'/camps'} />
         return (
-            <div >
+            <div className="content">
                 <span >
                     <H4 dark={dark} style={{ fontWeight: '500' }}>
                         {camp.name}
@@ -69,7 +69,7 @@ const Buildings = () => {
                                     flexDirection: 'column'
                                 }}
                             >
-                                <Icon path={mdiRun} size={2.5} color='var(--primary)' />
+                                {/*<Icon path={mdiRun} size={2.5} color='var(--primary)' />*/}
                                 <H5 style={{ padding: '4px 0px' }}>20</H5>
 
                                 <Caption style={{ padding: '4px 0px' }} secondary>
@@ -97,7 +97,7 @@ const Buildings = () => {
                                 dark={dark}
                                 style={{ padding: '4px', width: '46px', height: '46px' }}
                             >
-                                <Icon path={mdiForest} size={1.5} color='var(--primary)' />
+                                {/*<Icon path={mdiForest} size={1.5} color='var(--primary)' />*/}
                             </Card>
                             <Card
 
@@ -127,11 +127,11 @@ const Buildings = () => {
                                             size='large'
                                             rounded
                                         >
-                                            <Icon
+                                            {/*<Icon
                                                 path={mdiChevronRight}
                                                 size={0.7}
                                                 color='var(--primary)'
-                                            />
+                                />*/}
                                         </IconButton>
                                     </Link>
                                 </Card>
@@ -152,7 +152,7 @@ const Buildings = () => {
                                 dark={dark}
                                 style={{ padding: '4px', width: '46px', height: '46px' }}
                             >
-                                <Icon path={mdiAccountMultiple} size={1.5} color='var(--primary)' />
+                                {/* <Icon path={mdiAccountMultiple} size={1.5} color='var(--primary)' />*/}
                             </Card>
                             <Card
 
@@ -182,11 +182,11 @@ const Buildings = () => {
                                             size='large'
                                             rounded
                                         >
-                                            <Icon
+                                            {/*<Icon
                                                 path={mdiChevronRight}
                                                 size={0.7}
                                                 color='var(--primary)'
-                                            />
+                                />*/}
                                         </IconButton>
                                     </Link>
                                 </Card>
@@ -207,7 +207,7 @@ const Buildings = () => {
                                 dark={dark}
                                 style={{ padding: '4px', width: '46px', height: '46px' }}
                             >
-                                <Icon path={mdiPodiumGold} size={1.5} color='var(--primary)' />
+                                {/*<Icon path={mdiPodiumGold} size={1.5} color='var(--primary)' />*/}
                             </Card>
                             <Card
 
@@ -237,11 +237,11 @@ const Buildings = () => {
                                             size='large'
                                             rounded
                                         >
-                                            <Icon
+                                            {/*<Icon
                                                 path={mdiChevronRight}
                                                 size={0.7}
                                                 color='var(--primary)'
-                                            />
+                                />*/}
                                         </IconButton>
                                     </Link>
                                 </Card>

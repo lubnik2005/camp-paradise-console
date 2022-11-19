@@ -34,7 +34,7 @@ const VipHouse = () => {
     if (!camp) return <Navigate to={'/camps'} />
 
     return (
-        <div className="container" style={{ border: '1px solid' }}>
+        <div className="content">
             <h4 align="center">{camp.name}</h4>
             <h3 align="center">VIP House</h3>
             <div className="side">
