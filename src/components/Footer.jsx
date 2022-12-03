@@ -54,7 +54,7 @@ const Footer = () => {
                     dark={dark}
                     onClick={() => navigate('/camps')}
                 >
-                    {/*<Icon path={typeof mdiTent === 'object' ? '' : mdiTent} size={0.9} />*/}
+                    <Icon path={typeof mdiTent === 'object' ? '' : mdiTent} size={0.9} />
                 </ToggleButton >
                 <ToggleButton
                     value="/"
@@ -62,13 +62,13 @@ const Footer = () => {
                     selected={path === '/guidelines'}
                     dark={dark}
                     onClick={() => navigate('/guidelines')}>
-                    {/*<Icon path={typeof mdiTextBoxOutline === 'object' ? '' : mdiTextBoxOutline} size={0.9} />*/}
+                    <Icon path={typeof mdiTextBoxOutline === 'object' ? '' : mdiTextBoxOutline} size={0.9} />
                 </ToggleButton>
                 <ToggleButton
                     value="/map"
                     onClick={() => setMapVisible(!mapVisible)}
                     dark={dark}>
-                    {/*<Icon path={typeof mdiMap === 'object' ? '' : mdiMap} size={0.9} />*/}
+                    <Icon path={typeof mdiMap === 'object' ? '' : mdiMap} size={0.9} />
                 </ToggleButton>
                 <ToggleButton
                     value="/account"
@@ -76,7 +76,7 @@ const Footer = () => {
                     selected={path === '/account'}
                     dark={dark}
                     onClick={() => navigate('/account')}>
-                    {/*<Icon path={typeof mdiAccount === 'object' ? '' : mdiAccount} size={0.9} />*/}
+                    <Icon path={typeof mdiAccount === 'object' ? '' : mdiAccount} size={0.9} />
                 </ToggleButton>
                 <ToggleButton
                     value="/logout"
@@ -84,7 +84,7 @@ const Footer = () => {
                     selected={path === '/'}
                     dark={dark}
                     onClick={logoutUser}>
-                    {/*<Icon path={typeof mdiLogout === 'object' ? '' : mdiLogout} size={0.9} />*/}
+                    <Icon path={typeof mdiLogout === 'object' ? '' : mdiLogout} size={0.9} />
                 </ToggleButton>
             </ToggleButtonGroup >
         </>) : <></>
