@@ -46,9 +46,11 @@
         ]
     },
     "devDependencies": {
+        "@iconify/json": "^2.1.150",
         "@vitejs/plugin-react": "^2.2.0",
         "sass": "^1.56.1",
         "vite": "^3.2.2",
+        "vite-plugin-react-icons": "^0.2.0",
         "vite-plugin-svgr": "^2.2.2",
         "vite-tsconfig-paths": "^3.5.2"
     }
