@@ -3,15 +3,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import { ToggleButton, ToggleButtonGroup } from 'ui-neumorphism'
 import map from '../map.jpeg'
-import Icon from '@mdi/react';
-import {
-    mdiHome,
-    mdiTextBoxOutline,
-    mdiAccount,
-    mdiLogout,
-    mdiMap,
-    mdiTent
-} from '@mdi/js'
+import TextBoxOutlineIcon from '~icons/mdi/text-box-outline'
+import AccountIcon from '~icons/mdi/account'
+import LogoutIcon from '~icons/mdi/logout'
+import MapIcon from '~icons/mdi/map'
+import TentIcon from '~icons/mdi/tent'
 
 const Footer = () => {
     const { user, logoutUser } = useContext(AuthContext)
@@ -39,8 +35,6 @@ const Footer = () => {
     }
 
     let dark = false;
-    console.log(mdiTextBoxOutline);
-    console.log(mdiMap);
     return user ?
         (<>
             <Map />
@@ -54,7 +48,7 @@ const Footer = () => {
                     dark={dark}
                     onClick={() => navigate('/camps')}
                 >
-                    <Icon path={typeof mdiTent === 'object' ? '' : mdiTent} size={0.9} />
+                    <TentIcon style={{ fontSize: '2em' }} />
                 </ToggleButton >
                 <ToggleButton
                     value="/"
@@ -62,13 +56,13 @@ const Footer = () => {
                     selected={path === '/guidelines'}
                     dark={dark}
                     onClick={() => navigate('/guidelines')}>
-                    <Icon path={typeof mdiTextBoxOutline === 'object' ? '' : mdiTextBoxOutline} size={0.9} />
+                    <TextBoxOutlineIcon style={{ fontSize: '2em' }} />
                 </ToggleButton>
                 <ToggleButton
                     value="/map"
                     onClick={() => setMapVisible(!mapVisible)}
                     dark={dark}>
-                    <Icon path={typeof mdiMap === 'object' ? '' : mdiMap} size={0.9} />
+                    <MapIcon style={{ fontSize: '2em' }} />
                 </ToggleButton>
                 <ToggleButton
                     value="/account"
@@ -76,7 +70,7 @@ const Footer = () => {
                     selected={path === '/account'}
                     dark={dark}
                     onClick={() => navigate('/account')}>
-                    <Icon path={typeof mdiAccount === 'object' ? '' : mdiAccount} size={0.9} />
+                    <AccountIcon style={{ fontSize: '2em' }} />
                 </ToggleButton>
                 <ToggleButton
                     value="/logout"
@@ -84,7 +78,7 @@ const Footer = () => {
                     selected={path === '/'}
                     dark={dark}
                     onClick={logoutUser}>
-                    <Icon path={typeof mdiLogout === 'object' ? '' : mdiLogout} size={0.9} />
+                    <LogoutIcon style={{ fontSize: '2em' }} />
                 </ToggleButton>
             </ToggleButtonGroup >
         </>) : <></>

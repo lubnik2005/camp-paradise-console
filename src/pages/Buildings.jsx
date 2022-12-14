@@ -4,22 +4,11 @@ import AuthContext from '../context/AuthContext'
 import { useLocation } from 'react-router-dom'
 import { Link } from "react-router-dom";
 import { ToggleButton, Card, Subtitle2, Caption, IconButton, H4, H5, H6 } from 'ui-neumorphism'
-import Icon from '@mdi/react';
-import {
-    mdiTicket,
-    mdiChevronRight,
-    mdiForest,
-    mdiTent,
-    mdiAccountMultiple,
-    mdiPodiumGold,
-    mdiEarth,
-    mdiHome,
-    mdiBell,
-    mdiAccount,
-    mdiChartLine,
-    mdiRun,
-} from '@mdi/js'
-
+import ChevronRightIcon from '~icons/mdi/chevron-right';
+import ForestIcon from '~icons/mdi/forest';
+import AccountMultipleIcon from '~icons/mdi/account-multiple';
+import PodiumGoldIcon from '~icons/mdi/podium-gold';
+import RunIcon from '~icons/mdi/run';
 import 'ui-neumorphism/dist/index.css'
 
 
@@ -69,7 +58,7 @@ const Buildings = () => {
                                     flexDirection: 'column'
                                 }}
                             >
-                                {/*<Icon path={mdiRun} size={2.5} color='var(--primary)' />*/}
+                                <RunIcon style={{ fontSize: '10em', color: 'var(--primary)' }} />
                                 <H5 style={{ padding: '4px 0px' }}>20</H5>
 
                                 <Caption style={{ padding: '4px 0px' }} secondary>
@@ -97,7 +86,7 @@ const Buildings = () => {
                                 dark={dark}
                                 style={{ padding: '4px', width: '46px', height: '46px' }}
                             >
-                                {/*<Icon path={mdiForest} size={1.5} color='var(--primary)' />*/}
+                                <ForestIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                             </Card>
                             <Card
 
@@ -127,11 +116,7 @@ const Buildings = () => {
                                             size='large'
                                             rounded
                                         >
-                                            {/*<Icon
-                                                path={mdiChevronRight}
-                                                size={0.7}
-                                                color='var(--primary)'
-                                />*/}
+                                            <ChevronRightIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                                         </IconButton>
                                     </Link>
                                 </Card>
@@ -152,7 +137,7 @@ const Buildings = () => {
                                 dark={dark}
                                 style={{ padding: '4px', width: '46px', height: '46px' }}
                             >
-                                {/* <Icon path={mdiAccountMultiple} size={1.5} color='var(--primary)' />*/}
+                                <AccountMultipleIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                             </Card>
                             <Card
 
@@ -182,11 +167,8 @@ const Buildings = () => {
                                             size='large'
                                             rounded
                                         >
-                                            {/*<Icon
-                                                path={mdiChevronRight}
-                                                size={0.7}
-                                                color='var(--primary)'
-                                />*/}
+
+                                            <ChevronRightIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                                         </IconButton>
                                     </Link>
                                 </Card>
@@ -207,7 +189,7 @@ const Buildings = () => {
                                 dark={dark}
                                 style={{ padding: '4px', width: '46px', height: '46px' }}
                             >
-                                {/*<Icon path={mdiPodiumGold} size={1.5} color='var(--primary)' />*/}
+                                <PodiumGoldIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                             </Card>
                             <Card
 
@@ -237,11 +219,7 @@ const Buildings = () => {
                                             size='large'
                                             rounded
                                         >
-                                            {/*<Icon
-                                                path={mdiChevronRight}
-                                                size={0.7}
-                                                color='var(--primary)'
-                                />*/}
+                                            <ChevronRightIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                                         </IconButton>
                                     </Link>
                                 </Card>

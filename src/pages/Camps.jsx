@@ -3,18 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import AuthContext from '../context/AuthContext'
 import { ToggleButton, Card, Subtitle2, Caption, IconButton, H4 } from 'ui-neumorphism'
-import Icon from '@mdi/react';
-import {
-    mdiTicket,
-    mdiChevronRight,
-    mdiTent,
-    mdiEarth,
-    mdiHome,
-    mdiBell,
-    mdiAccount,
-    mdiChartLine,
-} from '@mdi/js'
-
+import ChevronRightIcon from '~icons/mdi/chevron-right';
+import TentIcon from '~icons/mdi/tent';
+import EarthIcon from '~icons/mdi/earth';
 import 'ui-neumorphism/dist/index.css'
 
 
@@ -68,7 +59,7 @@ const Camps = () => {
                         dark={dark}
                         style={{ padding: '4px', width: '46px', height: '46px' }}
                     >
-                        {/*<Icon path={typeof mdiTent === 'object' ? '' : mdiTent} size={1.5} color='var(--primary)' />*/}
+                        <EarthIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                     </Card>
                     <Card
 
@@ -98,11 +89,7 @@ const Camps = () => {
                                     size='large'
                                     rounded
                                 >
-                                    {/*<Icon
-                                        path={typeof mdiChevronRight === 'object' ? '' : mdiChevronRight}
-                                        size={0.7}
-                                        color='var(--primary)'
-                        />*/}
+                                    <ChevronRightIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                                 </IconButton>
                             </Link>
                         </Card>
@@ -126,7 +113,7 @@ const Camps = () => {
                     dark={dark}
                     style={{ padding: '4px', width: '46px', height: '46px' }}
                 >
-                    {/*<Icon path={typeof mdiEarth === 'object' ? '' : mdiEarth} size={1.5} color='var(--primary)' />*/}
+                    <Icon path={typeof mdiEarth === 'object' ? '' : mdiEarth} size={1.5} color='var(--primary)' />
                 </Card>
                 <Card
 

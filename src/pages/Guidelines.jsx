@@ -4,22 +4,6 @@ import AuthContext from '../context/AuthContext'
 import { useLocation } from 'react-router-dom'
 import { Link } from "react-router-dom";
 import { ToggleButton, Card, Subtitle2, Caption, IconButton, H4, H5, H6 } from 'ui-neumorphism'
-import Icon from '@mdi/react';
-import {
-    mdiTicket,
-    mdiChevronRight,
-    mdiForest,
-    mdiTent,
-    mdiAccountMultiple,
-    mdiPodiumGold,
-    mdiEarth,
-    mdiHome,
-    mdiBell,
-    mdiAccount,
-    mdiChartLine,
-    mdiRun,
-} from '@mdi/js'
-
 import 'ui-neumorphism/dist/index.css'
 
 
