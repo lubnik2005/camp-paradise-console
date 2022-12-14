@@ -113,7 +113,7 @@ const Camps = () => {
                     dark={dark}
                     style={{ padding: '4px', width: '46px', height: '46px' }}
                 >
-                    <Icon path={typeof mdiEarth === 'object' ? '' : mdiEarth} size={1.5} color='var(--primary)' />
+                    <EarthIcon style={{ fontSize: '2em', color: 'var(--primary)' }} />
                 </Card>
                 <Card
 
