@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthContext'
+import { Button, ToggleButton, Card, CardContent, Subtitle2, Caption, IconButton, H4, H5, H6 } from 'ui-neumorphism'
+
+import ChevronRightIcon from '~icons/mdi/chevron-right';
 
 
 const Room = () => {
@@ -51,20 +54,16 @@ const Room = () => {
         <div className="content" >
             <h4 align="center">{camp.name}</h4>
             <h3 align="center">{room.name}</h3>
-            <h5>Available Cots</h5>
-            {cots.filter(cot => !cot.first_name && !cot.last_name)
-                .map((cot) => <Link to="/cot" key={`cot-${cot.id}`} state={{ camp, room, cot }}>
-                    ID: {cot.id}
-                    Name: {cot.first_name} {cot.last_name}
-                </Link>
-                )}
-            <h5>Reserved Rooms</h5>
-            {cots.filter(cot => cot.first_name || cot.last_name)
-                .map((cot) => <div key={`cot-${cot.id}`} >
-                    ID: {cot.id}
-                    Name: {cot.first_name} {cot.last_name}
-                </div>
-                )}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+                {cots.map((cot) => <Card style={{ margin: '10px' }}>  <CardContent>
+
+                    <H5>
+                        {cot.description}
+                    </H5>
+                    {!cot.first_name && !cot.last_name ? <Link to="/cot" key={`cot-${cot.id}`} state={{ camp, room, cot }}>
+                        <Button style={{ marginTop: '20px' }} color='var(--primary)'>Add to Cart</Button></Link> : <Subtitle2>{cot.first_name} {cot.last_name}</Subtitle2>}
+                </CardContent></Card>)}
+            </div>
         </ div >
     );
 }

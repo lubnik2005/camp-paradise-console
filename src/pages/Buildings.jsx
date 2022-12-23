@@ -16,9 +16,33 @@ import 'ui-neumorphism/dist/index.css'
 const Buildings = () => {
 
     const location = useLocation();
-    let { user } = useContext(AuthContext)
+    let { user, accessToken, logoutUser } = useContext(AuthContext);
+    let [capacity, setCapacity] = useState({ capacity: '', reserved: '', dorms: '', cabins: '', vip: '' });
     const camp = location.state?.camp;
     const dark = false;
+
+    const getCapacity = async (eventId) => {
+        console.log('data1');
+        try {
+            const response = await fetch(`${import.meta.env.VITE_APP_API_URL}capacity?token=${accessToken.accessToken}&event_id=${eventId}`);
+            const data = await response.json();
+            console.log(data);
+            if (response.status === 200) {
+                console.log('data');
+                return data
+            }
+        }
+
+        catch (e) { console.log(e) }
+        return '';
+    }
+    React.useEffect(() => {
+        const fetchData = async () => setCapacity(await getCapacity(camp.id));
+        console.log('camp');
+        console.log(camp);
+        console.log(!!camp?.id);
+        if (!!camp?.id) fetchData();
+    }, []);
 
     const CampInfo = () => {
 
@@ -59,10 +83,10 @@ const Buildings = () => {
                                 }}
                             >
                                 <RunIcon style={{ fontSize: '10em', color: 'var(--primary)' }} />
-                                <H5 style={{ padding: '4px 0px' }}>20</H5>
+                                <H5 style={{ padding: '4px 0px' }}>{capacity.reserved}</H5>
 
                                 <Caption style={{ padding: '4px 0px' }} secondary>
-                                    Cap: 480
+                                    Cap: {capacity.capacity}
                                 </Caption>
                             </Card>
                         </Card>
@@ -106,7 +130,7 @@ const Buildings = () => {
                                     }}
                                 >
                                     <Caption secondary component='span'>
-                                        10 spots available
+                                        {capacity.cabins} spots available (int total)
                                     </Caption>
                                     <Link to={"cabins"} state={{ camp }} >
                                         <IconButton
@@ -157,9 +181,9 @@ const Buildings = () => {
                                     }}
                                 >
                                     <Caption secondary component='span'>
-                                        10 spots available
+                                        {capacity.dorms} spots available (in total)
                                     </Caption>
-                                    <Link to={"cabins"} state={{ camp }} >
+                                    <Link to={"dorm"} state={{ camp }} >
                                         <IconButton
                                             style={{ position: 'absolute', right: '10px', top: '5px' }}
                                             text={false}
@@ -209,7 +233,7 @@ const Buildings = () => {
                                     }}
                                 >
                                     <Caption secondary component='span'>
-                                        10 spots available
+                                        {capacity.vips} spots available (in total)
                                     </Caption>
                                     <Link to={"cabins"} state={{ camp }} >
                                         <IconButton

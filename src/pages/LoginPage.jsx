@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import AuthContext from '../context/AuthContext'
 import logo from '../logo.png'; // Tell webpack this JS file uses this image
-
+import { Link } from 'react-router-dom';
 import { Card, TextField, Button, Alert } from 'ui-neumorphism'
 
 import 'ui-neumorphism/dist/index.css'
@@ -11,12 +11,15 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [alertVisible, setAlertVisible] = useState(false);
-    const [alertMessage, setAlertMessage] = useState('');
+    const [alertMessages, setAlertMessages] = useState([]);
 
     const login = async () => {
         let response = await loginUser(email, password);
         if (response?.hasOwnProperty('error')) {
-            setAlertMessage(response.error);
+            console.log(response.error);
+            setAlertMessages(response.error);
+            console.log(alertMessages);
+            console.log(Object.values(alertMessages));
             setAlertVisible(true);
         }
     }
@@ -29,7 +32,12 @@ const LoginPage = () => {
                 <img src={logo} className={'logo'} alt="camp-paradise-logo" />
             </picture>
             <div className={'login-item'}>
-                <Alert type='error' closable border='left' visible={alertVisible} onClose={() => setAlertVisible(false)}>{alertMessage}</Alert>
+                <Alert
+                    type='error'
+                    closable
+                    border='left'
+                    visible={alertVisible}
+                    onClose={() => setAlertVisible(false)}><ul>{Object.values(alertMessages).map(messages => (messages.map(message => <li>{message}</li>)))}</ul></Alert>
                 <div className={'form form-login'}>
                     <div className={"form-field"}>
                         <TextField value={email} inputStyles={{ width: '300px' }} onChange={handleEmailChange} name="email" type="text" className={'form-input'} placeholder="Username" required />
@@ -43,7 +51,7 @@ const LoginPage = () => {
                         <Button onClick={login} style={{ width: '300px', marginLeft: '20px', marginBottom: '30px' }}>Login</Button>
                     </div>
                 </div>
-                <Button style={{ width: '300px', marginLeft: '10px' }}>Register</Button>
+                <Link to={"/register"} ><Button style={{ width: '300px', marginLeft: '10px' }}>Register</Button></Link>
             </div >
         </>
     )

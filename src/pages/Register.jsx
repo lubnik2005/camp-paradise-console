@@ -45,7 +45,7 @@ const vpassword = value => {
     }
 };
 
-export default class Register extends Component {
+export default class RegisterPage extends Component {
     constructor(props) {
         super(props);
         this.handleRegister = this.handleRegister.bind(this);

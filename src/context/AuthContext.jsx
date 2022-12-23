@@ -36,9 +36,9 @@ export const AuthProvider = ({ children }) => {
             })
         } catch (error) {
             console.log(error);
-            return { error: 'Cannot connect to api.' }
+            return { error: { api_error: ['Cannot connect to api.'] } }
         }
-        if (!response) return { error: 'Cannot connect to api.' };
+        if (!response) return { error: { api_error: ['Cannot connect to api.'] } };
 
         let data = await response.json()
 
@@ -51,9 +51,46 @@ export const AuthProvider = ({ children }) => {
             navigate('/')
         } else {
             console.log("NOT FOUND");
-            return { error: 'Credentials not found.' };
+            return { error: { api_error: ['Credentials not found.'] } };
         }
     }
+
+    let registerUser = async (gender, firstName, lastName, email, password, passwordConfirm) => {
+        let response = false;
+        // FIX: Use proper fetch error handling.
+        try {
+            response = await fetch(import.meta.env.VITE_APP_API_URL + 'register/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    gender,
+                    first_name: firstName,
+                    last_name: lastName,
+                    email,
+                    password,
+                    password_confirm: passwordConfirm
+                })
+            })
+        } catch (error) {
+            console.log(error);
+            return { error: { api_error: ['Cannot connect to api.'] } }
+        }
+        if (!response) return { error: { api_error: ['Cannot connect to api.'] } };
+
+        let data = await response.json()
+
+        if (response.status === 200) {
+            console.log('Created new user');
+            navigate('/login');
+            return
+        } else {
+            console.log("NOT FOUND");
+            return { error: data.error };
+        }
+    }
+
 
 
     let logoutUser = () => {
@@ -94,6 +131,7 @@ export const AuthProvider = ({ children }) => {
         accessToken: accessToken,
         loginUser: loginUser,
         logoutUser: logoutUser,
+        registerUser: registerUser,
     }
 
 

@@ -9,7 +9,7 @@ import ChevronRightIcon from '~icons/mdi/chevron-right';
 import TentIcon from '~icons/mdi/tent';
 
 
-const Cabins = () => {
+const Dorm = () => {
 
     const [rooms, setRooms] = useState(localStorage.getItem('rooms') ? JSON.parse(localStorage.getItem('rooms')) : []);
     let { user, accessToken, logoutUser } = useContext(AuthContext);
@@ -41,13 +41,25 @@ const Cabins = () => {
 
 
     const Rooms = () => {
-        return rooms ? rooms.filter(room => room.type === 'cabin').map(room =>
-            <Card key={`upcoming-camp-${room.id}`} rounded={false} elevation={2} style={{ padding: '16px', marginBottom: '1.5em', marginTop: '.5em' }
-            }>
+        return rooms ? rooms.filter(room => room.type === 'dorm').reverse().map(room =>
+            <Card
+                key={`upcoming-camp-${room.id}`}
+                rounded={false}
+                elevation={2}
+                style={{
+                    width: '20em',
+                    height: '15em',
+                    padding: '16px',
+                    marginBottom: '1.5em',
+                    marginTop: '.5em',
+                    marginRight: '1.5em'
+                }
+                }>
                 <div
                     style={{
                         display: 'flex',
-                        position: 'relative'
+                        position: 'relative',
+                        height: '50%'
                     }}
                 >
                     <Card
@@ -61,7 +73,7 @@ const Cabins = () => {
 
                         flat
                         dark={dark}
-                        style={{ marginLeft: '12px', overflow: 'unset' }}
+                        style={{ marginLeft: '12px' }}
                     >
                         <Subtitle2 style={{ margin: '0px 0px' }}>
                             {room.name}
@@ -70,7 +82,6 @@ const Cabins = () => {
                             flat
                             style={{
                                 display: 'flex',
-                                overflow: 'unset',
                                 alignItems: 'center',
                             }}
                         >
@@ -98,13 +109,20 @@ const Cabins = () => {
 
 
     return (
-        <div className="content" >
+        <div className="content" style={{ height: '100%', marginBottom: '70px' }}>
             <h4 align="center">{camp.name}</h4>
-            <h3 align="center">Cabins</h3>
-            <Rooms />
+            <h3 align="center">Dorms</h3>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+                paddingLeft: '20px',
+                outline: 'green',
+            }}>
+                <Rooms />
+            </div>
         </ div>
     );
 }
 
-export default Cabins;
+export default Dorm;
 
