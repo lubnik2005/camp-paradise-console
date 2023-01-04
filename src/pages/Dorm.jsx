@@ -86,7 +86,7 @@ const Dorm = () => {
                             }}
                         >
                             <Caption secondary component='span'>
-                                3/4 cots filled
+                                {room.reservations_count}/{room.cots_count} cots filled
                             </Caption>
                             <Link key={`cabin-${room.id})}`} to="/room" state={{ camp, room }}>
                                 <IconButton
@@ -118,6 +118,8 @@ const Dorm = () => {
                 paddingLeft: '20px',
                 outline: 'green',
             }}>
+                {console.log("ROoms")}
+                {console.log(rooms)}
                 <Rooms />
             </div>
         </ div>

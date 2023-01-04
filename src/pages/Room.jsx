@@ -61,7 +61,7 @@ const Room = () => {
                         {cot.description}
                     </H5>
                     {!cot.first_name && !cot.last_name ? <Link to="/cot" key={`cot-${cot.id}`} state={{ camp, room, cot }}>
-                        <Button style={{ marginTop: '20px' }} color='var(--primary)'>Add to Cart</Button></Link> : <Subtitle2>{cot.first_name} {cot.last_name}</Subtitle2>}
+                        <Button style={{ marginTop: '20px' }} color='var(--primary)'>Buy Now</Button></Link> : <Subtitle2>{cot.first_name} {cot.last_name}</Subtitle2>}
                 </CardContent></Card>)}
             </div>
         </ div >

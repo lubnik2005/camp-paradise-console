@@ -37,10 +37,10 @@ const LoginPage = () => {
                     closable
                     border='left'
                     visible={alertVisible}
-                    onClose={() => setAlertVisible(false)}><ul>{Object.values(alertMessages).map(messages => (messages.map(message => <li>{message}</li>)))}</ul></Alert>
+                    onClose={() => setAlertVisible(false)}><ul>{Object.values(alertMessages).map(messages => (messages.map(message => <li>{message === 'Email not verified.' ? <>{message} Please check your email or <a href="/resend" >Resend</a></> : message}</li>)))}</ul></Alert>
                 <div className={'form form-login'}>
                     <div className={"form-field"}>
-                        <TextField value={email} inputStyles={{ width: '300px' }} onChange={handleEmailChange} name="email" type="text" className={'form-input'} placeholder="Username" required />
+                        <TextField value={email} inputStyles={{ width: '300px' }} onChange={handleEmailChange} name="email" type="text" className={'form-input'} placeholder="Email" required />
                     </div>
 
                     <div className={"form-field"}>

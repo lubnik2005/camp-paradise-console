@@ -130,7 +130,7 @@ const Buildings = () => {
                                     }}
                                 >
                                     <Caption secondary component='span'>
-                                        {capacity.cabins} spots available (int total)
+                                        {capacity.cabins} spots available (in total)
                                     </Caption>
                                     <Link to={"cabins"} state={{ camp }} >
                                         <IconButton

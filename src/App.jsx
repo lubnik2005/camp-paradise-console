@@ -16,6 +16,8 @@ import Cot from './pages/Cot'
 import Account from './pages/Account'
 import Guidelines from './pages/Guidelines'
 import RegisterPage from './pages/RegisterPage'
+import VerifyPage from './pages/VerifyPage'
+import ResendPage from './pages/ResendPage'
 import { Outlet, Navigate } from "react-router-dom";
 import { Card, TextField, Button } from 'ui-neumorphism';
 import 'ui-neumorphism/dist/index.css';
@@ -29,8 +31,11 @@ function App() {
             <Router>
                 <AuthProvider>
                     <Routes>
+                        <Route element={<RegisterPage />} path="/register" />
+                        <Route element={<LoginPage />} path="/login" />
+                        <Route element={<VerifyPage />} path="/verify" />
+                        <Route element={<ResendPage />} path="/resend" />
                         <Route element={<PrivateRoutes />}>
-                            {/*<Route element={<HomePage />} path="/" exact />*/}
                             <Route element={<Navigate to="/camps" />} path="/" exact />
                             <Route element={<Camps />} path="/camps" exact />
                             <Route element={<Buildings />} path="/buildings" exact />
@@ -42,13 +47,11 @@ function App() {
                             <Route element={<Account />} path="/account" exact />
                             <Route element={<Guidelines />} path="/guidelines" exact />
                         </Route>
-                        <Route element={<RegisterPage />} path="/register" />
-                        <Route element={<LoginPage />} path="/login" />
                     </Routes>
                     <Footer />
                 </AuthProvider>
             </Router>
-        </Card>
+        </Card >
     );
 }
 

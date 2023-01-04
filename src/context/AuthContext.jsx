@@ -36,9 +36,9 @@ export const AuthProvider = ({ children }) => {
             })
         } catch (error) {
             console.log(error);
-            return { error: { api_error: ['Cannot connect to api.'] } }
+            return { error: { error: ['Cannot connect to api.'] } }
         }
-        if (!response) return { error: { api_error: ['Cannot connect to api.'] } };
+        if (!response) return { error: { error: ['Cannot connect to api.'] } };
 
         let data = await response.json()
 
@@ -50,8 +50,10 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('accessToken', JSON.stringify(data.accessToken))
             navigate('/')
         } else {
+            console.log(data)
+            return data;
             console.log("NOT FOUND");
-            return { error: { api_error: ['Credentials not found.'] } };
+            return { error: { error: ['Credentials not found.'] } };
         }
     }
 
@@ -75,9 +77,9 @@ export const AuthProvider = ({ children }) => {
             })
         } catch (error) {
             console.log(error);
-            return { error: { api_error: ['Cannot connect to api.'] } }
+            return { error: { error: ['Cannot connect to api.'] } }
         }
-        if (!response) return { error: { api_error: ['Cannot connect to api.'] } };
+        if (!response) return { error: { error: ['Cannot connect to api.'] } };
 
         let data = await response.json()
 
@@ -97,7 +99,7 @@ export const AuthProvider = ({ children }) => {
         setAccessToken(null)
         setUser(null)
         localStorage.removeItem('accessToken')
-        navigate('/login')
+        //navigate('/login')
     }
 
 
@@ -145,7 +147,7 @@ export const AuthProvider = ({ children }) => {
 
         let interval = setInterval(() => {
             if (accessToken) {
-                updateToken()
+                //updateToken()
             }
         }, fourMinutes)
         return () => clearInterval(interval)
