@@ -31,6 +31,7 @@ export default function AuthRegisterForm() {
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required('First name required'),
     lastName: Yup.string().required('Last name required'),
+    gender: Yup.string().required('Gender is required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
     password: Yup.string().required('Password is required'),
   });
@@ -40,6 +41,7 @@ export default function AuthRegisterForm() {
     lastName: '',
     email: '',
     password: '',
+    gender: ''
   };
 
   const methods = useForm<FormValuesProps>({
@@ -57,7 +59,7 @@ export default function AuthRegisterForm() {
   const onSubmit = async (data: FormValuesProps) => {
     try {
       if (register) {
-        await register(data.email, data.password, data.firstName, data.lastName);
+        await register(data.email, data.password, data.firstName, data.lastName, data.gender);
       }
     } catch (error) {
       console.error(error);
