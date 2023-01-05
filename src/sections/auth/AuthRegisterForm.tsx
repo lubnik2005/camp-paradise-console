@@ -10,13 +10,14 @@ import { LoadingButton } from '@mui/lab';
 import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
-import FormProvider, { RHFTextField } from '../../components/hook-form';
+import FormProvider, { RHFTextField, RHFRadioGroup } from '../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
   email: string;
   password: string;
+  gender: string;
   firstName: string;
   lastName: string;
   afterSubmit?: string;
@@ -77,6 +78,8 @@ export default function AuthRegisterForm() {
           <RHFTextField name="firstName" label="First name" />
           <RHFTextField name="lastName" label="Last name" />
         </Stack>
+
+        <RHFRadioGroup name="gender" options={[{label: 'Guy', value: 'm'}, {label: 'Gal', value: 'f'}]} label="Gender" row/>
 
         <RHFTextField name="email" label="Email address" />
 
