@@ -40,11 +40,6 @@ import {
     EcommerceProductEditPage,
     EcommerceProductCreatePage,
     EcommerceProductDetailsPage,
-    // Dashboard: Invoice
-    InvoiceListPage,
-    InvoiceDetailsPage,
-    InvoiceCreatePage,
-    InvoiceEditPage,
     // Dashboard: Blog
     BlogPostsPage,
     BlogPostPage,
@@ -209,16 +204,16 @@ export default function Router() {
                         { path: 'account', element: <UserAccountPage /> },
                     ],
                 },
-                {
-                    path: 'invoice',
-                    children: [
-                        { element: <Navigate to="/dashboard/invoice/list" replace />, index: true },
-                        { path: 'list', element: <InvoiceListPage /> },
-                        { path: ':id', element: <InvoiceDetailsPage /> },
-                        { path: ':id/edit', element: <InvoiceEditPage /> },
-                        { path: 'new', element: <InvoiceCreatePage /> },
-                    ],
-                },
+                // {
+                //     path: 'invoice',
+                //     children: [
+                //         { element: <Navigate to="/dashboard/invoice/list" replace />, index: true },
+                //         { path: 'list', element: <InvoiceListPage /> },
+                //         { path: ':id', element: <InvoiceDetailsPage /> },
+                //         { path: ':id/edit', element: <InvoiceEditPage /> },
+                //         { path: 'new', element: <InvoiceCreatePage /> },
+                //     ],
+                // },
                 {
                     path: 'blog',
                     children: [
