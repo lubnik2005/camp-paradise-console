@@ -2,8 +2,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-// axios
-import axios from 'axios';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Container, Grid, Button } from '@mui/material';
@@ -11,6 +9,8 @@ import { Container, Grid, Button } from '@mui/material';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
+// axios
+import axios from "../../utils/axios";
 // _mock_
 import {
     _appFeatured,
@@ -53,7 +53,7 @@ export default function CampsPage() {
     const getCamps = useCallback(async () => {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}upcoming_events?token=${accessToken}`)
+            const response = await axios.get(`/upcoming_events?token=${accessToken}`)
             setCamps(response.data);
         } catch (error) {
             console.log(error);
