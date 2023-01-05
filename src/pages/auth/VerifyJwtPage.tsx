@@ -1,21 +1,55 @@
 import { Helmet } from 'react-helmet-async';
 import { Link as RouterLink } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
 // @mui
-import { Link, Typography } from '@mui/material';
-// routes
-import { PATH_AUTH } from '../../routes/paths';
+import { Link, Typography, CircularProgress } from '@mui/material';
 // components
 import Iconify from '../../components/iconify';
 // sections
 import AuthVerifyCodeForm from '../../sections/auth/AuthVerifyCodeForm';
 // assets
 import { EmailInboxIcon } from '../../assets/icons';
+// axios
+import axios from '../../utils/axios';
+// routes
+import { PATH_AUTH } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
 export default function VerifyJwtPage() {
+
+
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token')
+  const [verified, setVerified] = useState(false)
+  const [success, setSuccess] = useState(false)
+  console.log(token);
+
+  const verify = useCallback(async () => {
+      try {
+          const response = await axios.get(`/verify?token=${token}`);
+          console.log(response);
+          setVerified(true);
+          if (response.status === 200) setSuccess(true);
+      } catch (error) {
+          console.log(error);
+          setVerified(true);
+          setSuccess(false);
+          return { error: { error: ['Cannot connect to api.'] } }
+      }
+  }, [token]);
+
+  useEffect(() => {
+      const fetchData = async () => verify();
+      fetchData();
+  }, [verify]);
+
+  if (!verified) return <CircularProgress />
+
+
   return (
-    <>
+    success ?
+      <> 
       <Helmet>
         <title> Verify Code | Minimal UI</title>
       </Helmet>
@@ -23,19 +57,47 @@ export default function VerifyJwtPage() {
       <EmailInboxIcon sx={{ mb: 5, height: 96 }} />
 
       <Typography variant="h3" paragraph>
-        Please check your email!
+        E-mail verified!
+      </Typography>
+
+
+      <Typography sx={{ color: 'text.secondary', mb: 5 }}>
+        Your email has been verified. 
+      </Typography>
+
+      <Link
+        component={RouterLink}
+        to={PATH_AUTH.login}
+        color="inherit"
+        variant="subtitle2"
+        sx={{
+          mx: 'auto',
+          alignItems: 'center',
+          display: 'inline-flex',
+        }}
+      >
+        <Iconify icon="eva:chevron-left-fill" width={16} />
+        Return to sign in
+      </Link>
+    </> :
+    <> 
+      <Helmet>
+        <title> Verify Code | Minimal UI</title>
+      </Helmet>
+
+      <EmailInboxIcon sx={{ mb: 5, height: 96 }} />
+
+      <Typography variant="h3" paragraph>
+        Failed to verify your email!
       </Typography>
 
       <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-        We have emailed a 6-digit confirmation code to acb@domain, please enter the code in below
-        box to verify your email.
+        Please check yoor E-mail.
       </Typography>
 
-      <AuthVerifyCodeForm />
-
       <Typography variant="body2" sx={{ my: 3 }}>
-        Don’t have a code? &nbsp;
-        <Link variant="subtitle2">Resend code</Link>
+        Didn't receive an E-mail? &nbsp;
+        <RouterLink to={PATH_AUTH.resend}> <Link variant="subtitle2">Resend E-mail</Link></RouterLink>
       </Typography>
 
       <Link
