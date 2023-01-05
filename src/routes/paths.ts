@@ -43,6 +43,8 @@ export const PATH_DASHBOARD = {
     blank: path(ROOTS_DASHBOARD, '/blank'),
     general: {
         camps: path(ROOTS_DASHBOARD, '/camps'),
+        buildings: path(ROOTS_DASHBOARD, '/camps/buildings'),
+        cabins: path(ROOTS_DASHBOARD, '/camps/buildings/cabins'),
         app: path(ROOTS_DASHBOARD, '/app'),
         ecommerce: path(ROOTS_DASHBOARD, '/ecommerce'),
         analytics: path(ROOTS_DASHBOARD, '/analytics'),

@@ -6,7 +6,9 @@ import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Stack, Button } from '@mui/material';
+import { Container, Grid, Button } from '@mui/material';
+// routes
+import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
 // _mock_
@@ -21,27 +23,23 @@ import {
 import { useSettingsContext } from '../../components/settings';
 // sections
 import {
-    AppWidget,
     AppWelcome,
-    AppFeatured,
-    AppNewInvoice,
-    AppTopAuthors,
-    AppTopRelated,
-    AppAreaInstalled,
-    AppWidgetSummary,
-    AppCurrentDownload,
-    AppTopInstalledCountries,
 } from '../../sections/@dashboard/general/app';
 // assets
 import { SeoIllustration } from '../../assets/illustrations';
-//import logo from '../../../../camp-paradise-console.old/src/logo.png';
 // storage
 import localStorageAvailable from '../../utils/localStorageAvailable';
 
 // ----------------------------------------------------------------------
 
+interface Camp {
+    id: number;
+    name: string;
+    start_on: string;
+    end_on: string;
+}
+
 export default function CampsPage() {
-    //const { user } = useAuthContext();
     const { user } = useAuthContext();
 
     const storageAvailable = localStorageAvailable();
@@ -54,20 +52,17 @@ export default function CampsPage() {
 
     const getCamps = useCallback(async () => {
         try {
-            //const response = await axios.get('https://www.your-domain.com/api/product');
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`http://localhost:8000/api/upcoming_events` + `?token=${accessToken}`)
-            console.log(response.data);
-            console.log(response.data.camps);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}upcoming_events?token=${accessToken}`)
             setCamps(response.data);
         } catch (error) {
             console.log(error);
         }
-    }, []);
+    }, [storageAvailable]);
 
     useEffect(() => {
         getCamps();
-    }, []);
+    }, [getCamps]);
 
 
 
@@ -80,7 +75,7 @@ export default function CampsPage() {
 
             <Container maxWidth={themeStretch ? false : 'xl'}>
                 <Grid container spacing={3}>
-                    {camps.map(camp => <Grid
+                    {camps.map((camp: Camp) => <Grid
                         key={`upcoming-camp-${camp.id}`}
                         item
                         xs={12}
@@ -98,11 +93,10 @@ export default function CampsPage() {
                                     }}
                                 />
                             }
-                            action={<RouterLink to={"/dashboard/buildings"} state={{ camp }}><Button variant="contained">Register</Button></RouterLink>}
+                            action={<RouterLink to={PATH_DASHBOARD.general.buildings} state={{ camp }}><Button variant="contained">Register</Button></RouterLink>}
                         />
                     </Grid>)}
                 </Grid>
             </Container>
-        </> : <></>
-    );
+        </> : null );
 }

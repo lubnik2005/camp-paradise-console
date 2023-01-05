@@ -2,10 +2,12 @@ import { Helmet } from 'react-helmet-async';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Container, Grid, Box, Stack, Button, IconButton, Typography, StackProps } from '@mui/material';
+// navigate
+import { useLocation, Link, Navigate } from 'react-router-dom';
+// routes
+import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
-// navigate
-import { useLocation, Link, Navigate } from 'react-router-dom'
 // _mock_
 import {
     _appFeatured,
@@ -42,7 +44,6 @@ import {
 } from '../../sections/@dashboard/general/analytics';
 // assets
 import { SeoIllustration } from '../../assets/illustrations';
-//import logo from '../../../../camp-paradise-console.old/src/logo.png';
 
 // ----------------------------------------------------------------------
 
@@ -54,7 +55,7 @@ export default function GeneralAppPage() {
     const theme = useTheme();
 
     const { themeStretch } = useSettingsContext();
-    if (!camp) return <Navigate to={'/dashboard/camps'} />
+    if (!camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
     return (
         <>
             <Helmet>
@@ -93,7 +94,7 @@ export default function GeneralAppPage() {
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={4}>
-                        <Link to={"cabins"} state={{ camp }} >
+                        <Link to={PATH_DASHBOARD.general.cabins} state={{ camp }} >
                             <Button variant="outlined" color="inherit" >
                                 Cabins
                             </Button>

@@ -18,7 +18,6 @@ import { useSettingsContext } from '../../components/settings';
 import {
     AppWidget,
     AppWelcome,
-    AppFeatured,
     AppNewInvoice,
     AppTopAuthors,
     AppTopRelated,
@@ -29,12 +28,10 @@ import {
 } from '../../sections/@dashboard/general/app';
 // assets
 import { SeoIllustration } from '../../assets/illustrations';
-//import logo from '../../../../camp-paradise-console.old/src/logo.png';
 
 // ----------------------------------------------------------------------
 
 export default function GeneralAppPage() {
-    const { user } = useAuthContext();
 
     const theme = useTheme();
 
@@ -50,7 +47,7 @@ export default function GeneralAppPage() {
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={12} >
                         <AppWelcome
-                            title={`Winter Camp 2023`}
+                            title="Winter Camp 2023"
                             description="02/25/2023 — 02/29/23"
                             img={
                                 <SeoIllustration
