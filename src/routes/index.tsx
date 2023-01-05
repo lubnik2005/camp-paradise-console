@@ -14,7 +14,7 @@ import {
     // Auth
     LoginPage,
     RegisterPage,
-    VerifyCodePage,
+    VerifyJwtPage,
     NewPasswordPage,
     ResetPasswordPage,
     // Dashboard: General
@@ -156,7 +156,7 @@ export default function Router() {
                     children: [
                         { path: 'reset-password', element: <ResetPasswordPage /> },
                         { path: 'new-password', element: <NewPasswordPage /> },
-                        { path: 'verify', element: <VerifyCodePage /> },
+                        { path: 'verify', element: <VerifyJwtPage /> },
                     ],
                 },
             ],

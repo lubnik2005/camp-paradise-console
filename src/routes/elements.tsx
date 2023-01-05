@@ -17,6 +17,7 @@ const Loadable = (Component: ElementType) => (props: any) =>
 export const LoginPage = Loadable(lazy(() => import('../pages/auth/LoginPage')));
 export const RegisterPage = Loadable(lazy(() => import('../pages/auth/RegisterPage')));
 export const VerifyCodePage = Loadable(lazy(() => import('../pages/auth/VerifyCodePage')));
+export const VerifyJwtPage = Loadable(lazy(() => import('../pages/auth/VerifyJwtPage')));
 export const NewPasswordPage = Loadable(lazy(() => import('../pages/auth/NewPasswordPage')));
 export const ResetPasswordPage = Loadable(lazy(() => import('../pages/auth/ResetPasswordPage')));
 
