@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { useTheme } from '@mui/material/styles';
+import { useEffect, useState, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 import Iconify from '../../../src/components/iconify';
 import {
@@ -19,6 +20,7 @@ import {
     Divider,
     Collapse,
     Checkbox,
+    ListItem,
     ListItemText,
     ListItemIcon,
     ListSubheader,
@@ -34,8 +36,9 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-
-
+// utils
+import axios from '../../../src/utils/axios';
+import localStorageAvailable from '../../../src/utils/localStorageAvailable';
 // navigate
 import { useLocation, Link, Navigate } from 'react-router-dom';
 // routes
@@ -85,6 +88,23 @@ export default function CabinsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
     const camp = location.state?.camp;
+    const [cabins, setCabins] = useState([]);
+    const storageAvailable = localStorageAvailable();
+
+    const getCabins = useCallback(async () => {
+        try {
+            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
+            const response = await axios.get(`/upcoming_events?token=${accessToken}`)
+            setCabins(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [storageAvailable]);
+
+    useEffect(() => {
+        getCabins();
+    }, [getCabins]);
+
 
     const theme = useTheme();
 
@@ -92,6 +112,10 @@ export default function CabinsPage() {
         width: '100%',
         border: `solid 1px ${theme.palette.divider}`,
     }));
+
+    interface Cabin {
+
+    }
 
     const { themeStretch } = useSettingsContext();
     if (!camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
@@ -118,51 +142,18 @@ export default function CabinsPage() {
                         />
                     </Grid>
                     <Grid item xs={12} md={12}>
-                        <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                        <Box sx={{ width: '100%' }}>
                             <nav aria-label="main mailbox folders">
-                                <StyledListContainer>
-                                    <List>
-                                        <ListItemButton>
-                                            <ListItemAvatar>
-                                                <Avatar>
-                                                    <Iconify icon="ic:baseline-image" width={24} />
-                                                </Avatar>
-                                            </ListItemAvatar>
-                                            <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-                                        </ListItemButton>
-                                        <ListItemButton>
-                                            <ListItemAvatar>
-                                                <Avatar>
-                                                    <Iconify icon="ic:baseline-work" width={24} />
-                                                </Avatar>
-                                            </ListItemAvatar>
-                                            <ListItemText primary="Work" secondary="Jan 7, 2014" />
-                                        </ListItemButton>
-                                        <ListItemButton>
-                                            <ListItemAvatar>
-                                                <Avatar>
-                                                    <Iconify icon="ic:round-beach-access" width={24} />
-                                                </Avatar>
-                                            </ListItemAvatar>
-                                            <ListItemText primary="Vacation" secondary="July 20, 2014" />
-                                        </ListItemButton>
-                                    </List>
-                                </StyledListContainer>
-                            </nav>
-                            <Divider />
-                            <nav aria-label="secondary mailbox folders">
-                                <List>
+                                {cabins.map((cabin: Cabin) => <List>
                                     <ListItem disablePadding>
-                                        <ListItemButton>
-                                            <ListItemText primary="Trash" />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    <ListItem disablePadding>
-                                        <ListItemButton component="a" href="#simple-list">
+                                        <ListItemButton component={RouterLink} to={PATH_DASHBOARD.general.room}>
+                                            <ListItemIcon>
+                                            </ListItemIcon>
                                             <ListItemText primary="Spam" />
                                         </ListItemButton>
                                     </ListItem>
-                                </List>
+                                    <Divider />
+                                </List>)}
                             </nav>
                         </Box>
                     </Grid>

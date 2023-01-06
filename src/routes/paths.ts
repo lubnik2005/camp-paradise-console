@@ -43,6 +43,7 @@ export const PATH_DASHBOARD = {
     permissionDenied: path(ROOTS_DASHBOARD, '/permission-denied'),
     blank: path(ROOTS_DASHBOARD, '/blank'),
     general: {
+        room: path(ROOTS_DASHBOARD, '/room'),
         camps: path(ROOTS_DASHBOARD, '/camps'),
         buildings: path(ROOTS_DASHBOARD, '/buildings'),
         cabins: path(ROOTS_DASHBOARD, '/cabins'),
