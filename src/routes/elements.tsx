@@ -23,6 +23,11 @@ export const ResetPasswordPage = Loadable(lazy(() => import('../pages/auth/Reset
 
 // DASHBOARD: GENERAL
 export const BuildingsPage = Loadable(lazy(() => import('../pages/dashboard/BuildingsPage')));
+export const CabinsPage = Loadable(lazy(() => import('../pages/dashboard/CabinsPage')));
+export const DormsPage = Loadable(lazy(() => import('../pages/dashboard/DormsPage')));
+export const VipsPage = Loadable(lazy(() => import('../pages/dashboard/VipsPage')));
+export const RvsPage = Loadable(lazy(() => import('../pages/dashboard/RvsPage')));
+export const TentsPage = Loadable(lazy(() => import('../pages/dashboard/TentsPage')));
 export const CampsPage = Loadable(lazy(() => import('../pages/dashboard/CampsPage')));
 export const GeneralAppPage = Loadable(lazy(() => import('../pages/dashboard/GeneralAppPage')));
 export const GeneralEcommercePage = Loadable(

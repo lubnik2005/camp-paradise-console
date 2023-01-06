@@ -2,6 +2,12 @@ import { Helmet } from 'react-helmet-async';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Container, Grid, Box, Stack, Button, IconButton, Typography, StackProps } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 // navigate
 import { useLocation, Link, Navigate } from 'react-router-dom';
 // routes
@@ -47,7 +53,7 @@ import { SeoIllustration } from '../../assets/illustrations';
 
 // ----------------------------------------------------------------------
 
-export default function GeneralAppPage() {
+export default function BuildingsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
     const camp = location.state?.camp;
@@ -64,61 +70,129 @@ export default function GeneralAppPage() {
 
             <Container maxWidth={themeStretch ? false : 'xl'}>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} md={8} >
+                    <Grid item xs={12} md={12} >
                         <AppWelcome
                             title={camp.name}
                             description={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on.slice(0, 10).replace(/-/g, '/')}`}
-                            img={
-                                <SeoIllustration
-                                    sx={{
-                                        p: 3,
-                                        width: 360,
-                                        margin: { xs: 'auto', md: 'inherit' },
-                                    }}
-                                />
-                            }
+                            img={<img
+                                style={{
+                                    padding: '1.2em',
+                                    width: 360,
+                                    margin: { xs: 'auto', md: 'inherit' },
+                                }}
+                                src="/assets/undraw_into_the_night_vumi.svg" ></img>}
                             action={<></>}
                         />
                     </Grid>
-
-                    {/* <Grid item xs={12} md={4}>
-                        <AppFeatured list={_appFeatured} />
-                    </Grid> */}
                     <Grid item xs={12} sm={6} md={4}>
-                        <AnalyticsWidgetSummary
-                            title="Registered Attendees"
-                            total={234}
-                            color="info"
-                            icon="material-symbols:directions-run"
-                        />
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Link to={PATH_DASHBOARD.general.cabins} state={{ camp }} >
-                            <Button variant="outlined" color="inherit" >
-                                Cabins
-                            </Button>
-                        </Link>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Button variant="outlined" color="inherit" >
-                            Dorms
-                        </Button>
+                        <Card >
+                            <CardMedia
+                                component="img"
+                                alt="green iguana"
+                                height="140"
+                                image="/assets/undraw_cabin_hkfr.svg"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    Cabins
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                                    species, ranging across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.cabins} state={{ camp }}>Select</Button>
+                            </CardActions>
+                        </Card>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
-                        <Button variant="outlined" color="inherit" >
-                            VIP
-                        </Button>
+                        <Card >
+                            <CardMedia
+                                component="img"
+                                alt="green iguana"
+                                height="140"
+                                image="/static/images/cards/contemplative-reptile.jpg"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    Dorms
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                                    species, ranging across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.dorms} state={{ camp }}>Select</Button>
+                            </CardActions>
+                        </Card>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
-                        <Button variant="outlined" color="inherit" >
-                            RV
-                        </Button>
+                        <Card >
+                            <CardMedia
+                                component="img"
+                                alt="green iguana"
+                                height="140"
+                                image="/static/images/cards/contemplative-reptile.jpg"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    VIP
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                                    species, ranging across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.vips} state={{ camp }}>Select</Button>
+                            </CardActions>
+                        </Card>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
-                        <Button variant="outlined" color="inherit" >
-                            Tents
-                        </Button>
+                        <Card >
+                            <CardMedia
+                                component="img"
+                                alt="green iguana"
+                                height="140"
+                                image="/static/images/cards/contemplative-reptile.jpg"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    RV Parking Space
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                                    species, ranging across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.rvs} state={{ camp }}>Select</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <Card >
+                            <CardMedia
+                                component="img"
+                                alt="green iguana"
+                                height="140"
+                                image="/static/images/cards/contemplative-reptile.jpg"
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    Tents
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                                    species, ranging across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.tents} state={{ camp }}>Select</Button>
+                            </CardActions>
+                        </Card>
                     </Grid>
                 </Grid>
             </Container>

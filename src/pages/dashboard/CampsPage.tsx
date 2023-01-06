@@ -93,10 +93,10 @@ export default function CampsPage() {
                                     }}
                                 />
                             }
-                            action={<RouterLink to={PATH_DASHBOARD.general.buildings} state={{ camp }}><Button variant="contained">Register</Button></RouterLink>}
+                            action={<Button component={RouterLink} to={PATH_DASHBOARD.general.buildings} state={{ camp }} variant="contained">Register</Button>}
                         />
                     </Grid>)}
                 </Grid>
             </Container>
-        </> : null );
+        </> : null);
 }

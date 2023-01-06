@@ -19,6 +19,11 @@ import {
     ResetPasswordPage,
     // Dashboard: General
     BuildingsPage,
+    CabinsPage,
+    DormsPage,
+    VipsPage,
+    RvsPage,
+    TentsPage,
     CampsPage,
     GeneralAppPage,
     GeneralFilePage,
@@ -173,6 +178,11 @@ export default function Router() {
             children: [
                 { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
                 { path: 'buildings', element: <BuildingsPage /> },
+                { path: 'cabins', element: <CabinsPage /> },
+                { path: 'dorms', element: <DormsPage /> },
+                { path: 'vips', element: <VipsPage /> },
+                { path: 'rvs', element: <RvsPage /> },
+                { path: 'tents', element: <TentsPage /> },
                 { path: 'camps', element: <CampsPage /> },
                 { path: 'app', element: <GeneralAppPage /> },
                 { path: 'ecommerce', element: <GeneralEcommercePage /> },

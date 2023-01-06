@@ -11,3 +11,4 @@ export { default as MaintenanceIllustration } from './MaintenanceIllustration';
 export { default as PageNotFoundIllustration } from './PageNotFoundIllustration';
 export { default as OrderCompleteIllustration } from './OrderCompleteIllustration';
 export { default as UpgradeStorageIllustration } from './UpgradeStorageIllustration';
+//export { default as UndrawIntoTheNightIllustration } from './UndrawIntoTheNightIllustration';
