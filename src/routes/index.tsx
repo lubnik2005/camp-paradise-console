@@ -16,9 +16,11 @@ import {
     RegisterPage,
     VerifyJwtPage,
     NewPasswordPage,
+    NewPasswordJwtEmailSentPage,
     ResetPasswordPage,
     // Dashboard: General
     BuildingsPage,
+    CotsPage,
     CabinsPage,
     DormsPage,
     VipsPage,
@@ -161,6 +163,7 @@ export default function Router() {
                     children: [
                         { path: 'reset-password', element: <ResetPasswordPage /> },
                         { path: 'new-password', element: <NewPasswordPage /> },
+                        { path: 'reset-password-email-sent', element: <NewPasswordJwtEmailSentPage /> },
                         { path: 'verify', element: <VerifyJwtPage /> },
                     ],
                 },
@@ -179,6 +182,7 @@ export default function Router() {
                 { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
                 { path: 'buildings', element: <BuildingsPage /> },
                 { path: 'cabins', element: <CabinsPage /> },
+                { path: 'cots', element: <CotsPage /> },
                 { path: 'dorms', element: <DormsPage /> },
                 { path: 'vips', element: <VipsPage /> },
                 { path: 'rvs', element: <RvsPage /> },

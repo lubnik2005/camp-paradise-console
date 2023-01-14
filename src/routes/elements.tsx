@@ -19,10 +19,12 @@ export const RegisterPage = Loadable(lazy(() => import('../pages/auth/RegisterPa
 export const VerifyCodePage = Loadable(lazy(() => import('../pages/auth/VerifyCodePage')));
 export const VerifyJwtPage = Loadable(lazy(() => import('../pages/auth/VerifyJwtPage')));
 export const NewPasswordPage = Loadable(lazy(() => import('../pages/auth/NewPasswordPage')));
+export const NewPasswordJwtEmailSentPage = Loadable(lazy(() => import('../pages/auth/NewPasswordJwtEmailSentPage')));
 export const ResetPasswordPage = Loadable(lazy(() => import('../pages/auth/ResetPasswordPage')));
 
 // DASHBOARD: GENERAL
 export const BuildingsPage = Loadable(lazy(() => import('../pages/dashboard/BuildingsPage')));
+export const CotsPage = Loadable(lazy(() => import('../pages/dashboard/CotsPage')));
 export const CabinsPage = Loadable(lazy(() => import('../pages/dashboard/CabinsPage')));
 export const DormsPage = Loadable(lazy(() => import('../pages/dashboard/DormsPage')));
 export const VipsPage = Loadable(lazy(() => import('../pages/dashboard/VipsPage')));

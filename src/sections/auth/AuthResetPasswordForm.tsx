@@ -9,54 +9,57 @@ import { LoadingButton } from '@mui/lab';
 import { PATH_AUTH } from '../../routes/paths';
 // components
 import FormProvider, { RHFTextField } from '../../components/hook-form';
+// axios
+import axios from '../../../src/utils/axios';
 
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
-  email: string;
+    email: string;
 };
 
 export default function AuthResetPasswordForm() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const ResetPasswordSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-  });
+    const ResetPasswordSchema = Yup.object().shape({
+        email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    });
 
-  const methods = useForm<FormValuesProps>({
-    resolver: yupResolver(ResetPasswordSchema),
-    defaultValues: { email: 'demo@minimals.cc' },
-  });
+    const methods = useForm<FormValuesProps>({
+        resolver: yupResolver(ResetPasswordSchema),
+        defaultValues: { email: 'demo@minimals.cc' },
+    });
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
+    const {
+        handleSubmit,
+        formState: { isSubmitting },
+    } = methods;
 
-  const onSubmit = async (data: FormValuesProps) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      sessionStorage.setItem('email-recovery', data.email);
-      navigate(PATH_AUTH.newPassword);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    const onSubmit = async (data: FormValuesProps) => {
+        try {
+            // await new Promise((resolve) => setTimeout(resolve, 500));
+            await axios.get(`/reset-password?email=${data.email}`);
+            sessionStorage.setItem('email-recovery', data.email);
+            navigate(PATH_AUTH.newPasswordEmailSent);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-  return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <RHFTextField name="email" label="Email address" />
+    return (
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <RHFTextField name="email" label="Email address" />
 
-      <LoadingButton
-        fullWidth
-        size="large"
-        type="submit"
-        variant="contained"
-        loading={isSubmitting}
-        sx={{ mt: 3 }}
-      >
-        Send Request
-      </LoadingButton>
-    </FormProvider>
-  );
+            <LoadingButton
+                fullWidth
+                size="large"
+                type="submit"
+                variant="contained"
+                loading={isSubmitting}
+                sx={{ mt: 3 }}
+            >
+                Send Request
+            </LoadingButton>
+        </FormProvider>
+    );
 }

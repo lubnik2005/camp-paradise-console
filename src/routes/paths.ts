@@ -19,6 +19,7 @@ export const PATH_AUTH = {
     resend: path(ROOTS_AUTH, '/resend'),
     resetPassword: path(ROOTS_AUTH, '/reset-password'),
     newPassword: path(ROOTS_AUTH, '/new-password'),
+    newPasswordEmailSent: path(ROOTS_AUTH, '/new-password-email-sent'),
 };
 
 export const PATH_PAGE = {
@@ -43,7 +44,7 @@ export const PATH_DASHBOARD = {
     permissionDenied: path(ROOTS_DASHBOARD, '/permission-denied'),
     blank: path(ROOTS_DASHBOARD, '/blank'),
     general: {
-        room: path(ROOTS_DASHBOARD, '/room'),
+        cots: path(ROOTS_DASHBOARD, '/cots'),
         camps: path(ROOTS_DASHBOARD, '/camps'),
         buildings: path(ROOTS_DASHBOARD, '/buildings'),
         cabins: path(ROOTS_DASHBOARD, '/cabins'),

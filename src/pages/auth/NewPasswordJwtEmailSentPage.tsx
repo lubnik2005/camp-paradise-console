@@ -14,8 +14,6 @@ import { SentIcon } from '../../assets/icons';
 // ----------------------------------------------------------------------
 
 export default function NewPasswordPage() {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get('token')
     return (
         <>
             <Helmet>
@@ -29,16 +27,12 @@ export default function NewPasswordPage() {
             </Typography>
 
             <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-                We&apos;ve sent a 6-digit confirmation email to your email.
-                <br />
-                Please enter the code in below box to verify your email.
+                We&apos;ve sent an email with a reset password link.
             </Typography>
 
-            <AuthNewPasswordForm token={token} />
-
             <Typography variant="body2" sx={{ my: 3 }}>
-                Don’t have a code? &nbsp;
-                <Link variant="subtitle2">Resend code</Link>
+                Don’t receive an email? &nbsp;
+                <Link variant="subtitle2">Resend email</Link>
             </Typography>
 
             <Link

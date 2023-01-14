@@ -1,4 +1,7 @@
 import { Helmet } from 'react-helmet-async';
+// redux
+import { useDispatch, useSelector } from '../../redux/store';
+import { getProduct, addToCart, gotoStep } from '../../redux/slices/product';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { useEffect, useState, useCallback } from 'react';
@@ -42,6 +45,8 @@ import axios from '../../../src/utils/axios';
 import localStorageAvailable from '../../../src/utils/localStorageAvailable';
 // navigate
 import { useLocation, Link, Navigate } from 'react-router-dom';
+// @types
+import { ICheckoutCartItem } from '../../@types/product';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
@@ -88,25 +93,30 @@ import { SeoIllustration } from '../../assets/illustrations';
 export default function CabinsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
-    const camp = location.state?.camp;
-    const [rooms, setRooms] = useState([]);
+    const { camp, room } = location.state;
+    const [cots, setCots] = useState([]);
     const storageAvailable = localStorageAvailable();
+    const dispatch = useDispatch();
+
+    const handleAddCart = (newProduct: ICheckoutCartItem) => {
+        console.log(newProduct);
+        dispatch(addToCart(newProduct));
+    };
 
 
-    const getRooms = useCallback(async () => {
+    const getCots = useCallback(async () => {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`rooms?token=${accessToken}&event_id=${camp.id}`)
-            setRooms(response.data);
+            const response = await axios.get(`cots` + `?room_id=${room.id}&event_id=${camp.id}&token=${accessToken}`)
+            setCots(response.data);
         } catch (error) {
             console.log(error);
         }
     }, [storageAvailable]);
 
     useEffect(() => {
-        getRooms();
-    }, [getRooms]);
-
+        getCots();
+    }, [getCots]);
 
     const theme = useTheme();
 
@@ -115,10 +125,11 @@ export default function CabinsPage() {
         border: `solid 1px ${theme.palette.divider}`,
     }));
 
-    interface Room {
+    interface Cot {
         id: number,
-        type: string,
-        name: string,
+        first_name?: string,
+        last_name?: string,
+        description?: string
     }
 
     const { themeStretch } = useSettingsContext();
@@ -142,22 +153,46 @@ export default function CabinsPage() {
                                     margin: { xs: 'auto', md: 'inherit' },
                                 }}
                                 src="/assets/undraw_into_the_night_vumi.svg" ></img>}
-                            action={<>Cabins</>}
+                            action={<>{room?.name}</>}
                         />
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <Box sx={{ width: '100%' }}>
                             <nav aria-label="main mailbox folders">
-                                {rooms.length ? rooms.filter((room: Room) => room.type === 'cabin').map((room: Room) => <List>
-                                    <ListItem>
-                                        <ListItemButton component={RouterLink} to={PATH_DASHBOARD.general.cots} state={{ camp, room }}>
-                                            <ListItemIcon>
-                                            </ListItemIcon>
-                                            <ListItemText primary={room.name} />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    <Divider variant="inset" component="li" />
-                                </List>) : <LoadingScreen />}
+                                {cots.length ? cots.map((cot: Cot) =>
+                                    <Grid item xs={12} sm={6} md={4} key={`cot-${cot.id}`}>
+                                        <Card >
+                                            <CardMedia
+                                                component="img"
+                                                alt="green iguana"
+                                                height="140"
+                                                image="/assets/undraw_cabin_hkfr.svg"
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    {cot.description} $150
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    {!(cot.first_name || cot.last_name) ? <>Available</> : <>{cot.first_name} {cot.last_name}</>}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                {!(cot.first_name || cot.last_name) ?
+                                                    <Button size="small" onClick={() => handleAddCart({
+                                                        id: 1,
+                                                        name: 'temp',
+                                                        cover: '/temp',
+                                                        available: '10',
+                                                        price: '150',
+                                                        colors: ['green'],
+                                                        size: 10,
+                                                        quantity: 1,
+                                                    })}>Add to cart</Button> :
+                                                    <>Reserved</>
+                                                }
+                                            </CardActions>
+                                        </Card>
+                                    </Grid>) : <LoadingScreen />}
                             </nav>
                         </Box>
                     </Grid>
