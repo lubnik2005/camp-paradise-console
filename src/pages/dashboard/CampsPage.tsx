@@ -1,6 +1,6 @@
 // react
 import { useEffect, useState, useCallback } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { useTheme } from '@mui/material/styles';
@@ -93,7 +93,7 @@ export default function CampsPage() {
                                     }}
                                 />
                             }
-                            action={<Button component={RouterLink} to={PATH_DASHBOARD.general.buildings} state={{ camp }} variant="contained">Register</Button>}
+                            action={<Button component={RouterLink} to={PATH_DASHBOARD.general.buildings(camp.id.toString())} variant="contained">Register</Button>}
                         />
                     </Grid>)}
                 </Grid>

@@ -180,8 +180,8 @@ export default function Router() {
             ),
             children: [
                 { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-                { path: 'buildings', element: <BuildingsPage /> },
-                { path: 'cabins', element: <CabinsPage /> },
+                { path: 'camps/:campId', element: <BuildingsPage /> },
+                { path: 'camps/:campId/cabins', element: <CabinsPage /> },
                 { path: 'cots', element: <CotsPage /> },
                 { path: 'dorms', element: <DormsPage /> },
                 { path: 'vips', element: <VipsPage /> },

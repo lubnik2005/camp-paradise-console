@@ -1,7 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-// redux
-import { useDispatch, useSelector } from '../../redux/store';
-import { getProduct, addToCart, gotoStep } from '../../redux/slices/product';
+
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { useEffect, useState, useCallback } from 'react';
@@ -34,6 +32,22 @@ import {
     ListItemSecondaryAction,
 
 } from '@mui/material';
+// redux
+import { useDispatch, useSelector } from '../../../src/redux/store';
+import {
+    resetCart,
+    addToCart,
+    getCart,
+    nextStep,
+    backStep,
+    gotoStep,
+    deleteCart,
+    createBilling,
+    applyShipping,
+    applyDiscount,
+    increaseQuantity,
+    decreaseQuantity,
+} from '../../../src/redux/slices/product';
 import { Link as RouterLink } from 'react-router-dom';
 import * as React from 'react';
 import Card from '@mui/material/Card';
@@ -97,11 +111,17 @@ export default function CabinsPage() {
     const [cots, setCots] = useState([]);
     const storageAvailable = localStorageAvailable();
     const dispatch = useDispatch();
+    const { checkout } = useSelector((state) => state.product);
+    const { cart, billing, activeStep } = checkout;
 
     const handleAddCart = (newProduct: ICheckoutCartItem) => {
         console.log(newProduct);
         dispatch(addToCart(newProduct));
     };
+
+    useEffect(() => {
+        dispatch(getCart(cart));
+    }, [dispatch, cart]);
 
 
     const getCots = useCallback(async () => {
@@ -134,6 +154,24 @@ export default function CabinsPage() {
 
     const { themeStretch } = useSettingsContext();
     if (!camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+
+
+    const AddToCartButton = (cot) => {
+        if (cot.first_name || cot.last_name) return <>Reserved</>;
+        return cart.length < 1 ?
+            <Button size="small" onClick={() => handleAddCart({
+                id: 1,
+                name: 'temp',
+                cover: '/temp',
+                available: '10',
+                price: '150',
+                colors: ['green'],
+                size: 10,
+                quantity: 1,
+            })}>Add to cart</Button> :
+            <>Return maximum of 1 cot allowed per user per event.</>
+    }
+
     return (
         <>
             <Helmet>
@@ -177,19 +215,7 @@ export default function CabinsPage() {
                                                 </Typography>
                                             </CardContent>
                                             <CardActions>
-                                                {!(cot.first_name || cot.last_name) ?
-                                                    <Button size="small" onClick={() => handleAddCart({
-                                                        id: 1,
-                                                        name: 'temp',
-                                                        cover: '/temp',
-                                                        available: '10',
-                                                        price: '150',
-                                                        colors: ['green'],
-                                                        size: 10,
-                                                        quantity: 1,
-                                                    })}>Add to cart</Button> :
-                                                    <>Reserved</>
-                                                }
+                                                <AddToCartButton cot={cot} />
                                             </CardActions>
                                         </Card>
                                     </Grid>) : <LoadingScreen />}

@@ -1,15 +1,15 @@
+// react
+import { useEffect, useState, useCallback } from 'react';
+// @mui
+import { Grid, Container, Box, Stack, Button, IconButton, Card, Typography, StackProps, CardActions, CardContent, CardMedia } from '@mui/material';
+// navigate
+import { Link as RouterLink, useLocation, Link, Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Box, Stack, Button, IconButton, Typography, StackProps } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-// navigate
-import { useLocation, Link, Navigate } from 'react-router-dom';
+// axios
+import axios from "../../utils/axios";
+// _mock_
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
@@ -50,25 +50,55 @@ import {
 } from '../../sections/@dashboard/general/analytics';
 // assets
 import { SeoIllustration } from '../../assets/illustrations';
+// storage
+import localStorageAvailable from '../../utils/localStorageAvailable';
+
+interface Camp {
+    id: number;
+    name: string;
+    start_on: string;
+    end_on: string;
+}
 
 // ----------------------------------------------------------------------
 
 export default function BuildingsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
-    const camp = location.state?.camp;
-
+    //const camp = location.state?.camp;
+    const { campId } = useParams();
+    const storageAvailable = localStorageAvailable();
+    const [camps, setCamps] = useState([]);
+    const [camp, setCamp] = useState(null);
     const theme = useTheme();
 
     const { themeStretch } = useSettingsContext();
-    if (!camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+    const getCamps = useCallback(async () => {
+        try {
+            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
+            const response = await axios.get(`/upcoming_events?token=${accessToken}`)
+            setCamps(response.data);
+            console.log('data');
+            console.log(response.data);
+            setCamp(response.data.find((camp: Camp) => camp.id.toString() === campId?.toString()));
+        } catch (error) {
+            console.log(error);
+        }
+    }, [storageAvailable, campId]);
+    if (!campId) return <Navigate to={PATH_DASHBOARD.general.camps} />
+    useEffect(() => {
+        getCamps();
+    }, [getCamps]);
+
+
+
     return (
         <>
             <Helmet>
                 <title> General: App | Minimal UI</title>
             </Helmet>
 
-            <Container maxWidth={themeStretch ? false : 'xl'}>
+            {camp ? <Container maxWidth={themeStretch ? false : 'xl'}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={12} >
                         <AppWelcome
@@ -102,7 +132,7 @@ export default function BuildingsPage() {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.cabins} state={{ camp }}>Select</Button>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.cabins(camp.id)} >Select</Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -195,7 +225,7 @@ export default function BuildingsPage() {
                         </Card>
                     </Grid>
                 </Grid>
-            </Container>
+            </Container> : null}
         </>
     );
 }

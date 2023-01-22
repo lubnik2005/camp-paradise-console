@@ -46,8 +46,10 @@ export const PATH_DASHBOARD = {
     general: {
         cots: path(ROOTS_DASHBOARD, '/cots'),
         camps: path(ROOTS_DASHBOARD, '/camps'),
-        buildings: path(ROOTS_DASHBOARD, '/buildings'),
-        cabins: path(ROOTS_DASHBOARD, '/cabins'),
+        //buildings: path(ROOTS_DASHBOARD, '/buildings'),
+        buildings: (campId: string) => path(ROOTS_DASHBOARD, `/camps/${campId}`),
+        //cabins: path(ROOTS_DASHBOARD, '/cabins'),
+        cabins: (campId: string) => path(ROOTS_DASHBOARD, `/camps/${campId}/cabins`),
         dorms: path(ROOTS_DASHBOARD, '/dorms'),
         vips: path(ROOTS_DASHBOARD, '/vips'),
         rvs: path(ROOTS_DASHBOARD, '/rvs'),

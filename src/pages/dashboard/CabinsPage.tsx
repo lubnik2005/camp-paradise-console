@@ -31,7 +31,7 @@ import {
     ListItemSecondaryAction,
 
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -88,25 +88,36 @@ import { SeoIllustration } from '../../assets/illustrations';
 export default function CabinsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
-    const camp = location.state?.camp;
+    const { campId } = useParams();
     const [rooms, setRooms] = useState([]);
+    const [camp, setCamp] = useState([]);
     const storageAvailable = localStorageAvailable();
-
+    interface Camp {
+        id: number;
+        name: string;
+        start_on: string;
+        end_on: string;
+    }
 
     const getRooms = useCallback(async () => {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`rooms?token=${accessToken}&event_id=${camp.id}`)
+            const response = await axios.get(`rooms?token=${accessToken}&event_id=${campId}`)
             setRooms(response.data);
         } catch (error) {
             console.log(error);
         }
-    }, [storageAvailable]);
+    }, [storageAvailable, campId]);
 
-    useEffect(() => {
-        getRooms();
-    }, [getRooms]);
-
+    const getCamps = useCallback(async () => {
+        try {
+            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
+            const response = await axios.get(`/upcoming_events?token=${accessToken}`)
+            setCamp(response.data.find((camp: Camp) => camp.id.toString() === campId?.toString()));
+        } catch (error) {
+            console.log(error);
+        }
+    }, [storageAvailable, campId]);
 
     const theme = useTheme();
 
@@ -122,7 +133,17 @@ export default function CabinsPage() {
     }
 
     const { themeStretch } = useSettingsContext();
-    if (!camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+
+    if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+    useEffect(() => {
+        getRooms();
+    }, [getRooms, campId]);
+
+    useEffect(() => {
+        getCamps();
+    }, [getCamps, campId]);
+
+
     return (
         <>
             <Helmet>
