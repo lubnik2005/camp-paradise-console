@@ -5,6 +5,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import {
     Box,
     Card,
+    Grid,
     Radio,
     Stack,
     Paper,
@@ -17,6 +18,7 @@ import {
     CardContent,
     FormHelperText,
     FormControlLabel,
+    Skeleton
 } from '@mui/material';
 // Stripe
 import { PaymentElement, Elements, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -114,11 +116,41 @@ export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, ..
 
         return (
             <span>
-                {stripePromise && clientSecret && (
+                {stripePromise && clientSecret ? (
                     <Elements stripe={stripePromise} options={{ clientSecret }}>
                         <PaymentElement />
                     </Elements>
-                )}
+                ): <>
+                <Grid
+                    container
+                    justifyContent={{
+                        xs: 'center',
+                        md: 'space-between',
+                    }}
+                    sx={{
+                        textAlign: {
+                        xs: 'center',
+                        md: 'left',
+                    },
+                    }}
+                >
+                    <Grid item xs={12} sx={{px: 2}} >
+                        <Skeleton animation="wave" height={80}/>
+                    </Grid>
+                    <Grid item xs={6} sx={{px: 2}}>
+                        <Skeleton animation="wave" height={80}/>
+                    </Grid>
+                    <Grid item xs={6} sx={{px: 2}}>
+                        <Skeleton animation="wave" height={80}/>
+                    </Grid>
+                    <Grid item xs={6} sx={{px: 2}}>
+                        <Skeleton animation="wave" height={80}/>
+                    </Grid>
+                    <Grid item xs={6} sx={{px: 2}}>
+                        <Skeleton animation="wave" height={80}/>
+                    </Grid>
+                </Grid>
+                </>}
             </span>
         );
     };

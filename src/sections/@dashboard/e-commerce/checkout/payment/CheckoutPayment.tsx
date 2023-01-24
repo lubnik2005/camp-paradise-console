@@ -26,7 +26,7 @@ import CheckoutPaymentMethods from './CheckoutPaymentMethods';
 const DELIVERY_OPTIONS: ICheckoutDeliveryOption[] = [
   {
     value: 0,
-    title: 'Standard delivery (Free)',
+    title: 'Email delivery (Free)',
     description: 'Delivered on Monday, August 12',
   },
   {
@@ -119,7 +119,9 @@ export default function CheckoutPayment({
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
+          {/*
           <CheckoutDelivery onApplyShipping={onApplyShipping} deliveryOptions={DELIVERY_OPTIONS} />
+          */}
 
           <CheckoutPaymentMethods
             cardOptions={CARDS_OPTIONS}

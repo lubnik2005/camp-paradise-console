@@ -142,7 +142,7 @@ export default function BuildingsPage() {
                                 component="img"
                                 alt="green iguana"
                                 height="140"
-                                image="/static/images/cards/contemplative-reptile.jpg"
+                                image="/assets/undraw_cabin_hkfr.svg"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
@@ -154,7 +154,7 @@ export default function BuildingsPage() {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.dorms} state={{ camp }}>Select</Button>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.dorms(camp.id)} >Select</Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -164,7 +164,7 @@ export default function BuildingsPage() {
                                 component="img"
                                 alt="green iguana"
                                 height="140"
-                                image="/static/images/cards/contemplative-reptile.jpg"
+                                image="/assets/undraw_cabin_hkfr.svg"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
@@ -176,10 +176,11 @@ export default function BuildingsPage() {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.vips} state={{ camp }}>Select</Button>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.vips(camp.id)} state={{ camp }}>Select</Button>
                             </CardActions>
                         </Card>
                     </Grid>
+                    {/*
                     <Grid item xs={12} sm={6} md={4}>
                         <Card >
                             <CardMedia
@@ -224,6 +225,7 @@ export default function BuildingsPage() {
                             </CardActions>
                         </Card>
                     </Grid>
+                            */}
                 </Grid>
             </Container> : null}
         </>

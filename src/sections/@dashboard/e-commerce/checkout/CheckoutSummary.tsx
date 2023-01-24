@@ -62,7 +62,7 @@ export default function CheckoutSummary({
             </Typography>
             <Typography variant="subtitle2">{fCurrency(subtotal)}</Typography>
           </Stack>
-
+          {/*
           <Stack direction="row" justifyContent="space-between">
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               Discount
@@ -78,6 +78,7 @@ export default function CheckoutSummary({
               {shipping ? fCurrency(shipping) : displayShipping}
             </Typography>
           </Stack>
+        */}
 
           <Divider />
 
@@ -97,11 +98,11 @@ export default function CheckoutSummary({
             <TextField
               fullWidth
               placeholder="Discount codes / Gifts"
-              value="DISCOUNT5"
+              // value="DISCOUNTS"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <Button onClick={() => onApplyDiscount(5)} sx={{ mr: -0.5 }}>
+                    <Button onClick={() => onApplyDiscount(0)} sx={{ mr: -0.5 }}>
                       Apply
                     </Button>
                   </InputAdornment>

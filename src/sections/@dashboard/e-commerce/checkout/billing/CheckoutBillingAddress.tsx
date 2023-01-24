@@ -37,7 +37,8 @@ export default function CheckoutBillingAddress({ checkout, onBackStep, onCreateB
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
-          {_addressBooks.map((address, index) => (
+          {//_addressBooks
+          [].map((address, index) => (
             <AddressItem
               key={index}
               address={address}

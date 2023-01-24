@@ -90,7 +90,7 @@ export default function CabinsPage() {
     const location = useLocation();
     const { campId } = useParams();
     const [rooms, setRooms] = useState([]);
-    const [camp, setCamp] = useState([]);
+    const [camp, setCamp] = useState(null);
     const storageAvailable = localStorageAvailable();
     interface Camp {
         id: number;
@@ -103,6 +103,7 @@ export default function CabinsPage() {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
             const response = await axios.get(`rooms?token=${accessToken}&event_id=${campId}`)
+            console.log(response);
             setRooms(response.data);
         } catch (error) {
             console.log(error);
@@ -113,9 +114,14 @@ export default function CabinsPage() {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
             const response = await axios.get(`/upcoming_events?token=${accessToken}`)
-            setCamp(response.data.find((camp: Camp) => camp.id.toString() === campId?.toString()));
+            const camp = response.data.find((camp: Camp) => camp.id.toString() === campId?.toString());
+            setCamp(camp);
+            console.log('camp');
+            console.log(camp);
+            if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
         } catch (error) {
             console.log(error);
+            if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
         }
     }, [storageAvailable, campId]);
 
@@ -134,7 +140,7 @@ export default function CabinsPage() {
 
     const { themeStretch } = useSettingsContext();
 
-    if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+    if (!campId) return <Navigate to={PATH_DASHBOARD.general.camps} />
     useEffect(() => {
         getRooms();
     }, [getRooms, campId]);
@@ -153,7 +159,7 @@ export default function CabinsPage() {
             <Container maxWidth={themeStretch ? false : 'xl'}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={12} >
-                        <AppWelcome
+                        {camp ? <AppWelcome
                             title={camp.name}
                             description={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on.slice(0, 10).replace(/-/g, '/')}`}
                             img={<img
@@ -163,15 +169,16 @@ export default function CabinsPage() {
                                     margin: { xs: 'auto', md: 'inherit' },
                                 }}
                                 src="/assets/undraw_into_the_night_vumi.svg" ></img>}
-                            action={<>Cabins</>}
-                        />
+                            action={<>Cabins</>} 
+                        />: <LoadingScreen/>}
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <Box sx={{ width: '100%' }}>
                             <nav aria-label="main mailbox folders">
-                                {rooms.length ? rooms.filter((room: Room) => room.type === 'cabin').map((room: Room) => <List>
+                                {rooms.length ? rooms.filter((room: Room) => room.type === 'cabin').map((room: Room) => 
+                                <List key={`room-${room.id}`}>
                                     <ListItem>
-                                        <ListItemButton component={RouterLink} to={PATH_DASHBOARD.general.cots} state={{ camp, room }}>
+                                        <ListItemButton component={RouterLink} to={PATH_DASHBOARD.general.cots(camp.id, room.id)} >
                                             <ListItemIcon>
                                             </ListItemIcon>
                                             <ListItemText primary={room.name} />
