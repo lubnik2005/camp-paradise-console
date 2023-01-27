@@ -174,7 +174,7 @@ export default function Router() {
 
         // Dashboard
         {
-            path: 'dashboard',
+            //path: 'dashboard',
             element: (
                 <AuthGuard>
                     <DashboardLayout />
@@ -270,6 +270,7 @@ export default function Router() {
 
         // Main Routes
         {
+            path: 'dashboard',
             element: <MainLayout />,
             children: [
                 { element: <HomePage />, index: true },

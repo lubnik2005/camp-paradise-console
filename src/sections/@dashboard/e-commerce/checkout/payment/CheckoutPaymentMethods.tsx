@@ -43,7 +43,7 @@ interface Props extends CardProps {
     cardOptions: ICheckoutCardOption[];
 }
 
-export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, stripePromise, clientSecret, ...other }: Props) {
+export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, ...other }: Props) {
     const { control } = useFormContext();
 
     const [open, setOpen] = useState(false);
@@ -58,7 +58,7 @@ export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, st
 
     const Checkout = () => (
         <span>
-            {stripePromise ? (
+            {true ? (
                 <PaymentElement />
             ) : <Grid
                 container

@@ -5,7 +5,10 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // config
-import { Grid, Button } from '@mui/material';
+import {
+    Grid, Button, CardHeader,
+    CardContent, Card
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { loadStripe } from '@stripe/stripe-js';
 import { PaymentElement, Elements, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -36,6 +39,7 @@ import localStorageAvailable from '../../../../../utils/localStorageAvailable';
 import { useAuthContext } from '../../../../../../src/auth/useAuthContext';
 // redux
 import { useDispatch, useSelector } from '../../../../../../src/redux/store';
+import LoadingScreen from 'src/components/loading-screen/LoadingScreen';
 
 // ----------------------------------------------------------------------
 
@@ -93,16 +97,18 @@ type FormValuesProps = {
     payment: string;
 };
 
-export default function CheckoutPayment({
+const CheckoutForm = ({
     checkout,
     onReset,
     onNextStep,
     onBackStep,
     onGotoStep,
     onApplyShipping,
-}: Props) {
+}: Props) => {
     const { total, discount, subtotal, shipping, billing, cart } = checkout;
     const { user } = useAuthContext();
+    const { enqueueSnackbar } = useSnackbar();
+    const navigate = useNavigate();
 
     const PaymentSchema = Yup.object().shape({
         payment: Yup.string().required('Payment is required!'),
@@ -117,76 +123,109 @@ export default function CheckoutPayment({
         resolver: yupResolver(PaymentSchema),
         defaultValues,
     });
-
-    // const {
-    //     handleSubmit,
-    //     formState: { isSubmitting },
-    // } = methods;
-
-    const onSubmit = async () => {
-        try {
-            onNextStep();
-            onReset();
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    const { enqueueSnackbar } = useSnackbar();
+    const stripe = useStripe();
+    const elements = useElements();
     const [isProcessing, setIsProcessing] = useState(false);
-    const [elements, setElements] = useState(null);
-    const [stripe, setStripe] = useState(null)
-    const stripePromise = loadStripe(STRIPE.KEY);
-    const navigate = useNavigate();
-    /*
-    const handleSubmitTemp = async (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsProcessing(true);
         try {
-            console.log(stripe);
-            console.log(elements);
-            if (!stripe || !elements) {
-                return;
-            }
-
-            // try {
-
-
-            //     const response = await axios.get('verify_reservation', { cart });
-
-            // } catch (error) {
-            //     console.log(error);
-            //     //enqueueSnackbar(error.message, { variant: 'error' });
-            //     //onReset();
-            //     //navigate(PATH_DASHBOARD.general.camps, { replace: true });
-            //     return;
-            // }
-            const { error } = await stripe.confirmPayment({
-                elements,
-                confirmParams: {
-                    return_url: `${window.location.origin}/login`
-                },
-                redirect: "if_required"
-            });
-            if (error) {
-                console.log(error);
-                enqueueSnackbar(error.message, { variant: 'error' });
-            } else {
-                onNextStep();
-                onReset();
-            }
-
-        }
-        catch (error) {
+            const response = await axios.get('verify-reservation', { cart });
+        } catch (error) {
             console.log(error);
+            enqueueSnackbar(error.message, { variant: 'error' });
+            setIsProcessing(false);
+            return;
         }
-    }
+        const { error } = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: `${window.location.origin}/login`
+            },
+            redirect: "if_required"
+        });
+        if (error) {
+            console.log(error);
+            enqueueSnackbar(error.message, { variant: 'error' });
+            setIsProcessing(false);
+        } else {
+            onNextStep();
+            onReset();
+        }
+    };
 
 
+    return (<FormProvider methods={methods} onSubmit={handleSubmit} >
+        <Grid container spacing={3}>
+            <Grid item xs={12} md={8}>
+                <Card >
+                    <CardHeader title="Payment options" />
+                    <CardContent>
+                        <PaymentElement />
+                    </CardContent>
+                </Card>
+                {/*
+                    <CheckoutPaymentMethods
+                        cardOptions={CARDS_OPTIONS}
+                        paymentOptions={PAYMENT_OPTIONS}
+                        sx={{ my: 3 }}
+                    />
+    */}
+                <Button
+                    size="small"
+                    color="inherit"
+                    onClick={onBackStep}
+                    startIcon={<Iconify icon="eva:arrow-ios-back-fill" />}
+                >
+                    Back
+                </Button>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+                <CheckoutBillingInfo onBackStep={onBackStep} billing={billing} />
+
+                <CheckoutSummary
+                    enableEdit
+                    total={total}
+                    subtotal={subtotal}
+                    discount={discount}
+                    shipping={shipping}
+                    onEdit={() => onGotoStep(0)}
+                />
+                <LoadingButton
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    loading={isProcessing}
+                >
+                    Complete Order
+                </LoadingButton>
+            </Grid>
+        </Grid>
+
+    </FormProvider >
+    );
+}
+
+
+export default function CheckoutPayment({
+    checkout,
+    onReset,
+    onNextStep,
+    onBackStep,
+    onGotoStep,
+    onApplyShipping,
+}: Props) {
 
     const [clientSecret, setClientSecret] = useState("");
+    const stripePromise = loadStripe(STRIPE.KEY);
+    const { user } = useAuthContext();
+    const { total, discount, subtotal, shipping, billing, cart } = checkout;
 
-    const getClientSecret = useCallback(async () => {
-        const storageAvailable = localStorageAvailable();
+    const storageAvailable = localStorageAvailable();
+    const fetchClientSecret = async () => {
         try {
             const token = storageAvailable ? localStorage.getItem('accessToken') : '';
             const { data } = await axios.post('create-payment-intent', {
@@ -202,75 +241,19 @@ export default function CheckoutPayment({
         } catch (error) {
             console.log(error);
         }
-    }, []);
-
-    useEffect(() => {
-        getClientSecret();
-    }, [getClientSecret]);
-    */
-
-
-    const PaymentCheckoutMethodsWrapper = () => {
-        const stripe = useStripe();
-        const elements = useElements();
-        const [clientSecret, setClientSecret] = useState('');
-
-        return (<CheckoutPaymentMethods
-            cardOptions={CARDS_OPTIONS}
-            paymentOptions={PAYMENT_OPTIONS}
-            stripePromise={stripePromise}
-            sx={{ my: 3 }}
-        />
-
-        );
     }
+    useEffect(() => {
+        fetchClientSecret();
+    }, [storageAvailable]);
 
-
-    return (
-        <FormProvider methods={methods} onSubmit={ } >
-            <Elements stripe={stripePromise} >
-                <Grid container spacing={3}>
-                    <Grid item xs={12} md={8}>
-                        {/*
-                        <CheckoutDelivery onApplyShipping={onApplyShipping} deliveryOptions={DELIVERY_OPTIONS} />
-                    */}
-                        <PaymentCheckoutMethodsWrapper />
-                        <Button
-                            size="small"
-                            color="inherit"
-                            onClick={onBackStep}
-                            startIcon={<Iconify icon="eva:arrow-ios-back-fill" />}
-                        >
-                            Back
-                        </Button>
-                    </Grid>
-
-                    <Grid item xs={12} md={4}>
-                        <CheckoutBillingInfo onBackStep={onBackStep} billing={billing} />
-
-                        <CheckoutSummary
-                            enableEdit
-                            total={total}
-                            subtotal={subtotal}
-                            discount={discount}
-                            shipping={shipping}
-                            onEdit={() => onGotoStep(0)}
-                        />
-
-                        <LoadingButton
-                            fullWidth
-                            size="large"
-                            type="submit"
-                            variant="contained"
-                            disabled={(!stripePromise || !clientSecret)}
-                            //loading={isSubmitting}
-                            style={{ display: isProcessing ? 'inherit' : 'inherit' }}
-                        >
-                            Complete Order
-                        </LoadingButton>
-                    </Grid>
-                </Grid>
-            </Elements>
-        </FormProvider >
+    return (clientSecret && stripePromise ? <Elements stripe={stripePromise} options={{ clientSecret }} >
+        <CheckoutForm
+            checkout={checkout}
+            onReset={onReset}
+            onNextStep={onNextStep}
+            onBackStep={onBackStep}
+            onGotoStep={onGotoStep}
+            onApplyShipping={onApplyShipping} />
+    </Elements> : <LoadingScreen />
     );
 }
