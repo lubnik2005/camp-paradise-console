@@ -22,7 +22,6 @@ import {
 } from '@mui/material';
 // Stripe
 import { PaymentElement, Elements, useStripe, useElements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 // config
 import { STRIPE } from '../../../../../config-global';
 // utils
@@ -44,7 +43,7 @@ interface Props extends CardProps {
     cardOptions: ICheckoutCardOption[];
 }
 
-export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, ...other }: Props) {
+export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, stripePromise, clientSecret, ...other }: Props) {
     const { control } = useFormContext();
 
     const [open, setOpen] = useState(false);
@@ -57,103 +56,41 @@ export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, ..
         setOpen(false);
     };
 
-    // const stripe = useStripe();
-    // const elements = useElements();
-
-    const Checkout = () => {
-        console.log(STRIPE);
-        console.log(STRIPE.KEY);
-        const stripePromise = loadStripe(STRIPE.KEY);
-        const [clientSecret, setClientSecret] = useState("");
-
-        // useEffect(() => {
-        //     if (accessToken?.accessToken) {
-        //         fetch(import.meta.env.VITE_APP_API_URL + `create-payment-intent?token=${accessToken?.accessToken}`, {
-        //             method: "POST",
-        //             headers: {
-        //                 'Content-Type': 'application/json'
-        //             },
-        //             body: JSON.stringify({
-        //                 user_id: user.id,
-        //                 cot_id: 1,
-        //                 room_id: 2,
-        //                 event_id: 4,
-        //             })
-        //         })
-        //             .then(async (response) => {
-        //                 const { clientSecret } = await response.json();
-        //                 setClientSecret(clientSecret);
-        //             })
-        //     }
-        // }, []);
-
-        const getClientSecret = useCallback(async () => {
-            console.log('temp');
-            const storageAvailable = localStorageAvailable();
-            try {
-                const token = storageAvailable ? localStorage.getItem('accessToken') : '';
-                console.log('temp2');
-                const { data } = await axios.post('create-payment-intent', {
-                    token,
-                    user_id: 1,
-                    cot_id: 1,
-                    room_id: 1,
-                    event_id: 1,
-                }, {
-                    headers: { 'Content-Type': 'text/json' }
-                });
-                console.log(data);
-                console.log(data.clientSecret);
-                setClientSecret(data.clientSecret);
-            } catch (error) {
-                console.log(error);
-            }
-        }, []);
-
-        useEffect(() => {
-            getClientSecret();
-        }, [getClientSecret]);
-
-        return (
-            <span>
-                {stripePromise && clientSecret ? (
-                    <Elements stripe={stripePromise} options={{ clientSecret }}>
-                        <PaymentElement />
-                    </Elements>
-                ): <>
-                <Grid
-                    container
-                    justifyContent={{
-                        xs: 'center',
-                        md: 'space-between',
-                    }}
-                    sx={{
-                        textAlign: {
+    const Checkout = () => (
+        <span>
+            {stripePromise ? (
+                <PaymentElement />
+            ) : <Grid
+                container
+                justifyContent={{
+                    xs: 'center',
+                    md: 'space-between',
+                }}
+                sx={{
+                    textAlign: {
                         xs: 'center',
                         md: 'left',
                     },
-                    }}
-                >
-                    <Grid item xs={12} sx={{px: 2}} >
-                        <Skeleton animation="wave" height={80}/>
-                    </Grid>
-                    <Grid item xs={6} sx={{px: 2}}>
-                        <Skeleton animation="wave" height={80}/>
-                    </Grid>
-                    <Grid item xs={6} sx={{px: 2}}>
-                        <Skeleton animation="wave" height={80}/>
-                    </Grid>
-                    <Grid item xs={6} sx={{px: 2}}>
-                        <Skeleton animation="wave" height={80}/>
-                    </Grid>
-                    <Grid item xs={6} sx={{px: 2}}>
-                        <Skeleton animation="wave" height={80}/>
-                    </Grid>
+                }}
+            >
+                <Grid item xs={12} sx={{ px: 2 }} >
+                    <Skeleton animation="wave" height={80} />
                 </Grid>
-                </>}
-            </span>
-        );
-    };
+                <Grid item xs={6} sx={{ px: 2 }}>
+                    <Skeleton animation="wave" height={80} />
+                </Grid>
+                <Grid item xs={6} sx={{ px: 2 }}>
+                    <Skeleton animation="wave" height={80} />
+                </Grid>
+                <Grid item xs={6} sx={{ px: 2 }}>
+                    <Skeleton animation="wave" height={80} />
+                </Grid>
+                <Grid item xs={6} sx={{ px: 2 }}>
+                    <Skeleton animation="wave" height={80} />
+                </Grid>
+            </Grid>}
+        </span>
+    );
 
 
     return (

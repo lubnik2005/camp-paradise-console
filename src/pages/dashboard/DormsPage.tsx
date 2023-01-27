@@ -4,7 +4,6 @@ import { useTheme } from '@mui/material/styles';
 import { useEffect, useState, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 import LoadingScreen from 'src/components/loading-screen';
-import Iconify from '../../components/iconify';
 import {
     Container,
     Grid,
@@ -38,10 +37,11 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 // utils
+import { useLocation, Link, Navigate } from 'react-router-dom';
 import axios from '../../utils/axios';
 import localStorageAvailable from '../../utils/localStorageAvailable';
 // navigate
-import { useLocation, Link, Navigate } from 'react-router-dom';
+import Iconify from '../../components/iconify';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
@@ -168,7 +168,7 @@ export default function DormsPage() {
                                     width: 360,
                                     margin: { xs: 'auto', md: 'inherit' },
                                 }}
-                                src="/assets/undraw_into_the_night_vumi.svg" ></img>}
+                                src="/assets/undraw_into_the_night_vumi.svg"  />}
                             action={<>Dorm Rooms</>} 
                         />: <LoadingScreen/>}
                     </Grid>
@@ -179,8 +179,7 @@ export default function DormsPage() {
                                 <List key={`room-${room.id}`}>
                                     <ListItem>
                                         <ListItemButton component={RouterLink} to={PATH_DASHBOARD.general.cots(camp.id, room.id)} >
-                                            <ListItemIcon>
-                                            </ListItemIcon>
+                                            <ListItemIcon />
                                             <ListItemText primary={room.name} />
                                         </ListItemButton>
                                     </ListItem>

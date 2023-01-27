@@ -44,6 +44,7 @@ const navConfig = [
         items: [
             { title: 'camps', path: PATH_DASHBOARD.general.camps, icon: ICONS.tent },
             { title: 'cart', path: PATH_DASHBOARD.eCommerce.checkout, icon: ICONS.ecommerce },
+            { title: 'forms', path: PATH_DASHBOARD.general.forms, icon: ICONS.folder },
             /*
             { title: 'app', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
             { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
@@ -228,6 +229,6 @@ const navConfig = [
         ],
     }, 
     */
-]; 
+];
 
 export default navConfig;

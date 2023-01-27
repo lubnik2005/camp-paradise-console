@@ -65,7 +65,7 @@ interface Camp {
 export default function BuildingsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
-    //const camp = location.state?.camp;
+    // const camp = location.state?.camp;
     const { campId } = useParams();
     const storageAvailable = localStorageAvailable();
     const [camps, setCamps] = useState([]);
@@ -110,7 +110,7 @@ export default function BuildingsPage() {
                                     width: 360,
                                     margin: { xs: 'auto', md: 'inherit' },
                                 }}
-                                src="/assets/undraw_into_the_night_vumi.svg" ></img>}
+                                src="/assets/undraw_into_the_night_vumi.svg"  />}
                             action={<></>}
                         />
                     </Grid>
@@ -118,7 +118,7 @@ export default function BuildingsPage() {
                         <Card >
                             <CardMedia
                                 component="img"
-                                alt="green iguana"
+                                alt="cabins"
                                 height="140"
                                 image="/assets/undraw_cabin_hkfr.svg"
                             />
@@ -140,7 +140,7 @@ export default function BuildingsPage() {
                         <Card >
                             <CardMedia
                                 component="img"
-                                alt="green iguana"
+                                alt="dorm"
                                 height="140"
                                 image="/assets/undraw_cabin_hkfr.svg"
                             />
@@ -162,7 +162,7 @@ export default function BuildingsPage() {
                         <Card >
                             <CardMedia
                                 component="img"
-                                alt="green iguana"
+                                alt="vip"
                                 height="140"
                                 image="/assets/undraw_cabin_hkfr.svg"
                             />
@@ -180,14 +180,13 @@ export default function BuildingsPage() {
                             </CardActions>
                         </Card>
                     </Grid>
-                    {/*
                     <Grid item xs={12} sm={6} md={4}>
                         <Card >
                             <CardMedia
                                 component="img"
-                                alt="green iguana"
+                                alt="rv_parking_space"
                                 height="140"
-                                image="/static/images/cards/contemplative-reptile.jpg"
+                                image="/assets/undraw_cabin_hkfr.svg"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
@@ -207,9 +206,9 @@ export default function BuildingsPage() {
                         <Card >
                             <CardMedia
                                 component="img"
-                                alt="green iguana"
+                                alt="Tents"
                                 height="140"
-                                image="/static/images/cards/contemplative-reptile.jpg"
+                                image="/assets/undraw_cabin_hkfr.svg"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
@@ -225,7 +224,7 @@ export default function BuildingsPage() {
                             </CardActions>
                         </Card>
                     </Grid>
-                            */}
+
                 </Grid>
             </Container> : null}
         </>

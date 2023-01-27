@@ -31,6 +31,7 @@ export const VipsPage = Loadable(lazy(() => import('../pages/dashboard/VipsPage'
 export const RvsPage = Loadable(lazy(() => import('../pages/dashboard/RvsPage')));
 export const TentsPage = Loadable(lazy(() => import('../pages/dashboard/TentsPage')));
 export const CampsPage = Loadable(lazy(() => import('../pages/dashboard/CampsPage')));
+export const GuidelinesPage = Loadable(lazy(() => import('../pages/dashboard/GuidelinesPage')));
 export const GeneralAppPage = Loadable(lazy(() => import('../pages/dashboard/GeneralAppPage')));
 export const GeneralEcommercePage = Loadable(
     lazy(() => import('../pages/dashboard/GeneralEcommercePage'))
@@ -41,8 +42,12 @@ export const GeneralAnalyticsPage = Loadable(
 export const GeneralBankingPage = Loadable(
     lazy(() => import('../pages/dashboard/GeneralBankingPage'))
 );
-export const GeneralBookingPage = Loadable(
-    lazy(() => import('../pages/dashboard/GeneralBookingPage'))
+
+export const FormsPage = Loadable(
+    lazy(() => import('../pages/dashboard/FormsPage'))
+);
+export const FormPage = Loadable(
+    lazy(() => import('../pages/dashboard/FormPage'))
 );
 export const GeneralFilePage = Loadable(lazy(() => import('../pages/dashboard/GeneralFilePage')));
 

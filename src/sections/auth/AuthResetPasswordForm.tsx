@@ -10,7 +10,7 @@ import { PATH_AUTH } from '../../routes/paths';
 // components
 import FormProvider, { RHFTextField } from '../../components/hook-form';
 // axios
-import axios from '../../../src/utils/axios';
+import axios from "../../utils/axios";
 
 // ----------------------------------------------------------------------
 

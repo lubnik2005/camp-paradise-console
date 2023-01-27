@@ -38,10 +38,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 // utils
 import { useLocation, Link, Navigate } from 'react-router-dom';
-import axios from "../../utils/axios";
-import localStorageAvailable from "../../utils/localStorageAvailable";
+import axios from '../../utils/axios';
+import localStorageAvailable from '../../utils/localStorageAvailable';
 // navigate
-import Iconify from "../../components/iconify";
+import Iconify from '../../components/iconify';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
@@ -85,7 +85,7 @@ import { SeoIllustration } from '../../assets/illustrations';
 
 // ----------------------------------------------------------------------
 
-export default function CabinsPage() {
+export default function RvsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
     const { campId } = useParams();
@@ -168,23 +168,23 @@ export default function CabinsPage() {
                                     width: 360,
                                     margin: { xs: 'auto', md: 'inherit' },
                                 }}
-                                src="/assets/undraw_into_the_night_vumi.svg"  />}
-                            action={<>Cabins</>} 
-                        />: <LoadingScreen/>}
+                                src="/assets/undraw_into_the_night_vumi.svg" />}
+                            action={<>VIP Rooms</>}
+                        /> : <LoadingScreen />}
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <Box sx={{ width: '100%' }}>
                             <nav aria-label="main mailbox folders">
-                                {rooms.length ? rooms.filter((room: Room) => room.type === 'cabin').map((room: Room) => 
-                                <List key={`room-${room.id}`}>
-                                    <ListItem>
-                                        <ListItemButton component={RouterLink} to={PATH_DASHBOARD.general.cots(camp.id, room.id)} >
-                                            <ListItemIcon />
-                                            <ListItemText primary={room.name} />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    <Divider variant="inset" component="li" />
-                                </List>) : <LoadingScreen />}
+                                {rooms.length ? rooms.filter((room: Room) => room.type === 'rv').map((room: Room) =>
+                                    <List key={`room-${room.id}`}>
+                                        <ListItem>
+                                            <ListItemButton component={RouterLink} to={PATH_DASHBOARD.general.cots(camp.id, room.id)} >
+                                                <ListItemIcon />
+                                                <ListItemText primary={room.name} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                        <Divider variant="inset" component="li" />
+                                    </List>) : <LoadingScreen />}
                             </nav>
                         </Box>
                     </Grid>

@@ -5,7 +5,6 @@ import { useTheme } from '@mui/material/styles';
 import { useEffect, useState, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 import LoadingScreen from 'src/components/loading-screen';
-import Iconify from '../../../src/components/iconify';
 import {
     Container,
     Grid,
@@ -34,7 +33,17 @@ import {
 
 } from '@mui/material';
 // redux
-import { useDispatch, useSelector } from '../../../src/redux/store';
+import { Link as RouterLink, useParams } from 'react-router-dom';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+// utils
+import { useLocation, Link, Navigate } from 'react-router-dom';
+import axios from "../../utils/axios";
+import localStorageAvailable from "../../utils/localStorageAvailable";
+// navigate
 import {
     resetCart,
     addToCart,
@@ -48,18 +57,9 @@ import {
     applyDiscount,
     increaseQuantity,
     decreaseQuantity,
-} from '../../../src/redux/slices/product';
-import { Link as RouterLink, useParams } from 'react-router-dom';
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-// utils
-import axios from '../../../src/utils/axios';
-import localStorageAvailable from '../../../src/utils/localStorageAvailable';
-// navigate
-import { useLocation, Link, Navigate } from 'react-router-dom';
+} from "../../redux/slices/product";
+import { useDispatch, useSelector } from "../../redux/store";
+import Iconify from "../../components/iconify";
 // @types
 import { ICheckoutCartItem } from '../../@types/product';
 // routes
@@ -127,15 +127,15 @@ export default function CabinsPage() {
         dispatch(getCart(cart));
     }, [dispatch, cart]);
 
-    
+
     const getRooms = useCallback(async () => {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const {data} = await axios.get(`rooms?token=${accessToken}&event_id=${campId}`)
+            const { data } = await axios.get(`rooms?token=${accessToken}&event_id=${campId}`)
             console.log(data.find((room: Room) => room.id.toString() === roomId));
             setRoom(data.find((room: Room) => room.id.toString() === roomId));
-            //console.log((data.find((room: Room) => room.id === roomId));
-            //setRoom((data.find((room: Room) => room.id === roomId));
+            // console.log((data.find((room: Room) => room.id === roomId));
+            // setRoom((data.find((room: Room) => room.id === roomId));
         } catch (error) {
             console.log(error);
         }
@@ -149,10 +149,10 @@ export default function CabinsPage() {
             setCamp(camp);
             console.log('camp');
             console.log(camp);
-            //if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+            // if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
         } catch (error) {
             console.log(error);
-            //if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+            // if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
         }
     }, [storageAvailable, campId]);
 
@@ -162,10 +162,10 @@ export default function CabinsPage() {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
             const response = await axios.get(`cots` + `?room_id=${roomId}&event_id=${campId}&token=${accessToken}`)
             setCots(response.data);
-            //if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+            // if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
         } catch (error) {
             console.log(error);
-            //if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+            // if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
         }
     }, [storageAvailable, roomId]);
 
@@ -199,7 +199,7 @@ export default function CabinsPage() {
 
     const { themeStretch } = useSettingsContext();
 
-    //if (!campId) return <Navigate to={PATH_DASHBOARD.general.camps} />
+    // if (!campId) return <Navigate to={PATH_DASHBOARD.general.camps} />
     useEffect(() => {
         getRooms();
     }, [getRooms, campId]);
@@ -213,18 +213,22 @@ export default function CabinsPage() {
     }, [getCots, campId, roomId]);
 
 
-    const AddToCartButton = ({cot}) => {
-        if (cot.first_name || cot.last_name) return <>Reserved</>;
-        {console.log('cart');}
-        {console.log(cart);}
+    const AddToCartButton = ({ cot }) => {
+        if (cot.first_name || cot.last_name) return <Button size="small" disabled>Reserved</Button>;
+        if (camp.reservations.length > 0) return <Button size="small" disabled>Purchase limit reached</Button>;
+        console.log(camp);
+        { console.log('cart'); }
+        { console.log(cart); }
         console.log(cot)
-        return !cart.find((product) => product.id === cot.id) ?
+        return !cart.find((product) => product.cot_id === cot.id) ?
             <Button size="small" onClick={() => handleAddCart({
-                id: cot.id,
+                cot_id: cot.id,
+                room_id: room?.id,
+                event_id: camp?.id,
                 name: `${camp.name} ${room.name} ${cot.description}`,
                 cover: '/temp',
                 available: '1',
-                price: '150',
+                price: cot.price / 100,
                 colors: ['green'],
                 size: 0,
                 quantity: 1,
@@ -250,32 +254,32 @@ export default function CabinsPage() {
                                     width: 360,
                                     margin: { xs: 'auto', md: 'inherit' },
                                 }}
-                                src="/assets/undraw_into_the_night_vumi.svg" ></img>}
+                                src="/assets/undraw_into_the_night_vumi.svg" />}
                             action={<>{room?.name}</>}
-                        /> : <LoadingScreen/>}
+                        /> : <LoadingScreen />}
                     </Grid>
                     {cots.length ? cots.map((cot: Cot) =>
-                    <Grid item xs={12} sm={6} md={4} key={`cot-${cot.id}`}>
-                        <Card >
-                            <CardMedia
-                                component="img"
-                                alt="green iguana"
-                                height="140"
-                                image="/assets/undraw_cabin_hkfr.svg"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    {cot.description} <Chip label="$150" />
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {!(cot.first_name || cot.last_name) ? <>Available</> : <>{cot.first_name} {cot.last_name}</>}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <AddToCartButton cot={cot} />
-                            </CardActions>
-                        </Card>
-                    </Grid>) : <LoadingScreen />}
+                        <Grid item xs={12} sm={6} md={4} key={`cot-${cot.id}`}>
+                            <Card >
+                                {/* <CardMedia
+                                    component="img"
+                                    alt="green iguana"
+                                    height="140"
+                                    image="/assets/undraw_cabin_hkfr.svg"
+                                /> */}
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {cot.description} {(!cot.first_name && !cot.last_name) ? <Chip label={`$${cot.price / 100}`} /> : null}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {!(cot.first_name || cot.last_name) ? <>Available</> : <>{cot.first_name} {cot.last_name}</>}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <AddToCartButton cot={cot} />
+                                </CardActions>
+                            </Card>
+                        </Grid>) : <LoadingScreen />}
 
                 </Grid>
             </Container>

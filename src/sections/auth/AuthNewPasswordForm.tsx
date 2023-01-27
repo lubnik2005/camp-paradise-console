@@ -14,7 +14,7 @@ import Iconify from '../../components/iconify';
 import { useSnackbar } from '../../components/snackbar';
 import FormProvider, { RHFTextField, RHFCodes } from '../../components/hook-form';
 // axios
-import axios from '../../../src/utils/axios';
+import axios from "../../utils/axios";
 
 // ----------------------------------------------------------------------
 
