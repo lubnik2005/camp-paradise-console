@@ -77,7 +77,7 @@ export default function Router() {
 
         // Dashboard
         {
-            // path: 'dashboard',
+            path: '/',
             element: (
                 <AuthGuard>
                     <DashboardLayout />
