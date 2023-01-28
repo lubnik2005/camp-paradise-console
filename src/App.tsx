@@ -9,10 +9,6 @@ import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/captions.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
-// map
-import './utils/mapboxgl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-
 // editor
 import 'react-quill/dist/quill.snow.css';
 
@@ -58,33 +54,33 @@ import { AuthProvider } from './auth/JwtContext';
 // ----------------------------------------------------------------------
 
 export default function App() {
-  return (
-    <AuthProvider>
-      <HelmetProvider>
-        <ReduxProvider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <SettingsProvider>
-                <BrowserRouter>
-                  <ScrollToTop />
-                  <MotionLazyContainer>
-                    <ThemeProvider>
-                      <ThemeSettings>
-                        <ThemeLocalization>
-                          <SnackbarProvider>
-                            <StyledChart />
-                            <Router />
-                          </SnackbarProvider>
-                        </ThemeLocalization>
-                      </ThemeSettings>
-                    </ThemeProvider>
-                  </MotionLazyContainer>
-                </BrowserRouter>
-              </SettingsProvider>
-            </LocalizationProvider>
-          </PersistGate>
-        </ReduxProvider>
-      </HelmetProvider>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <HelmetProvider>
+                <ReduxProvider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <SettingsProvider>
+                                <BrowserRouter>
+                                    <ScrollToTop />
+                                    <MotionLazyContainer>
+                                        <ThemeProvider>
+                                            <ThemeSettings>
+                                                <ThemeLocalization>
+                                                    <SnackbarProvider>
+                                                        <StyledChart />
+                                                        <Router />
+                                                    </SnackbarProvider>
+                                                </ThemeLocalization>
+                                            </ThemeSettings>
+                                        </ThemeProvider>
+                                    </MotionLazyContainer>
+                                </BrowserRouter>
+                            </SettingsProvider>
+                        </LocalizationProvider>
+                    </PersistGate>
+                </ReduxProvider>
+            </HelmetProvider>
+        </AuthProvider>
+    );
 }

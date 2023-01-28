@@ -231,7 +231,6 @@ export const DemoLabelPage = Loadable(
 export const DemoLightboxPage = Loadable(
     lazy(() => import('../pages/components/extra/DemoLightboxPage'))
 );
-export const DemoMapPage = Loadable(lazy(() => import('../pages/components/extra/DemoMapPage')));
 export const DemoMegaMenuPage = Loadable(
     lazy(() => import('../pages/components/extra/DemoMegaMenuPage'))
 );
