@@ -232,6 +232,7 @@ export default function CheckoutPayment({
             console.log(data.clientSecret);
             setClientSecret(data.clientSecret);
         } catch (error) {
+            onReset();
             console.log(error);
         }
     }, [storageAvailable, user, cart]);
