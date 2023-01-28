@@ -36,6 +36,13 @@ import { useSnackbar } from '../../../../../components/snackbar';
 import axios from '../../../../../utils/axios';
 import localStorageAvailable from '../../../../../utils/localStorageAvailable';
 import { useAuthContext } from "../../../../../auth/useAuthContext";
+import { useDispatch, useSelector } from "../../../../ redux/store";
+// navigate
+import {
+    resetCart,
+    addToCart,
+    getCart,
+} from "../../redux/slices/product";
 // redux
 
 // ----------------------------------------------------------------------
@@ -105,6 +112,7 @@ const CheckoutForm = ({
     const { total, discount, subtotal, shipping, billing, cart } = checkout;
     const { user } = useAuthContext();
     const { enqueueSnackbar } = useSnackbar();
+    const dispatch = useDispatch();
 
     const PaymentSchema = Yup.object().shape({
         payment: Yup.string().required('Payment is required!'),
@@ -148,7 +156,7 @@ const CheckoutForm = ({
             setIsProcessing(false);
         } else {
             onNextStep();
-            onReset();
+            dispatch(onReset());
         }
     };
 
@@ -215,6 +223,7 @@ export default function CheckoutPayment({
     const navigate = useNavigate();
     if (!user) navigate(PATH_AUTH.login);
     const { total, discount, subtotal, shipping, billing, cart } = checkout;
+    const dispatch = useDispatch();
 
     const storageAvailable = localStorageAvailable();
     const fetchClientSecret = useCallback(async () => {
@@ -232,7 +241,7 @@ export default function CheckoutPayment({
             console.log(data.clientSecret);
             setClientSecret(data.clientSecret);
         } catch (error) {
-            onReset();
+            dispatch(onReset());
             console.log(error);
         }
     }, [storageAvailable, user, cart]);
