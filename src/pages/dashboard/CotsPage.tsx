@@ -187,7 +187,7 @@ export default function CotsPage() {
                             action={<>{room?.name}</>}
                         /> : <LoadingScreen />}
                     </Grid>
-                    {cots !== undefined && cots.length ? cots.map((cot: Cot) =>
+                    {cots !== undefined ? cots.map((cot: Cot) =>
                         <Grid item xs={12} sm={6} md={4} key={`cot-${cot.id}`}>
                             <Card >
                                 {/* <CardMedia

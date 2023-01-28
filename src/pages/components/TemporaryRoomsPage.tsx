@@ -116,7 +116,7 @@ export default function TemporaryRoomsPage({ title, query }: { title: string, qu
                     <Grid item xs={12} md={12}>
                         <Box sx={{ width: '100%' }}>
                             <nav aria-label="main mailbox folders">
-                                {camp && rooms !== undefined && rooms.length ? rooms.filter((room: Room) => room.type === query).map((room: Room) =>
+                                {camp && rooms !== undefined ? rooms.filter((room: Room) => room.type === query).map((room: Room) =>
                                     <List key={`room-${room.id}`}>
                                         <ListItem>
                                             <ListItemButton component={RouterLink} to={PATH_DASHBOARD.general.cots(camp.id, room.id)} >
