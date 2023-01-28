@@ -45,16 +45,16 @@ export const PATH_DASHBOARD = {
     blank: path(ROOTS_DASHBOARD, '/blank'),
     general: {
         // cots: path(ROOTS_DASHBOARD, '/cots'),
-        cots: (campId: string, roomId: string) => path(ROOTS_DASHBOARD, `/camps/${campId}/${roomId}/cots`),
+        cots: (campId: number, roomId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/${roomId}/cots`),
         camps: path(ROOTS_DASHBOARD, '/camps'),
         // buildings: path(ROOTS_DASHBOARD, '/buildings'),
-        buildings: (campId: string) => path(ROOTS_DASHBOARD, `/camps/${campId}`),
+        buildings: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}`),
         // cabins: path(ROOTS_DASHBOARD, '/cabins'),
-        cabins: (campId: string) => path(ROOTS_DASHBOARD, `/camps/${campId}/cabins`),
-        dorms: (campId: string) => path(ROOTS_DASHBOARD, `/camps/${campId}/dorms`),
-        vips: (campId: string) => path(ROOTS_DASHBOARD, `/camps/${campId}/vips`),
+        cabins: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/cabins`),
+        dorms: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/dorms`),
+        vips: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/vips`),
         forms: path(ROOTS_DASHBOARD, '/forms'),
-        form: (formId: string) => path(ROOTS_DASHBOARD, `/forms/${formId}`),
+        form: (formId: number) => path(ROOTS_DASHBOARD, `/forms/${formId}`),
         // vips: path(ROOTS_DASHBOARD, '/vips'),
         rvs: path(ROOTS_DASHBOARD, '/rvs'),
         tents: path(ROOTS_DASHBOARD, '/tents'),
@@ -65,7 +65,7 @@ export const PATH_DASHBOARD = {
         booking: path(ROOTS_DASHBOARD, '/booking'),
         file: path(ROOTS_DASHBOARD, '/file'),
         guidelines: path(ROOTS_DASHBOARD, '/guidelines'),
-        camp_guidelines: (campId: string) => path(ROOTS_DASHBOARD, `/guidelines/${campId}`)
+        camp_guidelines: (campId: number) => path(ROOTS_DASHBOARD, `/guidelines/${campId}`)
     },
     mail: {
         root: path(ROOTS_DASHBOARD, '/mail'),

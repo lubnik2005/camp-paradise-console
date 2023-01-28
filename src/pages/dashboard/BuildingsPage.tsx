@@ -1,9 +1,9 @@
 // react
 import { useEffect, useState, useCallback } from 'react';
 // @mui
-import { Grid, Container, Box, Stack, Button, IconButton, Card, Typography, StackProps, CardActions, CardContent, CardMedia } from '@mui/material';
+import { Grid, Container, Button, Card, Typography, CardActions, CardContent, CardMedia } from '@mui/material';
 // navigate
-import { Link as RouterLink, useLocation, Link, Navigate, useParams } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { useTheme } from '@mui/material/styles';
@@ -15,61 +15,32 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
 // _mock_
-import {
-    _appFeatured,
-    _appAuthors,
-    _appInstalled,
-    _appRelated,
-    _appInvoices,
-} from '../../_mock/arrays';
+
+
 // components
 import { useSettingsContext } from '../../components/settings';
+import { Camp } from '../../@types/camp';
 // sections
 import {
-    AppWidget,
     AppWelcome,
-    AppFeatured,
-    AppNewInvoice,
-    AppTopAuthors,
-    AppTopRelated,
-    AppAreaInstalled,
-    AppWidgetSummary,
-    AppCurrentDownload,
-    AppTopInstalledCountries,
 } from '../../sections/@dashboard/general/app';
-import {
-    AnalyticsTasks,
-    AnalyticsNewsUpdate,
-    AnalyticsOrderTimeline,
-    AnalyticsCurrentVisits,
-    AnalyticsWebsiteVisits,
-    AnalyticsTrafficBySite,
-    AnalyticsWidgetSummary,
-    AnalyticsCurrentSubject,
-    AnalyticsConversionRates,
-} from '../../sections/@dashboard/general/analytics';
+
+
 // assets
-import { SeoIllustration } from '../../assets/illustrations';
 // storage
 import localStorageAvailable from '../../utils/localStorageAvailable';
-
-interface Camp {
-    id: number;
-    name: string;
-    start_on: string;
-    end_on: string;
-}
 
 // ----------------------------------------------------------------------
 
 export default function BuildingsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
+    const navigate = useNavigate();
     // const camp = location.state?.camp;
     const { campId } = useParams();
     const storageAvailable = localStorageAvailable();
     const [camps, setCamps] = useState([]);
-    const [camp, setCamp] = useState(null);
+    const [camp, setCamp] = useState<Camp | undefined>();
     const theme = useTheme();
 
     const { themeStretch } = useSettingsContext();
@@ -80,17 +51,17 @@ export default function BuildingsPage() {
             setCamps(response.data);
             console.log('data');
             console.log(response.data);
-            setCamp(response.data.find((camp: Camp) => camp.id.toString() === campId?.toString()));
+            setCamp(response.data.find((c: Camp) => c.id === parseInt(campId ?? '', 10)));
         } catch (error) {
             console.log(error);
         }
     }, [storageAvailable, campId]);
-    if (!campId) return <Navigate to={PATH_DASHBOARD.general.camps} />
     useEffect(() => {
         getCamps();
     }, [getCamps]);
 
 
+    if (!campId) navigate(PATH_DASHBOARD.general.camps)
 
     return (
         <>
@@ -105,12 +76,12 @@ export default function BuildingsPage() {
                             title={camp.name}
                             description={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on.slice(0, 10).replace(/-/g, '/')}`}
                             img={<img
+                                alt="undraw_into_the_night_vumi"
                                 style={{
                                     padding: '1.2em',
                                     width: 360,
-                                    margin: { xs: 'auto', md: 'inherit' },
                                 }}
-                                src="/assets/undraw_into_the_night_vumi.svg"  />}
+                                src="/assets/undraw_into_the_night_vumi.svg" />}
                             action={<></>}
                         />
                     </Grid>

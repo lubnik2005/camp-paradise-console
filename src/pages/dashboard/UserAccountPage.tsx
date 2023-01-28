@@ -5,7 +5,6 @@ import { Container, Tab, Tabs, Box } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
-import { _userPayment, _userAddressBook, _userInvoices, _userAbout } from '../../_mock/arrays';
 // components
 import Iconify from '../../components/iconify';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
@@ -13,9 +12,6 @@ import { useSettingsContext } from '../../components/settings';
 // sections
 import {
     AccountGeneral,
-    AccountBilling,
-    AccountSocialLinks,
-    AccountNotifications,
     AccountChangePassword,
 } from '../../sections/@dashboard/user/account';
 

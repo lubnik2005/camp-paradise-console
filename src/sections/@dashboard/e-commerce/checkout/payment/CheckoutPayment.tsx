@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 // form
@@ -12,9 +12,9 @@ import {
 import { LoadingButton } from '@mui/lab';
 import { loadStripe } from '@stripe/stripe-js';
 import { PaymentElement, Elements, useStripe, useElements } from '@stripe/react-stripe-js';
+import LoadingScreen from 'src/components/loading-screen/LoadingScreen';
 import { STRIPE } from '../../../../../config-global';
 // routes
-import { PATH_DASHBOARD } from '../../../../../../src/routes/paths';
 // @mui
 // @types
 import {
@@ -25,21 +25,18 @@ import {
 } from '../../../../../@types/product';
 // components
 import Iconify from '../../../../../components/iconify';
-import FormProvider from '../../../../../components/hook-form';
+// routes
+import { PATH_AUTH } from "../../../../../routes/paths";
 //
 import CheckoutSummary from '../CheckoutSummary';
-import CheckoutDelivery from './CheckoutDelivery';
 import CheckoutBillingInfo from './CheckoutBillingInfo';
-import CheckoutPaymentMethods from './CheckoutPaymentMethods';
 import { useSnackbar } from '../../../../../components/snackbar';
 // stripe
 // utils
 import axios from '../../../../../utils/axios';
 import localStorageAvailable from '../../../../../utils/localStorageAvailable';
-import { useAuthContext } from '../../../../../../src/auth/useAuthContext';
+import { useAuthContext } from "../../../../../auth/useAuthContext";
 // redux
-import { useDispatch, useSelector } from '../../../../../../src/redux/store';
-import LoadingScreen from 'src/components/loading-screen/LoadingScreen';
 
 // ----------------------------------------------------------------------
 
@@ -108,7 +105,6 @@ const CheckoutForm = ({
     const { total, discount, subtotal, shipping, billing, cart } = checkout;
     const { user } = useAuthContext();
     const { enqueueSnackbar } = useSnackbar();
-    const navigate = useNavigate();
 
     const PaymentSchema = Yup.object().shape({
         payment: Yup.string().required('Payment is required!'),
@@ -127,11 +123,12 @@ const CheckoutForm = ({
     const elements = useElements();
     const [isProcessing, setIsProcessing] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const onSubmit = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
+        if (!stripe || !elements) return;
         setIsProcessing(true);
         try {
-            const response = await axios.get('verify-reservation', { cart });
+            const response = await axios.get('verify-reservation', { params: { cart } });
         } catch (error) {
             console.log(error);
             enqueueSnackbar(error.message, { variant: 'error' });
@@ -156,7 +153,7 @@ const CheckoutForm = ({
     };
 
 
-    return (<FormProvider methods={methods} onSubmit={handleSubmit} >
+    return (<form onSubmit={onSubmit} >
         <Grid container spacing={3}>
             <Grid item xs={12} md={8}>
                 <Card >
@@ -165,13 +162,6 @@ const CheckoutForm = ({
                         <PaymentElement />
                     </CardContent>
                 </Card>
-                {/*
-                    <CheckoutPaymentMethods
-                        cardOptions={CARDS_OPTIONS}
-                        paymentOptions={PAYMENT_OPTIONS}
-                        sx={{ my: 3 }}
-                    />
-    */}
                 <Button
                     size="small"
                     color="inherit"
@@ -205,7 +195,7 @@ const CheckoutForm = ({
             </Grid>
         </Grid>
 
-    </FormProvider >
+    </form>
     );
 }
 
@@ -222,10 +212,13 @@ export default function CheckoutPayment({
     const [clientSecret, setClientSecret] = useState("");
     const stripePromise = loadStripe(STRIPE.KEY);
     const { user } = useAuthContext();
+    const navigate = useNavigate();
+    if (!user) navigate(PATH_AUTH.login);
     const { total, discount, subtotal, shipping, billing, cart } = checkout;
 
     const storageAvailable = localStorageAvailable();
-    const fetchClientSecret = async () => {
+    const fetchClientSecret = useCallback(async () => {
+        if (!user) return;
         try {
             const token = storageAvailable ? localStorage.getItem('accessToken') : '';
             const { data } = await axios.post('create-payment-intent', {
@@ -241,10 +234,10 @@ export default function CheckoutPayment({
         } catch (error) {
             console.log(error);
         }
-    }
+    }, [storageAvailable, user, cart]);
     useEffect(() => {
         fetchClientSecret();
-    }, [storageAvailable]);
+    }, [storageAvailable, fetchClientSecret]);
 
     return (clientSecret && stripePromise ? <Elements stripe={stripePromise} options={{ clientSecret }} >
         <CheckoutForm

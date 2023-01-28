@@ -3,10 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { useTheme } from '@mui/material/styles';
 import { Container, Grid, Stack, Button } from '@mui/material';
 // auth
-import { useAuthContext } from '../../auth/useAuthContext';
 // _mock_
 import {
-    _appFeatured,
     _appAuthors,
     _appInstalled,
     _appRelated,

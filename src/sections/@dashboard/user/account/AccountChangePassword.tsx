@@ -12,8 +12,8 @@ import Iconify from '../../../../components/iconify';
 import { useSnackbar } from '../../../../components/snackbar';
 import FormProvider, { RHFTextField } from '../../../../components/hook-form';
 // utils
-import axios from '../../../../../src/utils/axios';
-import localStorageAvailable from '../../../../../src/utils/axios';
+import axios from "../../../../utils/axios";
+import localStorageAvailable from "../../../../utils/localStorageAvailable";
 
 // ----------------------------------------------------------------------
 

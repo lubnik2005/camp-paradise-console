@@ -15,7 +15,7 @@ import { SentIcon } from '../../assets/icons';
 
 export default function NewPasswordPage() {
     const params = new URLSearchParams(window.location.search);
-    const token = params.get('token')
+    const token: string = params.get('token') ?? '';
     return (
         <>
             <Helmet>
