@@ -10,11 +10,14 @@ import {
     Typography,
     CardContent,
     InputAdornment,
+    Link
 } from '@mui/material';
 // utils
 import { fCurrency } from '../../../../utils/formatNumber';
 // components
 import Iconify from '../../../../components/iconify';
+import { Link as RouterLink } from 'react-router-dom';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -89,7 +92,7 @@ export default function CheckoutSummary({
                                 {fCurrency(total)}
                             </Typography>
                             <Typography variant="caption" sx={{ fontStyle: 'italic' }}>
-                                (Taxes included if applicable)
+                                By making this purchase you are agreeing to <Link target="_blank" to={PATH_DASHBOARD.general.guidelines} component={RouterLink}>Camp Guidelines</Link>
                             </Typography>
                         </Box>
                     </Stack>
