@@ -36,13 +36,13 @@ import { useSnackbar } from '../../../../../components/snackbar';
 import axios from '../../../../../utils/axios';
 import localStorageAvailable from '../../../../../utils/localStorageAvailable';
 import { useAuthContext } from "../../../../../auth/useAuthContext";
-import { useDispatch, useSelector } from "../../../../ redux/store";
+import { useDispatch, useSelector } from "../../../../../redux/store";
 // navigate
 import {
     resetCart,
     addToCart,
     getCart,
-} from "../../redux/slices/product";
+} from "../../../../../redux/slices/product";
 // redux
 
 // ----------------------------------------------------------------------
@@ -156,7 +156,7 @@ const CheckoutForm = ({
             setIsProcessing(false);
         } else {
             onNextStep();
-            dispatch(onReset());
+            dispatch(resetCart());
         }
     };
 
@@ -241,7 +241,7 @@ export default function CheckoutPayment({
             console.log(data.clientSecret);
             setClientSecret(data.clientSecret);
         } catch (error) {
-            dispatch(onReset());
+            dispatch(resetCart());
             console.log(error);
         }
     }, [storageAvailable, user, cart]);
