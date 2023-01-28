@@ -1,46 +1,22 @@
 import { Helmet } from 'react-helmet-async';
 
 // @mui
-import { useTheme } from '@mui/material/styles';
 import { useEffect, useState, useCallback } from 'react';
-import { styled } from '@mui/material/styles';
 import LoadingScreen from 'src/components/loading-screen';
+import { LoadingButton } from '@mui/lab';
 import {
     Container,
     Grid,
-    Box,
-    Stack,
     Button,
-    IconButton,
     Typography,
-    StackProps,
-    List,
-    Paper,
     Chip,
-    Avatar,
-    Switch,
-    Divider,
-    Collapse,
-    Checkbox,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-    ListSubheader,
-    ListItemButton,
-    ListItemAvatar,
-    ListItemButtonProps,
-    ListItemSecondaryAction,
+    Card, CardActions, CardContent
 
 } from '@mui/material';
 // redux
-import { Link as RouterLink, useParams } from 'react-router-dom';
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 // utils
-import { useLocation, Link, Navigate } from 'react-router-dom';
 import axios from "../../utils/axios";
 import localStorageAvailable from "../../utils/localStorageAvailable";
 // navigate
@@ -48,74 +24,42 @@ import {
     resetCart,
     addToCart,
     getCart,
-    nextStep,
-    backStep,
-    gotoStep,
-    deleteCart,
-    createBilling,
-    applyShipping,
-    applyDiscount,
-    increaseQuantity,
-    decreaseQuantity,
 } from "../../redux/slices/product";
 import { useDispatch, useSelector } from "../../redux/store";
-import Iconify from "../../components/iconify";
 // @types
 import { ICheckoutCartItem } from '../../@types/product';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
 // _mock_
-import {
-    _appFeatured,
-    _appAuthors,
-    _appInstalled,
-    _appRelated,
-    _appInvoices,
-} from '../../_mock/arrays';
+import { Camp, Room, Cot } from "../../@types/camp";
+
+
 // components
 import { useSettingsContext } from '../../components/settings';
 // sections
 import {
-    AppWidget,
     AppWelcome,
-    AppFeatured,
-    AppNewInvoice,
-    AppTopAuthors,
-    AppTopRelated,
-    AppAreaInstalled,
-    AppWidgetSummary,
-    AppCurrentDownload,
-    AppTopInstalledCountries,
 } from '../../sections/@dashboard/general/app';
-import {
-    AnalyticsTasks,
-    AnalyticsNewsUpdate,
-    AnalyticsOrderTimeline,
-    AnalyticsCurrentVisits,
-    AnalyticsWebsiteVisits,
-    AnalyticsTrafficBySite,
-    AnalyticsWidgetSummary,
-    AnalyticsCurrentSubject,
-    AnalyticsConversionRates,
-} from '../../sections/@dashboard/general/analytics';
+
+
 // assets
-import { SeoIllustration } from '../../assets/illustrations';
 
 // ----------------------------------------------------------------------
 
-export default function CabinsPage() {
+export default function CotsPage() {
     const { user } = useAuthContext();
     const location = useLocation();
+    const navigate = useNavigate();
     const { campId, roomId } = useParams();
-    const [room, setRoom] = useState(null);
-    const [camp, setCamp] = useState(null);
-    const [cots, setCots] = useState([]);
+    const [room, setRoom] = useState<Room | undefined>();
+    const [camp, setCamp] = useState<Camp | undefined>();
+    const [cots, setCots] = useState<Array<Cot> | undefined>();
     const storageAvailable = localStorageAvailable();
     const dispatch = useDispatch();
     const { checkout } = useSelector((state) => state.product);
     const { cart, billing, activeStep } = checkout;
+    if (!(campId && roomId)) navigate(PATH_DASHBOARD.general.camps);
 
     const handleAddCart = (newProduct: ICheckoutCartItem) => {
         console.log(newProduct);
@@ -132,70 +76,46 @@ export default function CabinsPage() {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
             const { data } = await axios.get(`rooms?token=${accessToken}&event_id=${campId}`)
-            console.log(data.find((room: Room) => room.id.toString() === roomId));
-            setRoom(data.find((room: Room) => room.id.toString() === roomId));
+            console.log(data.find((r: Room) => r.id === parseInt(roomId ?? '', 10)));
+            setRoom(data.find((r: Room) => r.id === parseInt(roomId ?? '', 10)));
             // console.log((data.find((room: Room) => room.id === roomId));
             // setRoom((data.find((room: Room) => room.id === roomId));
         } catch (error) {
             console.log(error);
         }
-    }, [storageAvailable, campId]);
+    }, [storageAvailable, campId, roomId]);
 
     const getCamps = useCallback(async () => {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`/upcoming_events?token=${accessToken}`)
-            const camp = response.data.find((camp: Camp) => camp.id.toString() === campId?.toString());
-            setCamp(camp);
-            console.log('camp');
-            console.log(camp);
-            // if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+            const { data } = await axios.get(`/upcoming_events?token=${accessToken}`)
+            const find = data.find((c: Camp) => c.id === parseInt(campId ?? '', 10));
+            setCamp(find);
         } catch (error) {
             console.log(error);
-            // if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
         }
     }, [storageAvailable, campId]);
 
 
     const getCots = useCallback(async () => {
-        try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`cots` + `?room_id=${roomId}&event_id=${campId}&token=${accessToken}`)
-            setCots(response.data);
-            // if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
-        } catch (error) {
-            console.log(error);
-            // if (!campId || !camp) return <Navigate to={PATH_DASHBOARD.general.camps} />
+        console.log('CAMPID');
+        console.log(campId);
+        if (campId) {
+            try {
+                const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
+                const { data } = await axios.get(`cots`, {
+                    params: {
+                        room_id: roomId,
+                        event_id: campId,
+                        token: accessToken
+                    }
+                })
+                setCots(data);
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }, [storageAvailable, roomId]);
-
-
-    const theme = useTheme();
-
-    const StyledListContainer = styled(Paper)(({ theme }) => ({
-        width: '100%',
-        border: `solid 1px ${theme.palette.divider}`,
-    }));
-
-    interface Cot {
-        id: number,
-        first_name?: string,
-        last_name?: string,
-        description?: string
-    }
-
-    interface Room {
-        id: number,
-        type: string,
-        name: string,
-    }
-
-    interface Camp {
-        id: number;
-        name: string;
-        start_on: string;
-        end_on: string;
-    }
+    }, [storageAvailable, roomId, campId]);
 
     const { themeStretch } = useSettingsContext();
 
@@ -213,25 +133,34 @@ export default function CabinsPage() {
     }, [getCots, campId, roomId]);
 
 
-    const AddToCartButton = ({ cot }) => {
+    const AddToCartButton = ({ cot }: { cot: Cot }) => {
+        const isSubmitting = true;
+        if (!cot || !camp || !room) return <LoadingButton
+            type="button"
+            variant="contained"
+            loading={isSubmitting}
+        >
+            Post
+        </LoadingButton>;
         if (cot.first_name || cot.last_name) return <Button size="small" disabled>Reserved</Button>;
         if (camp.reservations.length > 0) return <Button size="small" disabled>Purchase limit reached</Button>;
         console.log(camp);
-        { console.log('cart'); }
-        { console.log(cart); }
         console.log(cot)
-        return !cart.find((product) => product.cot_id === cot.id) ?
+        if (!camp || !roomId) navigate(PATH_DASHBOARD.general.camps);
+        return !cart.find((product: ICheckoutCartItem) => product.cot_id === cot.id) ?
             <Button size="small" onClick={() => handleAddCart({
+                id: cot.id.toString(),
                 cot_id: cot.id,
-                room_id: room?.id,
-                event_id: camp?.id,
+                room_id: room.id,
+                event_id: camp.id,
                 name: `${camp.name} ${room.name} ${cot.description}`,
                 cover: '/temp',
-                available: '1',
+                available: 1,
                 price: cot.price / 100,
-                colors: ['green'],
-                size: 0,
+                colors: ['sm'],
+                size: 'sm',
                 quantity: 1,
+                subtotal: cot.price / 100,
             })}>Add to cart</Button> :
             <Button size="small" disabled>In Cart</Button>
     }
@@ -249,16 +178,16 @@ export default function CabinsPage() {
                             title={camp.name}
                             description={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on.slice(0, 10).replace(/-/g, '/')}`}
                             img={<img
+                                alt="undraw_into_the_night_vumi"
                                 style={{
                                     padding: '1.2em',
                                     width: 360,
-                                    margin: { xs: 'auto', md: 'inherit' },
                                 }}
                                 src="/assets/undraw_into_the_night_vumi.svg" />}
                             action={<>{room?.name}</>}
                         /> : <LoadingScreen />}
                     </Grid>
-                    {cots.length ? cots.map((cot: Cot) =>
+                    {cots !== undefined && cots.length ? cots.map((cot: Cot) =>
                         <Grid item xs={12} sm={6} md={4} key={`cot-${cot.id}`}>
                             <Card >
                                 {/* <CardMedia

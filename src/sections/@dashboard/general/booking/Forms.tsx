@@ -1,18 +1,13 @@
 import { useState } from 'react';
-import { format } from 'date-fns';
 import { sentenceCase } from 'change-case';
 // routes
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import {
-    Box,
     Card,
-    Stack,
     Link,
     Table,
-    Avatar,
-    Button,
     Divider,
     MenuItem,
     TableRow,
@@ -21,7 +16,6 @@ import {
     CardProps,
     CardHeader,
     Typography,
-    IconButton,
     TableContainer,
 } from '@mui/material';
 import { PATH_DASHBOARD } from '../../../../routes/paths';
@@ -36,7 +30,7 @@ import SvgColor from '../../../../components/svg-color';
 // ----------------------------------------------------------------------
 
 type RowProps = {
-    id: string;
+    id: number;
     name: string;
     required: boolean;
     status: string;

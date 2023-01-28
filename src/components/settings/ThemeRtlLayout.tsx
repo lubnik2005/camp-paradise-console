@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 // rtl
-import { prefixer } from 'stylis';
-import rtlPlugin from 'stylis-plugin-rtl';
+// import { prefixer } from 'stylis';
+// import rtlPlugin from 'stylis-plugin-rtl';
 // emotion
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
@@ -11,20 +11,20 @@ import { useTheme } from '@mui/material/styles';
 // ----------------------------------------------------------------------
 
 type Props = {
-  children: React.ReactNode;
+    children: React.ReactNode;
 };
 
 export default function ThemeRtlLayout({ children }: Props) {
-  const theme = useTheme();
+    const theme = useTheme();
 
-  useEffect(() => {
-    document.dir = theme.direction;
-  }, [theme.direction]);
+    useEffect(() => {
+        document.dir = theme.direction;
+    }, [theme.direction]);
 
-  const cacheRtl = createCache({
-    key: theme.direction === 'rtl' ? 'rtl' : 'css',
-    stylisPlugins: theme.direction === 'rtl' ? [prefixer, rtlPlugin] : [],
-  });
+    const cacheRtl = createCache({
+        key: theme.direction === 'rtl' ? 'rtl' : 'css',
+        // stylisPlugins: theme.direction === 'rtl' ? [prefixer, rtlPlugin] : [],
+    });
 
-  return <CacheProvider value={cacheRtl}>{children}</CacheProvider>;
+    return <CacheProvider value={cacheRtl}>{children}</CacheProvider>;
 }

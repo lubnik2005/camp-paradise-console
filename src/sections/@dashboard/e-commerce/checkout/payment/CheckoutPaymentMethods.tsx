@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react'
+import React, { useState } from 'react'
 // form
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 // @mui
 import {
     Box,
@@ -13,20 +13,15 @@ import {
     TextField,
     CardProps,
     Typography,
-    RadioGroup,
     CardHeader,
     CardContent,
-    FormHelperText,
     FormControlLabel,
     Skeleton
 } from '@mui/material';
 // Stripe
-import { PaymentElement, Elements, useStripe, useElements } from '@stripe/react-stripe-js';
+import { PaymentElement } from '@stripe/react-stripe-js';
 // config
-import { STRIPE } from '../../../../../config-global';
 // utils
-import axios from '../../../../../utils/axios';
-import localStorageAvailable from '../../../../../utils/localStorageAvailable';
 // @types
 import { ICheckoutCardOption, ICheckoutPaymentOption } from '../../../../../@types/product';
 // components

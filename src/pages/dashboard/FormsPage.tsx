@@ -5,7 +5,6 @@ import { Grid, Container } from '@mui/material';
 // react
 import { useEffect, useState, useCallback } from 'react';
 // _mock_
-import { _bookingNew, _bookingsOverview, _bookingReview } from '../../_mock/arrays';
 // components
 import { useSettingsContext } from '../../components/settings';
 // axios
@@ -13,21 +12,10 @@ import axios from "../../utils/axios";
 // sections
 import {
     Forms,
-    BookingBookedRoom,
-    BookingTotalIncomes,
-    BookingRoomAvailable,
-    BookingNewestBooking,
-    BookingWidgetSummary,
-    BookingCheckInWidgets,
-    BookingCustomerReviews,
-    BookingReservationStats,
 } from '../../sections/@dashboard/general/booking';
 // assets
-import {
-    BookingIllustration,
-    CheckInIllustration,
-    CheckOutIllustration,
-} from '../../assets/illustrations';
+
+
 // storage
 import localStorageAvailable from '../../utils/localStorageAvailable';
 

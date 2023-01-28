@@ -1,10 +1,10 @@
 // react
 import { useEffect, useState, useCallback } from 'react';
-import { Link as RouterLink, useParams } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Button, Link, Box } from '@mui/material';
+import { Container, Grid, Button } from '@mui/material';
 // routes
 import LoadingScreen from 'src/components/loading-screen/LoadingScreen';
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -13,13 +13,8 @@ import { useAuthContext } from '../../auth/useAuthContext';
 // axios
 import axios from "../../utils/axios";
 // _mock_
-import {
-    _appFeatured,
-    _appAuthors,
-    _appInstalled,
-    _appRelated,
-    _appInvoices,
-} from '../../_mock/arrays';
+
+
 // components
 import { useSettingsContext } from '../../components/settings';
 // sections
@@ -30,16 +25,8 @@ import {
 import { SeoIllustration } from '../../assets/illustrations';
 // storage
 import localStorageAvailable from '../../utils/localStorageAvailable';
-
+import { Camp } from '../../@types/camp';
 // ----------------------------------------------------------------------
-
-interface Camp {
-    id: number;
-    name: string;
-    start_on: string;
-    end_on: string;
-    reservations: array;
-}
 
 export default function CampsPage() {
     const { user } = useAuthContext();
@@ -50,7 +37,7 @@ export default function CampsPage() {
 
     const { themeStretch } = useSettingsContext();
 
-    const [camps, setCamps] = useState(null);
+    const [camps, setCamps] = useState<Array<Camp> | undefined>();
 
     const getCamps = useCallback(async () => {
         try {
@@ -67,13 +54,13 @@ export default function CampsPage() {
     }, [getCamps]);
 
 
-    const DisplayButton = ({ camp }) => {
-        if (false) return <Button component={RouterLink} to={PATH_DASHBOARD.general.camp_guidelines(camp.id.toString())} variant="contained">
+    const DisplayButton = ({ camp }: { camp: Camp }) => {
+        if (false) return <Button component={RouterLink} to={PATH_DASHBOARD.general.camp_guidelines(camp.id)} variant="contained">
             Read and Accept Guidelines To Register
         </Button>
         return camp.reservations.length < 1 ?
-            <Button component={RouterLink} to={PATH_DASHBOARD.general.buildings(camp.id.toString())} variant="contained">Register</Button>
-            : <Button component={RouterLink} to={PATH_DASHBOARD.general.buildings(camp.id.toString())} variant="contained">View</Button>;
+            <Button component={RouterLink} to={PATH_DASHBOARD.general.buildings(camp.id)} variant="contained">Register</Button>
+            : <Button component={RouterLink} to={PATH_DASHBOARD.general.buildings(camp.id)} variant="contained">View</Button>;
     }
 
     return (camps ?
@@ -98,7 +85,6 @@ export default function CampsPage() {
                                     sx={{
                                         p: 3,
                                         width: 360,
-                                        margin: { xs: 'auto', md: 'inherit' },
                                     }}
                                 />
                             }

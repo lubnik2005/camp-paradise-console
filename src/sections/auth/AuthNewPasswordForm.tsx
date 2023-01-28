@@ -30,7 +30,7 @@ type FormValuesProps = {
     confirmPassword: string;
 };
 
-export default function AuthNewPasswordForm(token = '') {
+export default function AuthNewPasswordForm({ token }: { token: string }) {
     const navigate = useNavigate();
 
     const { enqueueSnackbar } = useSnackbar();
@@ -82,7 +82,7 @@ export default function AuthNewPasswordForm(token = '') {
     const onSubmit = async (data: FormValuesProps) => {
         try {
             await new Promise((resolve) => setTimeout(resolve, 500));
-            await axios.post('/new-password', { ...data, ...token });
+            await axios.post('/new-password', { ...data, token });
             console.log('DATA:', {
                 email: data.email,
                 code: `${data.code1}${data.code2}${data.code3}${data.code4}${data.code5}${data.code6}`,

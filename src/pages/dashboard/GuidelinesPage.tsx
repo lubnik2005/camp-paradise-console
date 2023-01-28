@@ -2,8 +2,8 @@ import { Helmet } from 'react-helmet-async';
 // @mui
 import { Container, Typography, Button } from '@mui/material';
 // components
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSettingsContext } from '../../components/settings';
-import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 
