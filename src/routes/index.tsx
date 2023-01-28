@@ -84,7 +84,7 @@ export default function Router() {
                 </AuthGuard>
             ),
             children: [
-                { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+                { element: <Navigate to={PATH_AFTER_LOGIN} />, index: true },
                 { path: 'camps/:campId', element: <BuildingsPage /> },
                 { path: 'camps/:campId/cabins', element: <CabinsPage /> },
                 { path: 'camps/:campId/dorms', element: <DormsPage /> },
