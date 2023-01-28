@@ -16,24 +16,24 @@ import {
 } from '@mui/material';
 import { Link as RouterLink, useParams, useLocation, useNavigate } from 'react-router-dom';
 // utils
-import axios from '../../utils/axios';
-import localStorageAvailable from '../../utils/localStorageAvailable';
+import axios from '../../../utils/axios';
+import localStorageAvailable from '../../../utils/localStorageAvailable';
 // navigate
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // auth
-import { useAuthContext } from '../../auth/useAuthContext';
+import { useAuthContext } from '../../../auth/useAuthContext';
 // _mock_
 
 
 // components
-import { useSettingsContext } from '../../components/settings';
+import { useSettingsContext } from '../../../components/settings';
 // sections
 import {
     AppWelcome,
-} from '../../sections/@dashboard/general/app';
+} from './app';
 
-import { Camp } from '../../@types/camp';
+import { Camp } from '../../../@types/camp';
 
 
 // assets

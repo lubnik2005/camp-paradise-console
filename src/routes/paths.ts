@@ -53,6 +53,7 @@ export const PATH_DASHBOARD = {
         camp_guidelines: (campId: number) => path(ROOTS_DASHBOARD, `/guidelines/${campId}`)
     },
     user: {
+        root: path(ROOTS_DASHBOARD, '/user/account'),
         account: path(ROOTS_DASHBOARD, '/user/account'),
     },
     eCommerce: {

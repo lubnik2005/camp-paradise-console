@@ -1,4 +1,4 @@
-import TemporaryRoomsPage from "../components/TemporaryRoomsPage";
+import TemporaryRoomsPage from "../../sections/@dashboard/general/TemporaryRoomsPage";
 
 // ----------------------------------------------------------------------
 

@@ -28,7 +28,6 @@ import { ICheckoutCardOption, ICheckoutPaymentOption } from '../../../../../@typ
 import Image from '../../../../../components/image';
 import Iconify from '../../../../../components/iconify';
 // section
-import { PaymentNewCardDialog } from '../../../../payment';
 
 
 // ----------------------------------------------------------------------
@@ -130,7 +129,6 @@ export default function CheckoutPaymentMethods({ paymentOptions, cardOptions, ..
                 </CardContent>
             </Card>
 
-            <PaymentNewCardDialog open={open} onClose={handleClose} />
         </>
     );
 }
