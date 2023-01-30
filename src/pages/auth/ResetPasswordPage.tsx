@@ -14,40 +14,40 @@ import { PasswordIcon } from '../../assets/icons';
 // ----------------------------------------------------------------------
 
 export default function ResetPasswordPage() {
-  return (
-    <>
-      <Helmet>
-        <title> Reset Password | Minimal UI</title>
-      </Helmet>
+    return (
+        <>
+            <Helmet>
+                <title> Reset Password | Camp Paradise</title>
+            </Helmet>
 
-      <PasswordIcon sx={{ mb: 5, height: 96 }} />
+            <PasswordIcon sx={{ mb: 5, height: 96 }} />
 
-      <Typography variant="h3" paragraph>
-        Forgot your password?
-      </Typography>
+            <Typography variant="h3" paragraph>
+                Forgot your password?
+            </Typography>
 
-      <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-        Please enter the email address associated with your account and We will email you a link to
-        reset your password.
-      </Typography>
+            <Typography sx={{ color: 'text.secondary', mb: 5 }}>
+                Please enter the email address associated with your account and We will email you a link to
+                reset your password.
+            </Typography>
 
-      <AuthResetPasswordForm />
+            <AuthResetPasswordForm />
 
-      <Link
-        component={RouterLink}
-        to={PATH_AUTH.login}
-        color="inherit"
-        variant="subtitle2"
-        sx={{
-          mt: 3,
-          mx: 'auto',
-          alignItems: 'center',
-          display: 'inline-flex',
-        }}
-      >
-        <Iconify icon="eva:chevron-left-fill" width={16} />
-        Return to sign in
-      </Link>
-    </>
-  );
+            <Link
+                component={RouterLink}
+                to={PATH_AUTH.login}
+                color="inherit"
+                variant="subtitle2"
+                sx={{
+                    mt: 3,
+                    mx: 'auto',
+                    alignItems: 'center',
+                    display: 'inline-flex',
+                }}
+            >
+                <Iconify icon="eva:chevron-left-fill" width={16} />
+                Return to sign in
+            </Link>
+        </>
+    );
 }

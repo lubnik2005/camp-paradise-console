@@ -50,7 +50,7 @@ export default function VerifyJwtPage() {
         success ?
             <>
                 <Helmet>
-                    <title> Verify Code | Minimal UI</title>
+                    <title> Verify Code | Camp Paradise</title>
                 </Helmet>
 
                 <EmailInboxIcon sx={{ mb: 5, height: 96 }} />
@@ -81,7 +81,7 @@ export default function VerifyJwtPage() {
             </> :
             <>
                 <Helmet>
-                    <title> Verify Code | Minimal UI</title>
+                    <title> Verify Code | Camp Paradise</title>
                 </Helmet>
 
                 <EmailInboxIcon sx={{ mb: 5, height: 96 }} />

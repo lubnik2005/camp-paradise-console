@@ -66,7 +66,7 @@ export default function BuildingsPage() {
     return (
         <>
             <Helmet>
-                <title> General: App | Minimal UI</title>
+                <title> General: App | Camp Paradise</title>
             </Helmet>
 
             {camp ? <Container maxWidth={themeStretch ? false : 'xl'}>

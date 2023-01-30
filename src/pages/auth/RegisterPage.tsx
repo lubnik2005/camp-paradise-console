@@ -5,13 +5,13 @@ import Register from '../../sections/auth/Register';
 // ----------------------------------------------------------------------
 
 export default function RegisterPage() {
-  return (
-    <>
-      <Helmet>
-        <title> Register | Minimal UI</title>
-      </Helmet>
+    return (
+        <>
+            <Helmet>
+                <title> Register | Camp Paradise</title>
+            </Helmet>
 
-      <Register />
-    </>
-  );
+            <Register />
+        </>
+    );
 }

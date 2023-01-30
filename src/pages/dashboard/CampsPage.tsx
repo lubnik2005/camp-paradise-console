@@ -66,7 +66,7 @@ export default function CampsPage() {
     return (camps ?
         <>
             <Helmet>
-                <title> General: App | Minimal UI</title>
+                <title> General: App | Camp Paradise</title>
             </Helmet>
 
             <Container maxWidth={themeStretch ? false : 'xl'}>

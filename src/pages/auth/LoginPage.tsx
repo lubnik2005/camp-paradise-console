@@ -6,13 +6,13 @@ import Login from '../../sections/auth/Login';
 // ----------------------------------------------------------------------
 
 export default function LoginPage() {
-  return (
-    <>
-      <Helmet>
-        <title> Login | Minimal UI</title>
-      </Helmet>
+    return (
+        <>
+            <Helmet>
+                <title> Login | Camp Paradise</title>
+            </Helmet>
 
-      <Login />
-    </>
-  );
+            <Login />
+        </>
+    );
 }

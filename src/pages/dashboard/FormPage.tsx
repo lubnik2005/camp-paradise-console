@@ -11,7 +11,7 @@ export default function BlankPage() {
     return (
         <>
             <Helmet>
-                <title> Blank Page | Minimal UI</title>
+                <title> Blank Page | Camp Paradise</title>
             </Helmet>
 
             Medical problems:
