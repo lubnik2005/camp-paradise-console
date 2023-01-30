@@ -99,7 +99,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             if (accessToken && isValidToken(accessToken)) {
                 setSession(accessToken);
 
-                const response = await axios.get('/api/account/my-account');
+                const response = await axios.get('/my-account');
 
                 const { user } = response.data;
 
@@ -155,7 +155,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     // REGISTER
     const register = useCallback(
-        async (email: string, password: string, firstName: string, lastName: string, gender:string) => {
+        async (email: string, password: string, firstName: string, lastName: string, gender: string) => {
             const response = await axios.post('/register', {
                 email,
                 password,
