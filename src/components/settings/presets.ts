@@ -9,13 +9,13 @@ const themePalette = palette('light');
 
 export const presets = [
     // DEFAULT
+    // {
+    //     name: 'default',
+    //     ...themePalette.primary,
+    // },
+    // Camp Paradise Colors
     {
         name: 'default',
-        ...themePalette.primary,
-    },
-    // CYAN
-    {
-        name: 'cyan',
         lighter: '#A68C5D',
         light: '#7F9038',
         main: '#5C732C',
@@ -23,16 +23,16 @@ export const presets = [
         darker: '#513A2A',
         contrastText: '#FFFFFF',
     },
-
-    // {
-    //     name: 'cyan_old',
-    //     lighter: '#CCF4FE',
-    //     light: '#68CDF9',
-    //     main: '#078DEE',
-    //     dark: '#0351AB',
-    //     darker: '#012972',
-    //     contrastText: '#FFFFFF',
-    // },
+    // CYAN
+    {
+        name: 'cyan',
+        lighter: '#CCF4FE',
+        light: '#68CDF9',
+        main: '#078DEE',
+        dark: '#0351AB',
+        darker: '#012972',
+        contrastText: '#FFFFFF',
+    },
     // PURPLE
     {
         name: 'purple',
