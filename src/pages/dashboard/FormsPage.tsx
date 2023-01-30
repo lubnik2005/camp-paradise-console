@@ -46,7 +46,7 @@ export default function FormsPage() {
     return (
         <>
             <Helmet>
-                <title> General: Booking | Camp Paradise</title>
+                <title> Forms | Camp Paradise</title>
             </Helmet>
 
             <Container maxWidth={themeStretch ? false : 'xl'}>

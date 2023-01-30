@@ -94,7 +94,7 @@ export default function TemporaryRoomsPage({ title, query }: { title: string, qu
     return (
         <>
             <Helmet>
-                <title> General: App | Camp Paradise</title>
+                <title> {title} | Camp Paradise</title>
             </Helmet>
 
             <Container maxWidth={themeStretch ? false : 'xl'}>

@@ -168,7 +168,7 @@ export default function CotsPage() {
     return (
         <>
             <Helmet>
-                <title> General: App | Camp Paradise</title>
+                <title> Cots | Camp Paradise</title>
             </Helmet>
 
             <Container maxWidth={themeStretch ? false : 'xl'}>
