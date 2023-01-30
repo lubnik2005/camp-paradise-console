@@ -156,7 +156,7 @@ const CheckoutForm = ({
             setIsProcessing(false);
         } else {
             onNextStep();
-            dispatch(resetCart());
+            resetCart();
         }
     };
 
