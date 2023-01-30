@@ -44,11 +44,11 @@ export const PATH_DASHBOARD = {
         cabins: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/cabins`),
         dorms: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/dorms`),
         vips: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/vips`),
+        rvs: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/rvs`),
+        tents: (campId: number) => path(ROOTS_DASHBOARD, `/camps/${campId}/tents`),
         forms: path(ROOTS_DASHBOARD, '/forms'),
         form: (formId: number) => path(ROOTS_DASHBOARD, `/forms/${formId}`),
         // vips: path(ROOTS_DASHBOARD, '/vips'),
-        rvs: path(ROOTS_DASHBOARD, '/rvs'),
-        tents: path(ROOTS_DASHBOARD, '/tents'),
         guidelines: path(ROOTS_DASHBOARD, '/guidelines'),
         camp_guidelines: (campId: number) => path(ROOTS_DASHBOARD, `/guidelines/${campId}`)
     },

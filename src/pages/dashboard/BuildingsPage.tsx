@@ -169,7 +169,7 @@ export default function BuildingsPage() {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.rvs} state={{ camp }}>Select</Button>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.rvs(camp.id)} state={{ camp }}>Select</Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -191,7 +191,7 @@ export default function BuildingsPage() {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.tents} state={{ camp }}>Select</Button>
+                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.tents(camp.id)} state={{ camp }}>Select</Button>
                             </CardActions>
                         </Card>
                     </Grid>
