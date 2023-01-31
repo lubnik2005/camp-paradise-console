@@ -106,11 +106,20 @@ export default function ReservationsPage() {
 
 // ----------------------------------------------------------------------
 
-type BookingDetailsRowProps = {
+type RowPops = {
+    first_name: string;
+    last_name: string;
+    event: { id: number, name: string };
+    room: { id: number, name: string };
+    cot: { id: number, description: string };
+    created_at: string;
+}
+
+type ReservationDetailsRowProps = {
     row: RowProps;
 };
 
-function ReservationDetailsRow({ row }: BookingDetailsRowProps) {
+function ReservationDetailsRow({ row }: ReservationDetailsRowProps) {
     const theme = useTheme();
 
     const isLight = theme.palette.mode === 'light';
