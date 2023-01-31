@@ -32,11 +32,12 @@ import {
     CheckoutPayment,
     CheckoutOrderComplete,
     CheckoutBillingAddress,
+    CheckoutReview,
 } from '../../sections/@dashboard/e-commerce/checkout';
 
 // ----------------------------------------------------------------------
 
-const STEPS = ['Cart', 'Billing & address', 'Payment'];
+const STEPS = ['Cart', 'Billing & address', 'Review', 'Payment'];
 
 // ----------------------------------------------------------------------
 
@@ -152,6 +153,14 @@ export default function EcommerceCheckoutPage() {
                             />
                         )}
                         {activeStep === 2 && billing && (
+                            <CheckoutReview
+                                checkout={checkout}
+                                onNextStep={handleNextStep}
+                                onBackStep={handleBackStep}
+                                onCreateBilling={handleCreateBilling}
+                            />
+                        )}
+                        {activeStep === 3 && billing && (
                             <CheckoutPayment
                                 checkout={checkout}
                                 onNextStep={handleNextStep}

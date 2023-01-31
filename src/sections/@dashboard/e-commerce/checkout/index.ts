@@ -5,6 +5,8 @@ export { default as CheckoutCartProductList } from './cart/CheckoutCartProductLi
 export { default as CheckoutBillingAddress } from './billing/CheckoutBillingAddress';
 export { default as CheckoutBillingNewAddressForm } from './billing/CheckoutBillingNewAddressForm';
 
+export { default as CheckoutReview } from './review/CheckoutReview';
+
 export { default as CheckoutPayment } from './payment/CheckoutPayment';
 export { default as CheckoutDelivery } from './payment/CheckoutDelivery';
 export { default as CheckoutBillingInfo } from './payment/CheckoutBillingInfo';

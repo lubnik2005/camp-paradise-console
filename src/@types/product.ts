@@ -59,6 +59,8 @@ export type ICheckoutCartItem = {
     event_id: number;
     name: string;
     cover: string;
+    title: string;
+    subtitle: string;
     available: number;
     price: number;
     colors: string[];

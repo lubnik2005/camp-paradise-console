@@ -154,6 +154,8 @@ export default function CotsPage() {
                 room_id: room.id,
                 event_id: camp.id,
                 name: `${camp.name} ${room.name} ${cot.description}`,
+                title: camp.name,
+                subtitle: `${room.name} ${cot.description}`,
                 cover: '/temp',
                 available: 1,
                 price: cot.price / 100,

@@ -14,134 +14,129 @@ import CheckoutBillingNewAddressForm from './CheckoutBillingNewAddressForm';
 // ----------------------------------------------------------------------
 
 type Props = {
-  checkout: IProductCheckoutState;
-  onBackStep: VoidFunction;
-  onCreateBilling: (address: ICheckoutBillingAddress) => void;
+    checkout: IProductCheckoutState;
+    onBackStep: VoidFunction;
+    onCreateBilling: (address: ICheckoutBillingAddress) => void;
 };
 
 export default function CheckoutBillingAddress({ checkout, onBackStep, onCreateBilling }: Props) {
-  const { total, discount, subtotal } = checkout;
+    const { total, discount, subtotal } = checkout;
 
-  const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  return (
-    <>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
-          {// _addressBooks
-          [].map((address, index) => (
-            <AddressItem
-              key={index}
-              address={address}
-              onCreateBilling={() => onCreateBilling(address)}
-            />
-          ))}
+    return (
+        <>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={8}>
+                    <CheckoutBillingNewAddressForm />
+                    {// _addressBooks
+                        [].map((address, index) => (
+                            <AddressItem
+                                key={index}
+                                address={address}
+                                onCreateBilling={() => onCreateBilling(address)}
+                            />
+                        ))}
 
-          <Stack direction="row" justifyContent="space-between">
-            <Button
-              size="small"
-              color="inherit"
-              onClick={onBackStep}
-              startIcon={<Iconify icon="eva:arrow-ios-back-fill" />}
-            >
-              Back
-            </Button>
+                    <Stack direction="row" justifyContent="space-between">
+                        <Button
+                            size="small"
+                            color="inherit"
+                            onClick={onBackStep}
+                            startIcon={<Iconify icon="eva:arrow-ios-back-fill" />}
+                        >
+                            Back
+                        </Button>
 
-            <Button
-              size="small"
-              variant="soft"
-              onClick={handleOpen}
-              startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              Add new address
-            </Button>
-          </Stack>
-        </Grid>
+                        <Button
+                            size="small"
+                            variant="soft"
+                            onClick={handleOpen}
+                            startIcon={<Iconify icon="eva:plus-fill" />}
+                        >
+                            Add new address
+                        </Button>
+                    </Stack>
+                </Grid>
 
-        <Grid item xs={12} md={4}>
-          <CheckoutSummary subtotal={subtotal} total={total} discount={discount} />
-        </Grid>
-      </Grid>
-
-      <CheckoutBillingNewAddressForm
-        open={open}
-        onClose={handleClose}
-        onCreateBilling={onCreateBilling}
-      />
-    </>
-  );
+                <Grid item xs={12} md={4}>
+                    <CheckoutSummary subtotal={subtotal} total={total} discount={discount} />
+                </Grid>
+            </Grid>
+        </>
+    );
 }
 
 // ----------------------------------------------------------------------
 
 type AddressItemProps = {
-  address: ICheckoutBillingAddress;
-  onCreateBilling: VoidFunction;
+    address: ICheckoutBillingAddress;
+    onCreateBilling: VoidFunction;
 };
 
 function AddressItem({ address, onCreateBilling }: AddressItemProps) {
-  const { receiver, fullAddress, addressType, phoneNumber, isDefault } = address;
+    const { receiver, fullAddress, addressType, phoneNumber, isDefault } = address;
 
-  return (
-    <Card
-      sx={{
-        p: 3,
-        mb: 3,
-      }}
-    >
-      <Stack
-        spacing={2}
-        alignItems={{
-          md: 'flex-end',
-        }}
-        direction={{
-          xs: 'column',
-          md: 'row',
-        }}
-      >
-        <Stack flexGrow={1} spacing={1}>
-          <Stack direction="row" alignItems="center">
-            <Typography variant="subtitle1">
-              {receiver}
-              <Box component="span" sx={{ ml: 0.5, typography: 'body2', color: 'text.secondary' }}>
-                ({addressType})
-              </Box>
-            </Typography>
+    return (
+        <Card
+            sx={{
+                p: 3,
+                mb: 3,
+            }}
+        >
+            <Stack
+                spacing={2}
+                alignItems={{
+                    md: 'flex-end',
+                }}
+                direction={{
+                    xs: 'column',
+                    md: 'row',
+                }}
+            >
+                <Stack flexGrow={1} spacing={1}>
+                    <Stack direction="row" alignItems="center">
+                        <Typography variant="subtitle1">
+                            {receiver}
+                            <Box component="span" sx={{ ml: 0.5, typography: 'body2', color: 'text.secondary' }}>
+                                ({addressType})
+                            </Box>
+                        </Typography>
 
-            {isDefault && (
-              <Label color="info" sx={{ ml: 1 }}>
-                Default
-              </Label>
-            )}
-          </Stack>
+                        {isDefault && (
+                            <Label color="info" sx={{ ml: 1 }}>
+                                Default
+                            </Label>
+                        )}
+                    </Stack>
 
-          <Typography variant="body2">{fullAddress}</Typography>
+                    <Typography variant="body2">{fullAddress}</Typography>
 
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {phoneNumber}
-          </Typography>
-        </Stack>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        {phoneNumber}
+                    </Typography>
+                </Stack>
 
-        <Stack flexDirection="row" flexWrap="wrap" flexShrink={0}>
-          {!isDefault && (
-            <Button variant="outlined" size="small" color="inherit" sx={{ mr: 1 }}>
-              Delete
-            </Button>
-          )}
+                <Stack flexDirection="row" flexWrap="wrap" flexShrink={0}>
+                    {!isDefault && (
+                        <Button variant="outlined" size="small" color="inherit" sx={{ mr: 1 }}>
+                            Delete
+                        </Button>
+                    )}
 
-          <Button variant="outlined" size="small" onClick={onCreateBilling}>
-            Deliver to this Address
-          </Button>
-        </Stack>
-      </Stack>
-    </Card>
-  );
+                    <Button variant="outlined" size="small" onClick={onCreateBilling}>
+                        Deliver to this Address
+                    </Button>
+                </Stack>
+            </Stack>
+        </Card>
+    );
 }
