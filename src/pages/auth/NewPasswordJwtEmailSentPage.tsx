@@ -30,8 +30,8 @@ export default function NewPasswordPage() {
             </Typography>
 
             <Typography variant="body2" sx={{ my: 3 }}>
-                Don’t receive an email? &nbsp;
-                <Link variant="subtitle2">Resend email</Link>
+                Didn't receive an email? &nbsp;
+                <Link variant="subtitle2" component={RouterLink} to={PATH_AUTH.resetPassword} >Resend email</Link>
             </Typography>
 
             <Link

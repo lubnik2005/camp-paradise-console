@@ -25,20 +25,18 @@ export default function NewPasswordPage() {
             <SentIcon sx={{ mb: 5, height: 96 }} />
 
             <Typography variant="h3" paragraph>
-                Request sent successfully!
+                Set New Password
             </Typography>
 
             <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-                We&apos;ve sent a 6-digit confirmation email to your email.
-                <br />
-                Please enter the code in below box to verify your email.
+                Please enter your e-mail and new password.
             </Typography>
 
             <AuthNewPasswordForm token={token} />
 
             <Typography variant="body2" sx={{ my: 3 }}>
-                Don’t have a code? &nbsp;
-                <Link variant="subtitle2">Resend code</Link>
+                Didn't receive an E-mail? &nbsp;
+                <Link variant="subtitle2" component={RouterLink} to={PATH_AUTH.resetPassword} >Resend email</Link>
             </Typography>
 
             <Link

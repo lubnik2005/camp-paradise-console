@@ -63,8 +63,8 @@ const reducer = (state: AuthStateType, action: ActionsType) => {
     if (action.type === Types.REGISTER) {
         return {
             ...state,
-            isAuthenticated: true,
-            user: action.payload.user,
+            isAuthenticated: false,
+            // user: action.payload.user,
         };
     }
     if (action.type === Types.LOGOUT) {

@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, IconButton, InputAdornment, FormHelperText } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD, PATH_AUTH } from '../../routes/paths';
 // components
 import Iconify from '../../components/iconify';
 import { useSnackbar } from '../../components/snackbar';
@@ -41,12 +41,6 @@ export default function AuthNewPasswordForm({ token }: { token: string }) {
         typeof window !== 'undefined' ? sessionStorage.getItem('email-recovery') : '';
 
     const VerifyCodeSchema = Yup.object().shape({
-        code1: Yup.string().required('Code is required'),
-        code2: Yup.string().required('Code is required'),
-        code3: Yup.string().required('Code is required'),
-        code4: Yup.string().required('Code is required'),
-        code5: Yup.string().required('Code is required'),
-        code6: Yup.string().required('Code is required'),
         email: Yup.string().required('Email is required').email('Email must be a valid email address'),
         password: Yup.string()
             .min(6, 'Password must be at least 6 characters')
@@ -81,7 +75,6 @@ export default function AuthNewPasswordForm({ token }: { token: string }) {
 
     const onSubmit = async (data: FormValuesProps) => {
         try {
-            await new Promise((resolve) => setTimeout(resolve, 500));
             await axios.post('/new-password', { ...data, token });
             console.log('DATA:', {
                 email: data.email,
@@ -89,9 +82,14 @@ export default function AuthNewPasswordForm({ token }: { token: string }) {
                 password: data.password,
             });
             sessionStorage.removeItem('email-recovery');
-            enqueueSnackbar('Change password success!');
-            navigate(PATH_DASHBOARD.root);
+            enqueueSnackbar('Successfully changed password!');
+            navigate(PATH_AUTH.login);
         } catch (error) {
+            Object.keys(error.error).forEach(key => {
+                const message = error.error[key];
+                enqueueSnackbar(message, { variant: 'error' });
+                navigate(PATH_AUTH.resetPassword);
+            });
             console.error(error);
         }
     };
@@ -105,19 +103,6 @@ export default function AuthNewPasswordForm({ token }: { token: string }) {
                     disabled={!!emailRecovery}
                     InputLabelProps={{ shrink: true }}
                 />
-
-                <RHFCodes keyName="code" inputs={['code1', 'code2', 'code3', 'code4', 'code5', 'code6']} />
-
-                {(!!errors.code1 ||
-                    !!errors.code2 ||
-                    !!errors.code3 ||
-                    !!errors.code4 ||
-                    !!errors.code5 ||
-                    !!errors.code6) && (
-                        <FormHelperText error sx={{ px: 2 }}>
-                            Code is required
-                        </FormHelperText>
-                    )}
 
                 <RHFTextField
                     name="password"
