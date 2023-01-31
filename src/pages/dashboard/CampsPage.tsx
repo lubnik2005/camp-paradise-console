@@ -42,7 +42,7 @@ export default function CampsPage() {
     const getCamps = useCallback(async () => {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`/upcoming_events?token=${accessToken}`)
+            const response = await axios.get(`/events?token=${accessToken}`)
             setCamps(response.data);
         } catch (error) {
             console.log(error);

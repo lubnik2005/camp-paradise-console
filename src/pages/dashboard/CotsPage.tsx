@@ -88,7 +88,7 @@ export default function CotsPage() {
     const getCamps = useCallback(async () => {
         try {
             const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const { data } = await axios.get(`/upcoming_events?token=${accessToken}`)
+            const { data } = await axios.get(`/events?token=${accessToken}`)
             const find = data.find((c: Camp) => c.id === parseInt(campId ?? '', 10));
             setCamp(find);
         } catch (error) {
