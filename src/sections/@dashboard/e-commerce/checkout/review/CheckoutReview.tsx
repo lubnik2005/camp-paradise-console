@@ -19,18 +19,8 @@ type Props = {
     onCreateBilling: (address: ICheckoutBillingAddress) => void;
 };
 
-export default function CheckoutBillingAddress({ checkout, onBackStep, onNextStep, onCreateBilling }: Props) {
+export default function CheckoutReview({ checkout, onBackStep, onNextStep, onCreateBilling }: Props) {
     const { total, discount, subtotal } = checkout;
-
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const { user } = useAuthContext();
 

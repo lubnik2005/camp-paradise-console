@@ -34,6 +34,7 @@ export const CampsPage = Loadable(lazy(() => import('../pages/dashboard/CampsPag
 export const GuidelinesPage = Loadable(lazy(() => import('../pages/dashboard/GuidelinesPage')));
 export const FormsPage = Loadable(lazy(() => import('../pages/dashboard/FormsPage')));
 export const FormPage = Loadable(lazy(() => import('../pages/dashboard/FormPage')));
+export const ReservationsPage = Loadable(lazy(() => import('../pages/dashboard/ReservationsPage')));
 export const EcommerceCheckoutPage = Loadable(lazy(() => import('../pages/dashboard/EcommerceCheckoutPage')));
 export const UserAccountPage = Loadable(lazy(() => import('../pages/dashboard/UserAccountPage')));
 export const Page500 = Loadable(lazy(() => import('../pages/Page500')));

@@ -149,10 +149,11 @@ export default function EcommerceCheckoutPage() {
                             <CheckoutBillingAddress
                                 checkout={checkout}
                                 onBackStep={handleBackStep}
+                                onNextStep={handleNextStep}
                                 onCreateBilling={handleCreateBilling}
                             />
                         )}
-                        {activeStep === 2 && billing && (
+                        {activeStep === 2 && (
                             <CheckoutReview
                                 checkout={checkout}
                                 onNextStep={handleNextStep}

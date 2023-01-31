@@ -72,9 +72,13 @@ export type ICheckoutCartItem = {
 export type ICheckoutBillingAddress = {
     receiver: string;
     phoneNumber: string;
+    line1: string;
+    city: string;
+    state: string;
+    countryCode: string;
+    zipCode: string;
     fullAddress: string;
     addressType: string;
-    isDefault: boolean;
 };
 
 export type ICheckoutDeliveryOption = {

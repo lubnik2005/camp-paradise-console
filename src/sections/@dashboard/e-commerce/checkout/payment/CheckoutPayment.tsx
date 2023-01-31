@@ -233,7 +233,8 @@ export default function CheckoutPayment({
             const { data } = await axios.post('create-payment-intent', {
                 token,
                 user_id: user.id,
-                cart
+                cart,
+                billing
             }, {
                 headers: { 'Content-Type': 'text/json' }
             });

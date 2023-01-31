@@ -27,6 +27,7 @@ import {
     GuidelinesPage,
     FormPage,
     FormsPage,
+    ReservationsPage,
     UserAccountPage,
     EcommerceCheckoutPage,
     Page500,
@@ -97,6 +98,7 @@ export default function Router() {
                 { path: 'camps', element: <CampsPage /> },
                 { path: 'forms', element: <FormsPage /> },
                 { path: 'forms/:formId', element: <FormPage /> },
+                { path: 'reservations', element: <ReservationsPage /> },
                 {
                     path: 'e-commerce',
                     children: [
