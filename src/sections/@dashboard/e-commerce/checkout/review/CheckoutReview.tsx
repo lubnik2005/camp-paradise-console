@@ -15,6 +15,7 @@ import { useAuthContext } from "../../../../../auth/useAuthContext";
 type Props = {
     checkout: IProductCheckoutState;
     onBackStep: VoidFunction;
+    onNextStep: VoidFunction;
     onCreateBilling: (address: ICheckoutBillingAddress) => void;
 };
 
