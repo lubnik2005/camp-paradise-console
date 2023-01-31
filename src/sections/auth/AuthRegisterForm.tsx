@@ -81,7 +81,7 @@ export default function AuthRegisterForm() {
                     <RHFTextField name="lastName" label="Last name" />
                 </Stack>
 
-                <RHFRadioGroup name="gender" options={[{ label: 'Male', value: 'Female' }, { label: 'Gal', value: 'f' }]} label="Gender" row />
+                <RHFRadioGroup name="gender" options={[{ label: 'Male', value: 'm' }, { label: 'Female', value: 'f' }]} label="Gender" row />
 
                 <RHFTextField name="email" label="Email address" />
 

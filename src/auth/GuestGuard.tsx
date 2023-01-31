@@ -9,19 +9,19 @@ import { useAuthContext } from './useAuthContext';
 // ----------------------------------------------------------------------
 
 type GuestGuardProps = {
-  children: React.ReactNode;
+    children: React.ReactNode;
 };
 
 export default function GuestGuard({ children }: GuestGuardProps) {
-  const { isAuthenticated, isInitialized } = useAuthContext();
+    const { isAuthenticated, isInitialized } = useAuthContext();
 
-  if (isAuthenticated) {
-    return <Navigate to={PATH_DASHBOARD.root} />;
-  }
+    if (isAuthenticated) {
+        return <Navigate to={PATH_DASHBOARD.general.camps} />;
+    }
 
-  if (!isInitialized) {
-    return <LoadingScreen />;
-  }
+    if (!isInitialized) {
+        return <LoadingScreen />;
+    }
 
-  return <> {children} </>;
+    return <> {children} </>;
 }
