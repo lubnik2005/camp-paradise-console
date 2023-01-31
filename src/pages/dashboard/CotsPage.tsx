@@ -189,7 +189,11 @@ export default function CotsPage() {
                             action={<>{room?.name}</>}
                         /> : <LoadingScreen />}
                     </Grid>
-                    {cots !== undefined ? cots.map((cot: Cot) =>
+                    {cots !== undefined ? cots.sort(function (a: Cot, b: Cot) {
+                        a.description = a?.description ?? '';
+                        b.description = b?.description ?? '';
+                        return /[A-Za-z]/.test(a.description) - /[A-Za-z]/.test(b.description) || (a.description.toUpperCase() < b.description.toUpperCase() ? -1 : a.description.toUpperCase() > b.description.toUpperCase() ? 1 : 0)
+                    }).map((cot: Cot) =>
                         <Grid item xs={12} sm={6} md={4} key={`cot-${cot.id}`}>
                             <Card >
                                 {/* <CardMedia
