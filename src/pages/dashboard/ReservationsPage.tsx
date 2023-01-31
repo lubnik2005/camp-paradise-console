@@ -106,7 +106,7 @@ export default function ReservationsPage() {
 
 // ----------------------------------------------------------------------
 
-type RowPops = {
+type RowProps = {
     first_name: string;
     last_name: string;
     event: { id: number, name: string };
