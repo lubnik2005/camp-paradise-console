@@ -112,6 +112,7 @@ type RowProps = {
     event: { id: number, name: string };
     room: { id: number, name: string };
     cot: { id: number, description: string };
+    price: number;
     created_at: string;
 }
 
