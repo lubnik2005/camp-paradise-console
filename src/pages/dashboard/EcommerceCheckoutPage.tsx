@@ -113,7 +113,7 @@ export default function EcommerceCheckoutPage() {
     return (
         <>
             <Helmet>
-                <title> Ecommerce: Checkout | Camp Paradise</title>
+                <title> Checkout | Camp Paradise</title>
             </Helmet>
 
             <Container maxWidth={themeStretch ? false : 'lg'}>
