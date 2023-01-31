@@ -19,7 +19,7 @@ export const PATH_AUTH = {
     resend: path(ROOTS_AUTH, '/resend'),
     resetPassword: path(ROOTS_AUTH, '/reset-password'),
     newPassword: path(ROOTS_AUTH, '/new-password'),
-    newPasswordEmailSent: path(ROOTS_AUTH, '/new-password-email-sent'),
+    newPasswordEmailSent: path(ROOTS_AUTH, '/reset-password-email-sent'),
 };
 
 export const PATH_PAGE = {
