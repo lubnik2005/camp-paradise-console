@@ -25,6 +25,7 @@ import {
     TentsPage,
     CampsPage,
     GuidelinesPage,
+    MapPage,
     FormPage,
     FormsPage,
     ReservationsPage,
@@ -99,6 +100,7 @@ export default function Router() {
                 { path: 'forms', element: <FormsPage /> },
                 { path: 'forms/:formId', element: <FormPage /> },
                 { path: 'reservations', element: <ReservationsPage /> },
+                { path: 'map', element: <MapPage /> },
                 {
                     path: 'e-commerce',
                     children: [

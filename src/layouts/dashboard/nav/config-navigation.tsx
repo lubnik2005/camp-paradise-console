@@ -43,6 +43,7 @@ const navConfig = [
             { title: 'camps', path: PATH_DASHBOARD.general.camps, icon: ICONS.tent },
             { title: 'cart', path: PATH_DASHBOARD.eCommerce.checkout, icon: ICONS.ecommerce },
             { title: 'reservations', path: PATH_DASHBOARD.general.reservations, icon: ICONS.dashboard },
+            { title: 'map', path: PATH_DASHBOARD.general.map, icon: ICONS.label },
             { title: 'forms', path: PATH_DASHBOARD.general.forms, icon: ICONS.folder },
             /*
             { title: 'app', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },

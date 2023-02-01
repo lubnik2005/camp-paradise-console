@@ -98,8 +98,8 @@ export default function BuildingsPage() {
                                     Cabins
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    The cabins are located by the RV park.
+                                    There are 12 cots per Cabin.
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -120,8 +120,8 @@ export default function BuildingsPage() {
                                     Dorms
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    The dorms are located behind the kitchen.
+                                    The dorms have 20 rooms with 2-4 cots.
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -142,12 +142,18 @@ export default function BuildingsPage() {
                                     VIP
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    This building is located in the center of the camp.
+                                    There are 16 rooms with  2-8 cots.
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" component={RouterLink} to={PATH_DASHBOARD.general.vips(camp.id)} state={{ camp }}>Select</Button>
+                                <Button
+                                    size="small"
+                                    component={RouterLink}
+                                    to={PATH_DASHBOARD.general.vips(camp.id)}
+                                    state={{ camp }}>
+                                    Select
+                                </Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -164,8 +170,8 @@ export default function BuildingsPage() {
                                     RV Parking Space
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    The RV parking is located next to the Cabins.
+                                    The owner of the RV has to register his spot.
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -186,8 +192,8 @@ export default function BuildingsPage() {
                                     Tents
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    Tents are for those who have a car equipped with a tent.
+                                    There is a limited number of tent spaces.
                                 </Typography>
                             </CardContent>
                             <CardActions>

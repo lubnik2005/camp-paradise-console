@@ -39,28 +39,16 @@ export default function CheckoutReview({ checkout, onBackStep, onNextStep, onCre
                             <CardContent>
                                 Email: {user?.email ?? 'Email not found'}<br />
                                 Name: {user?.first_name && user?.last_name ? `${user?.first_name} ${user?.last_name}` : 'Name not found'}<br />
-                                Cart: {cart.map((product) => {
-                                    return <>{product.name} @ ${product.price}<br /></>
-                                })}
                             </CardContent>
                         </Card>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <Card>
-                            <CardHeader title={<Typography variant="h4">Billing Info</Typography>} />
+                            <CardHeader title={<Typography variant="h4">Cart</Typography>} />
                             <CardContent>
-                                {billing?.receiver} &nbsp;
-                                <Typography component="span" variant="body2" sx={{ color: 'text.secondary' }}>
-                                    ({billing?.addressType})
-                                </Typography>
-
-                                <Typography variant="body2" gutterBottom>
-                                    {billing?.fullAddress}
-                                </Typography>
-
-                                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                                    {billing?.phoneNumber}
-                                </Typography>
+                                {cart.map((product) => {
+                                    return <>{product.name} @ ${product.price}<br /></>
+                                })}
                             </CardContent>
                         </Card >
                     </Grid>

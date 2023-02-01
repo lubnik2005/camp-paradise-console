@@ -138,9 +138,13 @@ const CheckoutForm = ({
         try {
             const response = await axios.get('verify-reservation', { params: { cart } });
         } catch (error) {
-            console.log(error);
-            enqueueSnackbar(error.message, { variant: 'error' });
+            Object.keys(error.error).forEach(key => {
+                const value = error.error[key];
+                console.log(key, error.error[key]);
+                enqueueSnackbar(value, { variant: 'error' });
+            });
             setIsProcessing(false);
+            dispatch(resetCart());
             return;
         }
         const { error } = await stripe.confirmPayment({

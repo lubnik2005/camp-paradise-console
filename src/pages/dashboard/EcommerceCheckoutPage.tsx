@@ -37,7 +37,7 @@ import {
 
 // ----------------------------------------------------------------------
 
-const STEPS = ['Cart', 'Billing & address', 'Review', 'Payment'];
+const STEPS = ['Cart', 'Review', 'Payment'];
 
 // ----------------------------------------------------------------------
 
@@ -146,14 +146,6 @@ export default function EcommerceCheckoutPage() {
                             />
                         )}
                         {activeStep === 1 && (
-                            <CheckoutBillingAddress
-                                checkout={checkout}
-                                onBackStep={handleBackStep}
-                                onNextStep={handleNextStep}
-                                onCreateBilling={handleCreateBilling}
-                            />
-                        )}
-                        {activeStep === 2 && (
                             <CheckoutReview
                                 checkout={checkout}
                                 onNextStep={handleNextStep}
@@ -161,7 +153,7 @@ export default function EcommerceCheckoutPage() {
                                 onCreateBilling={handleCreateBilling}
                             />
                         )}
-                        {activeStep === 3 && billing && (
+                        {activeStep === 2 && (
                             <CheckoutPayment
                                 checkout={checkout}
                                 onNextStep={handleNextStep}
