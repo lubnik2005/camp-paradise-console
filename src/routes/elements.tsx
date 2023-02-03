@@ -21,6 +21,8 @@ export const VerifyJwtPage = Loadable(lazy(() => import('../pages/auth/VerifyJwt
 export const NewPasswordPage = Loadable(lazy(() => import('../pages/auth/NewPasswordPage')));
 export const NewPasswordJwtEmailSentPage = Loadable(lazy(() => import('../pages/auth/NewPasswordJwtEmailSentPage')));
 export const ResetPasswordPage = Loadable(lazy(() => import('../pages/auth/ResetPasswordPage')));
+export const ResendVerificationPage = Loadable(lazy(() => import('../pages/auth/ResendVerificationPage')));
+export const VerificationEmailSentPage = Loadable(lazy(() => import('../pages/auth/VerificationEmailSentPage')));
 
 // DASHBOARD: GENERAL
 export const BuildingsPage = Loadable(lazy(() => import('../pages/dashboard/BuildingsPage')));

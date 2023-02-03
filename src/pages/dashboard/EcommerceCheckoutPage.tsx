@@ -132,7 +132,7 @@ export default function EcommerceCheckoutPage() {
                 </Grid>
 
                 {completed ? (
-                    <CheckoutOrderComplete open={completed} onReset={handleReset} onDownloadPDF={() => { }} />
+                    <CheckoutOrderComplete open={completed} onReset={handleReset} checkout={checkout} onDownloadPDF={() => { }} />
                 ) : (
                     <>
                         {activeStep === 0 && (

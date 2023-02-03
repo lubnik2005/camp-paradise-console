@@ -34,6 +34,7 @@ import {
 } from './app';
 
 import { Camp } from '../../../@types/camp';
+import CustomBreadcrumbs from '../../../components/custom-breadcrumbs';
 
 
 // assets
@@ -110,7 +111,13 @@ export default function TemporaryRoomsPage({ title, query }: { title: string, qu
                                     width: 360,
                                 }}
                                 src="/assets/undraw_into_the_night_vumi.svg" />}
-                            action={<>{title}</>}
+                            action={<CustomBreadcrumbs
+                                links={[
+                                    { name: 'All camps', href: PATH_DASHBOARD.general.camps },
+                                    { name: camp.name, href: PATH_DASHBOARD.general.buildings(camp.id) },
+                                    { name: title, }
+                                ]}
+                            />}
                         /> : <LoadingScreen />}
                     </Grid>
                     <Grid item xs={12} md={12}>

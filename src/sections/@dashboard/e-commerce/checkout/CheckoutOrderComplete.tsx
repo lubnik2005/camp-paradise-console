@@ -1,19 +1,24 @@
 // @mui
 import { Link, Button, Divider, Typography, Stack, DialogProps } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 // components
 import Iconify from '../../../../components/iconify';
 import { DialogAnimate } from '../../../../components/animate';
 // assets
 import { OrderCompleteIllustration } from '../../../../assets/illustrations';
+import { IProductCheckoutState } from '../../../../@types/product';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
 interface Props extends DialogProps {
     onReset: VoidFunction;
     onDownloadPDF: VoidFunction;
+    checkout: IProductCheckoutState;
 }
 
-export default function CheckoutOrderComplete({ open, onReset, onDownloadPDF }: Props) {
+export default function CheckoutOrderComplete({ open, onReset, checkout, onDownloadPDF }: Props) {
+    const { cart } = checkout;
     return (
         <DialogAnimate
             fullScreen
@@ -39,25 +44,19 @@ export default function CheckoutOrderComplete({ open, onReset, onDownloadPDF }: 
                 <OrderCompleteIllustration sx={{ height: 260 }} />
 
                 <Typography>
-                    Thanks for placing order
+                    Thanks for placing your order:
                     <br />
                     <br />
-                    <Link>01dc1370-3df6-11eb-b378-0242ac130002</Link>
+                    {cart.map((product) => <>
+                        <Link component={RouterLink} target="_blank" to={PATH_DASHBOARD.general.reservations}>{product.name}</Link><br />
+                    </>)}
                     <br />
                     <br />
-                    Event:
-                    Room:
-                    Cot:
                     <br />
-                    You should receive an email with a receipt of your purchase. You should also now see your reserved spot
-                    in your profile page. Depending on the event, you may not be able to purchase any more spots.
-                    <br /> If you have any question or if you did not receive an email and/or you cannot
-                    see your purchase in your profile please contact us. <br /> <br />
-                    All the best,
+                    All the best,<br />
+                    Camp Paradise Team
                 </Typography>
-
                 <Divider sx={{ borderStyle: 'dashed' }} />
-
                 <Stack
                     spacing={2}
                     justifyContent="space-between"
@@ -74,7 +73,18 @@ export default function CheckoutOrderComplete({ open, onReset, onDownloadPDF }: 
                         Back to Camps
                     </Button>
                 </Stack>
+                <Typography
+                    variant="caption"
+                    color="text.disabled" >
+                    <br />
+                    You should receive an email with a receipt of your purchase.
+                    <br />
+                    You should also now see your reserved spot
+                    in your profile page. Depending on the event, you may not be able to purchase any more spots.
+                    <br /> If you have any questions or if you did not receive an email and/or you cannot
+                    see your purchase in your profile please contact us. <br /> <br />
+                </Typography>
             </Stack>
-        </DialogAnimate>
+        </DialogAnimate >
     );
 }

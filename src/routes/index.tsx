@@ -34,9 +34,10 @@ import {
     Page500,
     Page403,
     Page404,
-
+    ResendVerificationPage,
     ComingSoonPage,
     MaintenancePage,
+    VerificationEmailSentPage
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -72,6 +73,8 @@ export default function Router() {
                         { path: 'new-password', element: <NewPasswordPage /> },
                         { path: 'reset-password-email-sent', element: <NewPasswordJwtEmailSentPage /> },
                         { path: 'verify', element: <VerifyJwtPage /> },
+                        { path: 'resend', element: <ResendVerificationPage /> },
+                        { path: 'verification-email-sent', element: <VerificationEmailSentPage /> },
                     ],
                 },
             ],

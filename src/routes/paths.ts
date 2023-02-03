@@ -20,6 +20,7 @@ export const PATH_AUTH = {
     resetPassword: path(ROOTS_AUTH, '/reset-password'),
     newPassword: path(ROOTS_AUTH, '/new-password'),
     newPasswordEmailSent: path(ROOTS_AUTH, '/reset-password-email-sent'),
+    verificationEmailSent: path(ROOTS_AUTH, '/verification-email-sent'),
 };
 
 export const PATH_PAGE = {

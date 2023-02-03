@@ -67,7 +67,9 @@ export default function AuthLoginForm() {
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3}>
-                {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
+                {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}
+                    {errors.afterSubmit.message === 'Email not verified.' ?
+                        <> Didn't receive a verification email? <Link component={RouterLink} to={PATH_AUTH.resend}>Resend.</Link> </> : null}</Alert>}
 
                 <RHFTextField name="email" label="Email address" />
 

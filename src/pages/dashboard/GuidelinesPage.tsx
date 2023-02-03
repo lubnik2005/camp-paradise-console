@@ -6,16 +6,37 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSettingsContext } from '../../components/settings';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
+// utils
+import localStorageAvailable from '../../utils/localStorageAvailable';
 
 export default function GuidelinePage() {
     const { themeStretch } = useSettingsContext();
+    const storageAvailable = localStorageAvailable();
     const navigate = useNavigate();
     const { campId } = useParams();
 
+    type CampAgreement = {
+        campId: string,
+        acceptedOn: string | null
+    }
+
     const handleAgree = () => {
-        console.log('Save');
+        let guidelinesAgreements: CampAgreement[] = [];
+        try {
+            guidelinesAgreements = JSON.parse(storageAvailable ? localStorage.getItem('guidelineAgreements') ?? '[]' : '[]');
+        } catch {
+        }
+        if (!campId) return;
+        const camp: CampAgreement = {
+            campId: campId,
+            acceptedOn: new Date().toTimeString()
+        }
+        guidelinesAgreements.push(camp);
+        console.log(guidelinesAgreements);
+        localStorage.setItem('guidelineAgreements', JSON.stringify(guidelinesAgreements));
         navigate(PATH_DASHBOARD.general.camps);
     }
+
 
     return <>
         <Helmet>

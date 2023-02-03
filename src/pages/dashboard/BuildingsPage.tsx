@@ -2,6 +2,7 @@
 import { useEffect, useState, useCallback } from 'react';
 // @mui
 import { Grid, Container, Button, Card, Typography, CardActions, CardContent, CardMedia } from '@mui/material';
+import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // navigate
 import { Link as RouterLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -82,17 +83,22 @@ export default function BuildingsPage() {
                                     width: 360,
                                 }}
                                 src="/assets/undraw_into_the_night_vumi.svg" />}
-                            action={<></>}
+                            action={<CustomBreadcrumbs
+                                links={[
+                                    { name: 'All camps', href: PATH_DASHBOARD.general.camps },
+                                    { name: camp.name },
+                                ]}
+                            />}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                         <Card >
-                            <CardMedia
+                            {/* <CardMedia
                                 component="img"
                                 alt="cabins"
                                 height="140"
                                 image="/assets/undraw_cabin_hkfr.svg"
-                            />
+                            /> */}
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                     Cabins
@@ -109,12 +115,12 @@ export default function BuildingsPage() {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                         <Card >
-                            <CardMedia
+                            {/* <CardMedia
                                 component="img"
                                 alt="dorm"
                                 height="140"
                                 image="/assets/undraw_cabin_hkfr.svg"
-                            />
+                            /> */}
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                     Dorms
@@ -131,12 +137,12 @@ export default function BuildingsPage() {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                         <Card >
-                            <CardMedia
+                            {/* <CardMedia
                                 component="img"
                                 alt="vip"
                                 height="140"
                                 image="/assets/undraw_cabin_hkfr.svg"
-                            />
+                            /> */}
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                     VIP
@@ -159,12 +165,12 @@ export default function BuildingsPage() {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                         <Card >
-                            <CardMedia
+                            {/* <CardMedia
                                 component="img"
                                 alt="rv_parking_space"
                                 height="140"
                                 image="/assets/undraw_cabin_hkfr.svg"
-                            />
+                            /> */}
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                     RV Parking Space
@@ -181,12 +187,12 @@ export default function BuildingsPage() {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                         <Card >
-                            <CardMedia
+                            {/* <CardMedia
                                 component="img"
                                 alt="Tents"
                                 height="140"
                                 image="/assets/undraw_cabin_hkfr.svg"
-                            />
+                            /> */}
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                     Tents

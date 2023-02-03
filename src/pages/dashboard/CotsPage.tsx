@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect, useState, useCallback } from 'react';
 import LoadingScreen from 'src/components/loading-screen';
 import { LoadingButton } from '@mui/lab';
+import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import {
     Container,
     Grid,
@@ -167,6 +168,15 @@ export default function CotsPage() {
             <Button size="small" disabled>In Cart</Button>
     }
 
+    // Should by a dynamic key with +s, but can't figure out the ts way of doing it
+    // with typescript and without any
+    const links: any = {
+        'cabin': PATH_DASHBOARD.general.cabins,
+        'dorm': PATH_DASHBOARD.general.dorms,
+        'vip': PATH_DASHBOARD.general.vips,
+        'rv': PATH_DASHBOARD.general.rvs,
+        'tent': PATH_DASHBOARD.general.tents
+    };
     return (
         <>
             <Helmet>
@@ -186,7 +196,14 @@ export default function CotsPage() {
                                     width: 360,
                                 }}
                                 src="/assets/undraw_into_the_night_vumi.svg" />}
-                            action={<>{room?.name}</>}
+                            action={<CustomBreadcrumbs
+                                links={[
+                                    { name: 'All camps', href: PATH_DASHBOARD.general.camps },
+                                    { name: camp.name, href: PATH_DASHBOARD.general.buildings(camp.id) },
+                                    { name: `${room?.type[0].toUpperCase() + room?.type.substring(1)}s`, href: links[room.type](camp.id) },
+                                    { name: room.name }
+                                ]}
+                            />}
                         /> : <LoadingScreen />}
                     </Grid>
                     {cots !== undefined ? cots.sort(function (a: Cot, b: Cot) {

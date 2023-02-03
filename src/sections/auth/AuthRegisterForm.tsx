@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 // form
 import { useForm } from 'react-hook-form';
@@ -11,6 +12,8 @@ import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField, RHFRadioGroup } from '../../components/hook-form';
+import { useSnackbar } from '../../components/snackbar';
+import { PATH_DASHBOARD, PATH_AUTH } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +28,8 @@ type FormValuesProps = {
 
 export default function AuthRegisterForm() {
     const { register } = useAuthContext();
+    const { enqueueSnackbar } = useSnackbar();
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -60,6 +65,8 @@ export default function AuthRegisterForm() {
         try {
             if (register) {
                 await register(data.email, data.password, data.firstName, data.lastName, data.gender);
+                enqueueSnackbar('Registered. Please check your email.', { persist: true })
+                navigate(PATH_AUTH.login);
             }
         } catch (error) {
             console.error(error);
