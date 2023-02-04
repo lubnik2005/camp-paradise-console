@@ -41,7 +41,7 @@ export default function CheckoutOrderComplete({ open, onReset, checkout, onDownl
             >
                 <Typography variant="h4">Thank you for your purchase!</Typography>
 
-                <OrderCompleteIllustration sx={{ height: 260 }} />
+                {/* <OrderCompleteIllustration sx={{ height: 260 }} /> */}
 
                 <Typography>
                     Thanks for placing your order:

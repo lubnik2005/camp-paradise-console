@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -17,11 +17,12 @@ import { useEffect, useState } from 'react';
 // utils 
 import axios from '../../utils/axios';
 import localStorageAvailable from '../../utils/localStorageAvailable';
-import { Navigate } from 'react-router';
 
 // ----------------------------------------------------------------------
 export default function FormPage() {
     const { themeStretch } = useSettingsContext();
+    const { formId, campId } = useParams();
+
     const navigate = useNavigate();
 
     const ChangePassWordSchema = Yup.object().shape({
@@ -132,8 +133,8 @@ export default function FormPage() {
         try {
             const response = await axios.post(`/form?token=${accessToken}`, {
                 data,
-                campId: 1,
-                formId: 1
+                campId,
+                formId
                 //campId,
             });
             navigate(PATH_DASHBOARD.general.forms);

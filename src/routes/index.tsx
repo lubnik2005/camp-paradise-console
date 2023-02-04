@@ -101,7 +101,7 @@ export default function Router() {
                 { path: 'guidelines', element: <GuidelinesPage /> },
                 { path: 'camps', element: <CampsPage /> },
                 { path: 'forms', element: <FormsPage /> },
-                { path: 'forms/:formId', element: <FormPage /> },
+                { path: 'forms/:formId/:campId', element: <FormPage /> },
                 { path: 'reservations', element: <ReservationsPage /> },
                 { path: 'map', element: <MapPage /> },
                 {

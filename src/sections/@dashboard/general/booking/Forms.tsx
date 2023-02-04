@@ -122,7 +122,7 @@ function BookingDetailsRow({ row }: BookingDetailsRowProps) {
             <TableRow>
                 <TableCell>
                     {row.status === 'completed' ? <Typography variant="subtitle2">{row.name}</Typography> :
-                        <Link component={RouterLink} to={PATH_DASHBOARD.general.form(row.id)} >
+                        <Link component={RouterLink} to={PATH_DASHBOARD.general.form(row.id, row.event.id)} >
                             <Typography variant="subtitle2">{row.name}</Typography>
                         </Link>}
                 </TableCell>

@@ -50,7 +50,7 @@ export const PATH_DASHBOARD = {
         forms: path(ROOTS_DASHBOARD, '/forms'),
         reservations: path(ROOTS_DASHBOARD, '/reservations'),
         map: path(ROOTS_DASHBOARD, '/map'),
-        form: (formId: number) => path(ROOTS_DASHBOARD, `/forms/${formId}`),
+        form: (formId: number, campId: number) => path(ROOTS_DASHBOARD, `/forms/${formId}/${campId}`),
         // vips: path(ROOTS_DASHBOARD, '/vips'),
         guidelines: path(ROOTS_DASHBOARD, '/guidelines'),
         camp_guidelines: (campId: number) => path(ROOTS_DASHBOARD, `/guidelines/${campId}`)

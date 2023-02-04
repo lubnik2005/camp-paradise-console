@@ -24,16 +24,8 @@ import { useEffect, useState, useCallback } from 'react';
 // _mock_
 // components
 import { useSettingsContext } from '../../components/settings';
-// axios
+// utils
 import axios from "../../utils/axios";
-// sections
-import {
-    Forms,
-} from '../../sections/@dashboard/general/booking';
-// assets
-
-
-// storage
 import localStorageAvailable from '../../utils/localStorageAvailable';
 
 // ----------------------------------------------------------------------
