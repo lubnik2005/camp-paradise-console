@@ -32,6 +32,16 @@ const ICONS = {
     analytics: icon('ic_analytics'),
     dashboard: icon('ic_dashboard'),
     tent: icon('ic_tent'),
+    agreement_terms: icon('ic_agreement_terms'),
+    form_multiple: icon('ic_form_multiple'),
+    ic_reshot_icon_location_map: icon('ic_reshot_icon_location_map'),
+    icon8_calendar: icon('ic_icons8_calendar'),
+    icon8_camping_tent: icon('ic_icons8_camping_tent'),
+    icon8_world_map: icon('ic_icons8_world_map'),
+    icon8_medical_history: icon('ic_icons8_medical_history'),
+    icon8_treatment: icon('ic_icons8_treatment'),
+    icon8_file_contract: icon('ic_icons8_file_contract'),
+    icon8_sell_stock: icon('ic_icons8_sell_stock'),
 };
 
 const navConfig = [
@@ -40,11 +50,12 @@ const navConfig = [
     {
         subheader: 'general',
         items: [
-            { title: 'camps', path: PATH_DASHBOARD.general.camps, icon: ICONS.tent },
-            { title: 'cart', path: PATH_DASHBOARD.eCommerce.checkout, icon: ICONS.ecommerce },
-            { title: 'reservations', path: PATH_DASHBOARD.general.reservations, icon: ICONS.dashboard },
-            { title: 'map', path: PATH_DASHBOARD.general.map, icon: ICONS.label },
-            { title: 'forms', path: PATH_DASHBOARD.general.forms, icon: ICONS.folder },
+            { title: 'camps', path: PATH_DASHBOARD.general.camps, icon: ICONS.icon8_camping_tent },
+            { title: 'cart', path: PATH_DASHBOARD.eCommerce.checkout, icon: ICONS.icon8_sell_stock },
+            { title: 'reservations', path: PATH_DASHBOARD.general.reservations, icon: ICONS.icon8_calendar },
+            { title: 'map', path: PATH_DASHBOARD.general.map, icon: ICONS.icon8_world_map },
+            { title: 'medical forms', path: PATH_DASHBOARD.general.forms, icon: ICONS.icon8_treatment },
+            { title: 'guidelines', path: PATH_DASHBOARD.general.guidelines, icon: ICONS.icon8_file_contract },
             /*
             { title: 'app', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
             { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },

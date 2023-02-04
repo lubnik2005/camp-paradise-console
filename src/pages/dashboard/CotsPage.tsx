@@ -11,7 +11,8 @@ import {
     Button,
     Typography,
     Chip,
-    Card, CardActions, CardContent
+    Card, CardActions, CardContent,
+    Box
 
 } from '@mui/material';
 // redux
@@ -189,13 +190,15 @@ export default function CotsPage() {
                         {camp && room ? <AppWelcome
                             title={camp.name}
                             description={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on.slice(0, 10).replace(/-/g, '/')}`}
-                            img={<img
-                                alt="undraw_into_the_night_vumi"
-                                style={{
-                                    padding: '1.2em',
-                                    width: 360,
-                                }}
-                                src="/assets/undraw_into_the_night_vumi.svg" />}
+                            img={<Box sx={{ display: { xs: 'none', md: 'inherit' } }}>
+                                <img
+                                    alt="undraw_into_the_night_vumi"
+                                    style={{
+                                        padding: '1.2em',
+                                        width: 360,
+                                    }}
+                                    src="/assets/undraw_into_the_night_vumi.svg" />
+                            </Box>}
                             action={<CustomBreadcrumbs
                                 links={[
                                     { name: 'All camps', href: PATH_DASHBOARD.general.camps },

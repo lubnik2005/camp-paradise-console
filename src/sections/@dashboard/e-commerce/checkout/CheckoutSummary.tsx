@@ -90,7 +90,7 @@ export default function CheckoutSummary({
                         <Box sx={{ textAlign: 'right' }}>
                             <Typography variant="subtitle1" sx={{ color: 'error.main' }}>
                                 {fCurrency(total)}
-                            </Typography>
+                            </Typography><br />
                             <Typography variant="caption" sx={{ fontStyle: 'italic' }}>
                                 By making this purchase you are agreeing to <Link target="_blank" to={PATH_DASHBOARD.general.guidelines} component={RouterLink}>Camp Guidelines</Link>
                             </Typography>

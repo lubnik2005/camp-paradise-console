@@ -57,9 +57,10 @@ export default function FormsPage() {
                             tableData={forms ?? []}
                             tableLabels={[
                                 { id: 'name', label: 'Form' },
+                                { id: 'event', label: 'Event' },
                                 { id: 'required', label: 'Required' },
                                 { id: 'status', label: 'Status' },
-                                { id: 'completedOn', label: 'Completed On' },
+                                { id: 'signedOn', label: 'Signed On' },
                             ]}
                         />
                     </Grid>

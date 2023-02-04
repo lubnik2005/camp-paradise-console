@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Button } from '@mui/material';
+import { Container, Grid, Button, Typography } from '@mui/material';
 // routes
 import LoadingScreen from 'src/components/loading-screen/LoadingScreen';
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -104,6 +104,11 @@ export default function CampsPage() {
                             action={<DisplayButton camp={camp} />}
                         />
                     </Grid>) : <LoadingScreen />}
+                    {camps !== null && camps.length === 0 ? <Grid item
+                        xs={12}
+                        md={12} >
+                        <Typography variant="h3" >No Camps Yet</Typography>
+                    </Grid> : null}
                 </Grid>
             </Container>
         </> : null);

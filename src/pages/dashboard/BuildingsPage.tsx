@@ -1,7 +1,7 @@
 // react
 import { useEffect, useState, useCallback } from 'react';
 // @mui
-import { Grid, Container, Button, Card, Typography, CardActions, CardContent, CardMedia } from '@mui/material';
+import { Grid, Container, Button, Card, Typography, CardActions, CardContent, CardMedia, Box } from '@mui/material';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // navigate
 import { Link as RouterLink, useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -76,13 +76,17 @@ export default function BuildingsPage() {
                         <AppWelcome
                             title={camp.name}
                             description={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on.slice(0, 10).replace(/-/g, '/')}`}
-                            img={<img
-                                alt="undraw_into_the_night_vumi"
-                                style={{
-                                    padding: '1.2em',
-                                    width: 360,
-                                }}
-                                src="/assets/undraw_into_the_night_vumi.svg" />}
+                            img={<Box sx={{ display: { xs: 'none', md: 'inherit' } }}>
+                                <img
+                                    alt="undraw_into_the_night_vumi"
+                                    style={{
+                                        padding: '1.2em',
+                                        width: 360,
+                                    }}
+                                    src="/assets/undraw_into_the_night_vumi.svg" />
+
+
+                            </Box>}
                             action={<CustomBreadcrumbs
                                 links={[
                                     { name: 'All camps', href: PATH_DASHBOARD.general.camps },

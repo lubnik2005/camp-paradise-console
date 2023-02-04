@@ -31,10 +31,12 @@ import SvgColor from '../../../../components/svg-color';
 
 type RowProps = {
     id: number;
+    form: { id: number, name: string }
+    event: { id: number, name: string }
     name: string;
     required: boolean;
     status: string;
-    completedOn: string;
+    signedOn: string;
 };
 
 interface Props extends CardProps {
@@ -62,7 +64,7 @@ export default function Forms({
 
                         <TableBody>
                             {tableData.map((row) => (
-                                <BookingDetailsRow key={row.id} row={row} />
+                                <BookingDetailsRow key={row.id + row.event.id} row={row} />
                             ))}
                         </TableBody>
                     </Table>
@@ -119,9 +121,16 @@ function BookingDetailsRow({ row }: BookingDetailsRowProps) {
         <>
             <TableRow>
                 <TableCell>
-                    <Link component={RouterLink} to={PATH_DASHBOARD.general.form(row.id)} >
-                        <Typography variant="subtitle2">{row.name}</Typography>
-                    </Link>
+                    {row.status === 'completed' ? <Typography variant="subtitle2">{row.name}</Typography> :
+                        <Link component={RouterLink} to={PATH_DASHBOARD.general.form(row.id)} >
+                            <Typography variant="subtitle2">{row.name}</Typography>
+                        </Link>}
+                </TableCell>
+                <TableCell>
+                    <Typography variant="subtitle2">{row.event.name}</Typography>
+                    {/* <Link component={RouterLink} to={PATH_DASHBOARD.general.form(row.id)} >
+                        <Typography variant="subtitle2">{row.form.name}</Typography>
+                    </Link> */}
                 </TableCell>
                 <TableCell>
                     {row.required ?
@@ -141,6 +150,9 @@ function BookingDetailsRow({ row }: BookingDetailsRowProps) {
                     >
                         {sentenceCase(row.status)}
                     </Label>
+                </TableCell>
+                <TableCell>
+                    {row.signedOn}
                 </TableCell>
             </TableRow>
 
