@@ -74,7 +74,7 @@ export default function ReservationsPage() {
                                             { id: 'event', label: 'Event' },
                                             { id: 'room', label: 'Room' },
                                             { id: 'cot', label: 'Cot' },
-                                            { id: 'created_at', label: 'Date' },
+                                            { id: 'created_at', label: 'Date Purchased' },
                                         ]} />
 
                                         <TableBody>
@@ -139,7 +139,7 @@ function ReservationDetailsRow({ row }: ReservationDetailsRowProps) {
                     {row.cot.description}
                 </TableCell>
                 <TableCell>
-                    {row.created_at}
+                    {row.created_at.substr(0, 10)}
                 </TableCell>
             </TableRow>
         </>
