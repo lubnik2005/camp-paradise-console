@@ -80,9 +80,9 @@ export default function CheckoutOrderComplete({ open, onReset, checkout, onDownl
                     You should receive an email with a receipt of your purchase.
                     <br />
                     You should also now see your reserved spot
-                    in your profile page. Depending on the event, you may not be able to purchase any more spots.
+                    on the reservations page. Depending on the event, you may not be able to purchase any more spots.
                     <br /> If you have any questions or if you did not receive an email and/or you cannot
-                    see your purchase in your profile please contact us. <br /> <br />
+                    see your purchase on the reservations please contact us: <a href="mailto:reservation@camp-paradise.org" target="_blank">reservation@camp-paradise.org</a> <br /> <br />
                 </Typography>
             </Stack>
         </DialogAnimate >

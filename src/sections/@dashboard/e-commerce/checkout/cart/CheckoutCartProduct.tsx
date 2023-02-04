@@ -56,7 +56,7 @@ export default function CheckoutCartProduct({
             </TableCell>
 
             <TableCell>{fCurrency(price)}</TableCell>
-
+            {/* 
             <TableCell>
                 <Box sx={{ width: 96, textAlign: 'right' }}>
                     <IncrementerButton
@@ -71,9 +71,9 @@ export default function CheckoutCartProduct({
                         available: {available}
                     </Typography>
                 </Box>
-            </TableCell>
+            </TableCell> */}
 
-            <TableCell align="right">{fCurrency(price * quantity)}</TableCell>
+            {/* <TableCell align="right">{fCurrency(price * quantity)}</TableCell> */}
 
             <TableCell align="right">
                 <IconButton onClick={onDelete}>
