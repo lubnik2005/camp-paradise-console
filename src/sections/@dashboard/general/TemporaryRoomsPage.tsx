@@ -136,7 +136,7 @@ export default function TemporaryRoomsPage({ title, query }: { title: string, qu
                                         </ListItem>
                                         <Divider variant="inset" component="li" />
                                     </List>) : <LoadingScreen />}
-                                {camp && rooms !== undefined && rooms.length === 0 ? <Grid item
+                                {camp && rooms !== undefined && rooms.filter((room: Room) => room.type === query).length === 0 ? <Grid item
                                     xs={12}
                                     md={12} >
                                     <Typography variant="h4" >Not Available</Typography>
