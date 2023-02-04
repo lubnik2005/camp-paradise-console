@@ -41,7 +41,8 @@ export default function CampsPage() {
 
     type CampAgreement = {
         campId: string,
-        acceptedOn: string | null
+        acceptedOn: string | null,
+        userId: string | null
     }
 
     let guidelinesAgreements: CampAgreement[] = [];
@@ -66,7 +67,7 @@ export default function CampsPage() {
 
 
     const DisplayButton = ({ camp }: { camp: Camp }) => {
-        if (!guidelinesAgreements.find((agreement: CampAgreement) => agreement.campId === camp.id.toString() && !!agreement.acceptedOn)) {
+        if (!guidelinesAgreements.find((agreement: CampAgreement) => agreement.campId === camp.id.toString() && !!agreement.acceptedOn && agreement.userId === user?.id.toString())) {
             return <Button component={RouterLink} to={PATH_DASHBOARD.general.camp_guidelines(camp.id)} variant="contained">
                 Read and Accept Guidelines To Register
             </Button>

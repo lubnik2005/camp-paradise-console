@@ -8,16 +8,20 @@ import { useSettingsContext } from '../../components/settings';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 import localStorageAvailable from '../../utils/localStorageAvailable';
+// auth
+import { useAuthContext } from '../../auth/useAuthContext';
 
 export default function GuidelinePage() {
     const { themeStretch } = useSettingsContext();
     const storageAvailable = localStorageAvailable();
     const navigate = useNavigate();
     const { campId } = useParams();
+    const { user } = useAuthContext();
 
     type CampAgreement = {
         campId: string,
-        acceptedOn: string | null
+        acceptedOn: string | null,
+        userId: string | null,
     }
 
     const handleAgree = () => {
@@ -27,9 +31,11 @@ export default function GuidelinePage() {
         } catch {
         }
         if (!campId) return;
+        console.log(user);
         const camp: CampAgreement = {
             campId: campId,
-            acceptedOn: new Date().toTimeString()
+            acceptedOn: new Date().toTimeString(),
+            userId: user?.id.toString()
         }
         guidelinesAgreements.push(camp);
         console.log(guidelinesAgreements);
@@ -65,7 +71,7 @@ export default function GuidelinePage() {
             <Typography variant="h5">Schedule</Typography>
             <ol>
                 <li>I will get up on time in the morning and attend in entirety all required activities. Security has the right to check my room at any time during required activities. If I am too sick to attend I will get an excuse note from a health worker and send it to security prior to the activity I miss.</li>
-                <li>I will not get or request food from the kitchen outside of posted mealtimes. Out of respect to God and the kitchen staff, I will come to the kitchen just before the opening prayer and vacate the dining hall just after the closing prayer. I will not accept more food than I can eat at a meal and I will clean up my spot at the table after I finish. If I have a serious complaint against the kitchen staff I will graciously and immediately appeal first to the head of the kitchen, and if necessary next to the head of camp. I will contact the head of the kitchen prior to camp to request reasonable dietary accommodations.</li>
+                <li>I will not get or request food from the kitchen outside of posted mealtimes. Out of respect to God and the kitchen staff, I will come to the kitchen just before the opening prayer and vacate the dining hall just after the closing prayer. I will not accept more food than I can eat at a meal and I will clean up my spot at the table after I finish. If I have a serious complaint against the kitchen staff I will immediately and graciously first appeal to the head of the kitchen, and if necessary, then to the head of camp. I will contact the head of the kitchen prior to camp to request reasonable dietary accommodations.</li>
                 <li>I understand there is no cell-phone coverage or Wifi internet available during camp. A land-line phone will be available to share during free time.</li>
                 <li>I will be in my room and be quiet from the hours of 1am to 8am so others can rest.</li>
             </ol>
