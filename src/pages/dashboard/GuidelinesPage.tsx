@@ -60,6 +60,7 @@ export default function GuidelinePage() {
                 <li>I will sleep only in my registered room for the duration of camp.</li>
                 <li>I will not leave the camp property during camp. Camp property boundaries are posted.</li>
                 <li>I will contact the head of security, ideally before camp, to request reasonable exceptions (example: to arrive late, leave early, or leave camp briefly for work or school).</li>
+                <li>I understand that attending camp is voluntary. Health information shared during registration is for my own benefit if an emergency arises. As such, it will be kept as confidential as the situation dictates and as our current platform provides.”</li>
             </ol>
             <Typography variant="h5">Schedule</Typography>
             <ol>

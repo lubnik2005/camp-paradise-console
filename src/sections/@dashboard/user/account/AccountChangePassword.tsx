@@ -25,7 +25,7 @@ export default function AccountChangePassword() {
     const ChangePassWordSchema = Yup.object().shape({
         oldPassword: Yup.string().required('Old Password is required'),
         newPassword: Yup.string()
-            .min(6, 'Password must be at least 6 characters')
+            .min(8, 'Password must be at least 6 characters')
             .required('New Password is required'),
         confirmNewPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], 'Passwords must match'),
     });
@@ -74,7 +74,7 @@ export default function AccountChangePassword() {
                         helperText={
                             <Stack component="span" direction="row" alignItems="center">
                                 <Iconify icon="eva:info-fill" width={16} sx={{ mr: 0.5 }} /> Password must be
-                                minimum 6+
+                                minimum 8+
                             </Stack>
                         }
                     />
