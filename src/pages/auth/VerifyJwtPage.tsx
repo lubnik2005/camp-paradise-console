@@ -26,7 +26,7 @@ export default function VerifyJwtPage() {
 
     const verify = useCallback(async () => {
         try {
-            const response = await axios.get(`/verify?token=${token}`);
+            const response = await axios.get("/verify");
             console.log(response);
             setVerified(true);
             if (response.status === 200) setSuccess(true);

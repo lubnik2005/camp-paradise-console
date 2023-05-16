@@ -20,7 +20,6 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { PATH_DASHBOARD } from 'src/routes/paths';
 // utils
 import axios from "../../utils/axios";
-import localStorageAvailable from "../../utils/localStorageAvailable";
 // navigate
 import {
     resetCart,
@@ -57,7 +56,6 @@ export default function CotsPage() {
     const [room, setRoom] = useState<Room | undefined>();
     const [camp, setCamp] = useState<Camp | undefined>();
     const [cots, setCots] = useState<Array<Cot> | undefined>();
-    const storageAvailable = localStorageAvailable();
     const dispatch = useDispatch();
     const { checkout } = useSelector((state) => state.product);
     const { cart, billing, activeStep } = checkout;
@@ -76,8 +74,7 @@ export default function CotsPage() {
 
     const getRooms = useCallback(async () => {
         try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const { data } = await axios.get(`rooms?token=${accessToken}&event_id=${campId}`)
+            const { data } = await axios.get(`rooms?event_id=${campId}`)
             console.log(data.find((r: Room) => r.id === parseInt(roomId ?? '', 10)));
             setRoom(data.find((r: Room) => r.id === parseInt(roomId ?? '', 10)));
             // console.log((data.find((room: Room) => room.id === roomId));
@@ -85,18 +82,17 @@ export default function CotsPage() {
         } catch (error) {
             console.log(error);
         }
-    }, [storageAvailable, campId, roomId]);
+    }, [campId, roomId]);
 
     const getCamps = useCallback(async () => {
         try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const { data } = await axios.get(`/events?token=${accessToken}`)
+            const { data } = await axios.get("/events")
             const find = data.find((c: Camp) => c.id === parseInt(campId ?? '', 10));
             setCamp(find);
         } catch (error) {
             console.log(error);
         }
-    }, [storageAvailable, campId]);
+    }, [campId]);
 
 
     const getCots = useCallback(async () => {
@@ -104,12 +100,10 @@ export default function CotsPage() {
         console.log(campId);
         if (campId) {
             try {
-                const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
                 const { data } = await axios.get(`cots`, {
                     params: {
                         room_id: roomId,
-                        event_id: campId,
-                        token: accessToken
+                        event_id: campId
                     }
                 })
                 setCots(data);
@@ -117,7 +111,7 @@ export default function CotsPage() {
                 console.log(error);
             }
         }
-    }, [storageAvailable, roomId, campId]);
+    }, [roomId, campId]);
 
     const { themeStretch } = useSettingsContext();
 

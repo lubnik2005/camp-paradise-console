@@ -126,12 +126,10 @@ export default function FormPage() {
     const hasMedicalProblems = watch('hasMedicalProblems');
     const hasAllergies = watch('hasAllergies');
     const hasMedicines = watch('hasMedicines');
-    const storageAvailable = localStorageAvailable();
-    const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
 
     const onSubmit = async (data: FormValuesProps) => {
         try {
-            const response = await axios.post(`/form?token=${accessToken}`, {
+            const response = await axios.post("/form", {
                 data,
                 campId,
                 formId

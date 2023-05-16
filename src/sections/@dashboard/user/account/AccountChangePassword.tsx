@@ -48,10 +48,8 @@ export default function AccountChangePassword() {
     } = methods;
 
     const onSubmit = async (data: FormValuesProps) => {
-        const storageAvailable = localStorageAvailable();
-        const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
         try {
-            const response = await axios.post(`/change-password?token=${accessToken}`, { ...data });
+            const response = await axios.post("/change-password", { ...data });
             reset();
             enqueueSnackbar('Update success!');
             console.log('DATA', data);

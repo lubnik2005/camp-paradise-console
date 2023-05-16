@@ -26,11 +26,6 @@ import {
     AppWelcome,
 } from '../../sections/@dashboard/general/app';
 
-
-// assets
-// storage
-import localStorageAvailable from '../../utils/localStorageAvailable';
-
 // ----------------------------------------------------------------------
 
 export default function BuildingsPage() {
@@ -39,7 +34,6 @@ export default function BuildingsPage() {
     const navigate = useNavigate();
     // const camp = location.state?.camp;
     const { campId } = useParams();
-    const storageAvailable = localStorageAvailable();
     const [camps, setCamps] = useState([]);
     const [camp, setCamp] = useState<Camp | undefined>();
     const theme = useTheme();
@@ -47,8 +41,7 @@ export default function BuildingsPage() {
     const { themeStretch } = useSettingsContext();
     const getCamps = useCallback(async () => {
         try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`/events?token=${accessToken}`)
+            const response = await axios.get("/events")
             setCamps(response.data);
             console.log('data');
             console.log(response.data);
@@ -56,7 +49,7 @@ export default function BuildingsPage() {
         } catch (error) {
             console.log(error);
         }
-    }, [storageAvailable, campId]);
+    }, [campId]);
     useEffect(() => {
         getCamps();
     }, [getCamps]);

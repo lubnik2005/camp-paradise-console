@@ -26,7 +26,6 @@ import { useEffect, useState, useCallback } from 'react';
 import { useSettingsContext } from '../../components/settings';
 // utils
 import axios from "../../utils/axios";
-import localStorageAvailable from '../../utils/localStorageAvailable';
 
 // ----------------------------------------------------------------------
 
@@ -34,18 +33,16 @@ export default function ReservationsPage() {
     const theme = useTheme();
 
     const { themeStretch } = useSettingsContext();
-    const storageAvailable = localStorageAvailable();
 
     const [reservations, setReservations] = useState<any[] | null>(null);
     const fetchReservations = useCallback(async () => {
         try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const { data } = await axios.get(`/reservations?token=${accessToken}`)
+            const { data } = await axios.get(`/reservations`)
             setReservations(data);
         } catch (error) {
             console.log(error);
         }
-    }, [storageAvailable]);
+    }, []);
 
     useEffect(() => {
         fetchReservations();

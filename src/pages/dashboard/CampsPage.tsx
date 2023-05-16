@@ -13,7 +13,7 @@ import { useAuthContext } from '../../auth/useAuthContext';
 // axios
 import axios from "../../utils/axios";
 // _mock_
-
+import AXIOS from 'axios';
 
 // components
 import { useSettingsContext } from '../../components/settings';
@@ -38,6 +38,8 @@ export default function CampsPage() {
     const { themeStretch } = useSettingsContext();
 
     const [camps, setCamps] = useState<Array<Camp> | undefined>();
+    const [upcomingCamps, setUpcomingCamps] = useState<Array<Camp> | undefined>();
+    const [previousCamps, setPreviousCamps] = useState<Array<Camp> | undefined>();
 
     type CampAgreement = {
         campId: string,
@@ -53,9 +55,12 @@ export default function CampsPage() {
 
     const getCamps = useCallback(async () => {
         try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`/events?token=${accessToken}`)
-            setCamps(response.data);
+            const { data: events } = await axios.get("/events");
+            const { data: upcoming } = await axios.get("/upcoming_events");
+            const { data: previous } = await axios.get("/previous_events");
+            setCamps(events);
+            setUpcomingCamps(upcoming);
+            setPreviousCamps(previous);
         } catch (error) {
             console.log(error);
         }
@@ -82,11 +87,13 @@ export default function CampsPage() {
             <Helmet>
                 <title>Camps | Camp Paradise</title>
             </Helmet>
-
             <Container maxWidth={themeStretch ? false : 'xl'}>
+                <Typography paragraph variant="h4" sx={{ whiteSpace: 'pre-line' }}>
+                    Current Camps
+                </Typography>
                 <Grid container spacing={3}>
                     {camps != null ? camps.map((camp: Camp) => <Grid
-                        key={`upcoming-camp-${camp.id}`}
+                        key={`upcoming - camp - ${camp.id}`}
                         item
                         xs={12}
                         md={12} >
@@ -111,6 +118,12 @@ export default function CampsPage() {
                         <Typography variant="h3" >No Camps Yet</Typography>
                     </Grid> : null}
                 </Grid>
+                <Typography paragraph variant="h4" sx={{ whiteSpace: 'pre-line' }}>
+                    Upcoming Camps
+                </Typography>
+                <Typography paragraph variant="h4" sx={{ whiteSpace: 'pre-line' }}>
+                    Previous Camps
+                </Typography>
             </Container>
         </> : null);
 }

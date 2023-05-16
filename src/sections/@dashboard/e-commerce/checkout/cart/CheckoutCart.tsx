@@ -47,23 +47,20 @@ export default function CheckoutCart({
         campName: string
     }
     const [forms, setForms] = useState<Form[] | null>(null);
-    const storageAvailable = localStorageAvailable();
-
 
     const fetchForms = useCallback(async () => {
         if (cart.length === 0) {
             setForms([]);
             return;
         };
-        const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
         try {
-            const { data } = await axios.get(`/verify-forms?token=${accessToken}`, { params: { cart } });
+            const { data } = await axios.get("/verify-forms", { params: { cart } });
             setForms(data);
         }
         catch (error) {
             console.log(error);
         }
-    }, [cart, storageAvailable]);
+    }, [cart]);
 
     useEffect(() => {
         fetchForms();

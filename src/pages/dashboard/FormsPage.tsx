@@ -25,18 +25,16 @@ export default function FormsPage() {
     const theme = useTheme();
 
     const { themeStretch } = useSettingsContext();
-    const storageAvailable = localStorageAvailable();
 
     const [forms, setForms] = useState(null);
     const getForms = useCallback(async () => {
         try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const { data } = await axios.get(`/forms?token=${accessToken}`)
+            const { data } = await axios.get("/forms")
             setForms(data);
         } catch (error) {
             console.log(error);
         }
-    }, [storageAvailable]);
+    }, []);
 
     useEffect(() => {
         getForms();

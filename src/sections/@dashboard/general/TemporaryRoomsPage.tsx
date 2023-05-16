@@ -49,23 +49,20 @@ export default function TemporaryRoomsPage({ title, query }: { title: string, qu
     const { campId } = useParams();
     const [rooms, setRooms] = useState<Array<Room> | undefined>();
     const [camp, setCamp] = useState<Camp | undefined>();
-    const storageAvailable = localStorageAvailable();
 
     const getRooms = useCallback(async () => {
         try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const response = await axios.get(`rooms?token=${accessToken}&event_id=${campId}`)
+            const response = await axios.get(`rooms&event_id=${campId}`)
             console.log(response);
             setRooms(response.data);
         } catch (error) {
             console.log(error);
         }
-    }, [storageAvailable, campId]);
+    }, [campId]);
 
     const getCamps = useCallback(async () => {
         try {
-            const accessToken = storageAvailable ? localStorage.getItem('accessToken') : '';
-            const { data } = await axios.get(`/events?token=${accessToken}`)
+            const { data } = await axios.get("/events")
             const find = data.find((c: Camp) => c.id === parseInt(campId ?? '', 10));
             setCamp(find);
             if (!find) navigate(PATH_DASHBOARD.general.camps);
@@ -73,7 +70,7 @@ export default function TemporaryRoomsPage({ title, query }: { title: string, qu
             console.log(error);
         }
         if (!campId) navigate(PATH_DASHBOARD.general.camps)
-    }, [storageAvailable, campId, navigate]);
+    }, [campId, navigate]);
 
     interface Room {
         id: number,
