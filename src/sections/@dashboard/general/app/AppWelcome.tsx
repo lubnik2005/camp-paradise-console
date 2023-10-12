@@ -48,12 +48,20 @@ const StyledBg = styled('div')(({ theme }) => ({
 
 interface Props extends CardProps {
   title?: string;
-  description?: string;
+  campDates?: string;
+  registrationDates?: string;
   img?: React.ReactNode;
   action?: React.ReactNode;
 }
 
-export default function AppWelcome({ title, description, action, img, ...other }: Props) {
+export default function AppWelcome({
+  title,
+  campDates,
+  registrationDates,
+  action,
+  img,
+  ...other
+}: Props) {
   return (
     <StyledRoot {...other}>
       <Stack
@@ -68,7 +76,7 @@ export default function AppWelcome({ title, description, action, img, ...other }
         }}
       >
         <Typography paragraph variant="h4" sx={{ whiteSpace: 'pre-line' }}>
-          {title}
+          {title}; {campDates}
         </Typography>
 
         <Typography
@@ -78,7 +86,7 @@ export default function AppWelcome({ title, description, action, img, ...other }
             mb: { xs: 3, xl: 5 },
           }}
         >
-          {description}
+          Registration Start and End: {registrationDates}
         </Typography>
 
         {action && action}

@@ -107,6 +107,14 @@ export default function CampsPage() {
     );
   };
 
+  const timeToReadble = (dateStr: string) => {
+    const dateObj = new Date(dateStr);
+    const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0'); // months from 1-12, add 1 because getMonth() is 0-based
+    const day = String(dateObj.getUTCDate()).padStart(2, '0');
+    const year = dateObj.getUTCFullYear();
+    return `${month}/${day}/${year}`;
+  };
+
   return camps ? (
     <>
       <Helmet>
@@ -123,9 +131,10 @@ export default function CampsPage() {
                 <AppWelcome
                   style={{ padding: '3em' }}
                   title={camp.name}
-                  description={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on
-                    .slice(0, 10)
-                    .replace(/-/g, '/')}`}
+                  campDates={`${timeToReadble(camp.start_on)}—${timeToReadble(camp.start_on)}`}
+                  registrationDates={`${timeToReadble(camp.registration_start_at)}—${timeToReadble(
+                    camp.registration_end_at
+                  )}`}
                   // img={
                   //     <SeoIllustration
                   //         sx={{
