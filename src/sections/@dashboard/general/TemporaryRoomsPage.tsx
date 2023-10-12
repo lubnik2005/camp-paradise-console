@@ -96,7 +96,7 @@ export default function TemporaryRoomsPage({ title, query }: { title: string; qu
             {camp ? (
               <AppWelcome
                 title={camp.name}
-                description={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on
+                registrationDates={`${camp.start_on.slice(0, 10).replace(/-/g, '/')} — ${camp.end_on
                   .slice(0, 10)
                   .replace(/-/g, '/')}`}
                 img={
