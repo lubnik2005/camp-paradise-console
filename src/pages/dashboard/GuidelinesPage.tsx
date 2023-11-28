@@ -156,7 +156,7 @@ export default function GuidelinePage() {
             ) ie. $120.00 = $117.06 + <i>$2.94 (stripe fee)</i>
           </li>
           <li>
-            Refunds and refund information, please contact 
+            Refunds and refund information, please contact&nbsp;
             <Link target="_blank" href={`mailto:${REPLY_CONTACT_EMAIL}`}>
             {REPLY_CONTACT_EMAIL}
             </Link>

@@ -9,6 +9,8 @@ import { OrderCompleteIllustration } from '../../../../assets/illustrations';
 import { IProductCheckoutState } from '../../../../@types/product';
 import { PATH_DASHBOARD } from 'src/routes/paths';
 
+import { REPLY_CONTACT_EMAIL } from '../../../../config-global';
+
 // ----------------------------------------------------------------------
 
 interface Props extends DialogProps {
@@ -82,7 +84,7 @@ export default function CheckoutOrderComplete({ open, onReset, checkout, onDownl
                     You should also now see your reserved spot
                     on the reservations page. Depending on the event, you may not be able to purchase any more spots.
                     <br /> If you have any questions or if you did not receive an email and/or you cannot
-                    see your purchase on the reservations please contact us: <a href="mailto:reservation@camp-paradise.org" target="_blank">reservation@camp-paradise.org</a> <br /> <br />
+                    see your purchase on the reservations please contact us: <a href={`mailto:${REPLY_CONTACT_EMAIL}`} target="_blank">{REPLY_CONTACT_EMAIL}</a><br /><br />
                 </Typography>
             </Stack>
         </DialogAnimate >
