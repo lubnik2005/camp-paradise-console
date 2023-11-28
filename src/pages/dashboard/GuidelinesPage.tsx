@@ -11,6 +11,8 @@ import localStorageAvailable from '../../utils/localStorageAvailable';
 // auth
 import { useAuthContext } from '../../auth/useAuthContext';
 
+import {REPLY_CONTACT_EMAIL} from '../../config-global';
+
 export default function GuidelinePage() {
   const { themeStretch } = useSettingsContext();
   const storageAvailable = localStorageAvailable();
@@ -152,6 +154,12 @@ export default function GuidelinePage() {
               Stripe Pricing
             </Link>
             ) ie. $120.00 = $117.06 + <i>$2.94 (stripe fee)</i>
+          </li>
+          <li>
+            Refunds and refund information, please contact 
+            <Link target="_blank" href={`mailto:${REPLY_CONTACT_EMAIL}`}>
+            {REPLY_CONTACT_EMAIL}
+            </Link>
           </li>
         </ol>
         {campId ? (

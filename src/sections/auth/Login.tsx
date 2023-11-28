@@ -10,6 +10,7 @@ import LoginLayout from '../../layouts/login';
 //
 import AuthLoginForm from './AuthLoginForm';
 import AuthWithSocial from './AuthWithSocial';
+import {REPLY_CONTACT_EMAIL} from '../../config-global';
 
 // ----------------------------------------------------------------------
 
@@ -39,11 +40,10 @@ export default function Login() {
                 </Tooltip>
             </Stack>
 
-            {/* <Alert severity="info" sx={{ mb: 3 }}>
-        Use email : <strong>demo@minimals.cc</strong> / password :<strong> demo1234</strong>
-      </Alert> */}
-
             <AuthLoginForm />
+            <Link  variant="body2" target="_blank" sx={{marginTop:'1em'}} href={`mailto:${REPLY_CONTACT_EMAIL}`}>
+            {REPLY_CONTACT_EMAIL}
+            </Link>
         </LoginLayout>
     );
 }

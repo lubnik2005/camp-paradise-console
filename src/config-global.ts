@@ -10,6 +10,8 @@ export const STRIPE = {
     KEY: import.meta.env.VITE_STRIPE_KEY || '',
 }
 
+export const REPLY_CONTACT_EMAIL = import.meta.env.VITE_REPLY_CONTACT_EMAIL || '';
+
 export const FIREBASE_API = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
