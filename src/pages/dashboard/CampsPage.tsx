@@ -131,7 +131,7 @@ export default function CampsPage() {
                 <AppWelcome
                   style={{ padding: '3em' }}
                   title={camp.name}
-                  campDates={`${timeToReadble(camp.start_on)}—${timeToReadble(camp.start_on)}`}
+                  campDates={`${timeToReadble(camp.start_on)}—${timeToReadble(camp.end_on)}`}
                   registrationDates={`${timeToReadble(camp.registration_start_at)}—${timeToReadble(
                     camp.registration_end_at
                   )}`}
